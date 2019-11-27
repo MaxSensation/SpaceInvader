@@ -1,18 +1,17 @@
 #ifndef SCENE_H
 #define SCENE_H
-
-#include "Component.h"
+#include "Sprite.h"
 #include <vector>
 
 namespace ge{
 	class Scene
 	{
 	public:		
+		void AddSprite(Sprite* sprite);
+		void Render();
 		~Scene();
-		void add(Component* component);
-		std::vector<Component*> getComponents();
 	private:
-		std::vector<Component*> components;
+		std::vector<Sprite*> sprites;
 	};
 }
 

@@ -1,17 +1,18 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
-#include <SDL.h>
+#include <iostream>
 
 namespace ge {
 	class Component {
 	public:		
 		virtual ~Component();
-		virtual void draw() const = 0;
+		std::string GetName();
 	protected:
-		Component();
+		Component(std::string name);
 	private:
 		Component(const Component&) = delete;
 		const Component& operator=(const Component&) = delete;
+		std::string name;
 	};
 }
 

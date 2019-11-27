@@ -1,8 +1,11 @@
 #include "Component.h"
+#include <iostream>
+
+using namespace std;
 
 namespace ge {
 
-	Component::Component()
+	Component::Component(const string name) : name(name)
 	{
 
 	}
@@ -10,5 +13,10 @@ namespace ge {
 	Component::~Component()
 	{
 
+	}
+
+	string Component::GetName()
+	{
+		return name;
 	}
 }

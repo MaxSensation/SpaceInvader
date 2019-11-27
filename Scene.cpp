@@ -1,16 +1,26 @@
 #include "Scene.h"
+#include "Sprite.h"
+#include <iostream>
+#include <SDL.h>
+#include "GameEngine.h"
 
 namespace ge{
-	Scene::~Scene()
+	void Scene::AddSprite(Sprite* sprite)
 	{
-	}
-	
-	void Scene::add(Component* component) {
-		components.push_back(component);
+		sprites.push_back(sprite);
 	}
 
-	std::vector<Component*> Scene::getComponents() {
-		return components;
+	void Scene::Render()
+	{
+		std::cout << *gameengine.GetScreenWidth() << std::endl;
+		for (Sprite* sprite : sprites) {				
+			SDL_RenderCopy(gameengine.GetRenderer(), sprite->GetTexture(), sprite->GetScreen(), sprite->GetSpriteRect());
+			SDL_RenderPresent(gameengine.GetRenderer());
+		}
+	}
+
+	Scene::~Scene()
+	{
 	}
 }
 
