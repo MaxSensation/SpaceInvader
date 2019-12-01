@@ -160,6 +160,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GraphicObject2D.cpp" />
+    <ClCompile Include="MovingSprite.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SpaceInvader.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GraphicObject2D.h" />
+    <ClInclude Include="MovingSprite.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
   </ItemGroup>

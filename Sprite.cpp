@@ -33,6 +33,7 @@ namespace ge {
 
 	void Sprite::Init()
 	{		
+		//TODO Fix transparency
 		SDL_Surface* image = IMG_Load(imgDestination);
 		texture = SDL_CreateTextureFromSurface(gameengine.GetRenderer(), image);
 		SDL_FreeSurface(image);

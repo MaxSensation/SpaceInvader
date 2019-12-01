@@ -36,6 +36,9 @@
     <ClCompile Include="Component.cpp">
       <Filter>Source Files\Dependencies</Filter>
     </ClCompile>
+    <ClCompile Include="MovingSprite.cpp">
+      <Filter>Source Files\Dependencies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

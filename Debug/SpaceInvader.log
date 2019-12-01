@@ -1,2 +1,5 @@
-﻿  SpaceInvader.cpp
+﻿  GameEngine.cpp
+D:\Github\SpaceInvader\SpaceInvader\GameEngine.cpp(43,23): warning C4244: 'initializing': conversion from 'double' to 'short', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\GameEngine.cpp(67,15): warning C4018: '<': signed/unsigned mismatch
+D:\Github\SpaceInvader\SpaceInvader\GameEngine.cpp(70,15): warning C4018: '>': signed/unsigned mismatch
   SpaceInvader.vcxproj -> D:\Github\SpaceInvader\Debug\SpaceInvader.exe

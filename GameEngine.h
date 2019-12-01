@@ -2,9 +2,10 @@
 #define GAMEENGINE_H
 #include "Scene.h"
 #include <SDL.h>
+#include <vector>
 
 namespace ge {
-	class GameEngine {
+	class GameEngine {	
 	public:
 		~GameEngine();
 		void SetScene(Scene* scene);
@@ -14,14 +15,14 @@ namespace ge {
 		void Render();
 		int* GetScreenHeight();
 		int* GetScreenWidth();
-	private:
+	private:		
 		void Update();
 		SDL_Window* win = nullptr;
 		SDL_Renderer* ren = nullptr;
 		Scene* currentScene = nullptr;
 		int* screenWidth = nullptr;
 		int* screenHeight = nullptr;
-		int targetFramerate = 60;;
+		short fps = 60;
 		bool hasInitialised = false;
 	};
 	extern GameEngine gameengine;
