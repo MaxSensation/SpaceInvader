@@ -6,8 +6,10 @@ namespace ge{
 	{
 	}
 	void MovingSprite::Translate(int x, int y)
-	{
+	{		
 		posX += x;
-		posY += y;
+		posY += y;		
+		spriteRect.x = posX;
+		spriteRect.y = posY;		
 	}
 }

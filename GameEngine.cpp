@@ -7,13 +7,13 @@ using namespace std;
 
 namespace ge {	
 
-	void GameEngine::Init(const char* title, int width, int height, const int targetFramerate) {
+	void GameEngine::Init(const char* title, int width, int height, const int targetFramerate){
 		screenWidth = &width;
 		screenHeight = &height;
 		fps = targetFramerate;
 		SDL_Init(SDL_INIT_VIDEO);
 		win = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
-		ren = SDL_CreateRenderer(win, -1, 0);
+		ren = SDL_CreateRenderer(win, -1, 0);		
 	}
 
 	void GameEngine::SetScene(Scene* scene)
@@ -24,6 +24,10 @@ namespace ge {
 	SDL_Renderer* GameEngine::GetRenderer()
 	{
 		return ren;
+	}
+
+	InputManager* GameEngine::GetInputManager() {
+		return inputManager;
 	}
 
 	void GameEngine::Render() {
@@ -40,7 +44,7 @@ namespace ge {
 			Uint32 startTime = 0;
 			Uint32 endTime = 0;
 			Uint32 delta = 0;
-			short timePerFrame = 1000/fps;
+			Uint32 timePerFrame = 1000/fps;
 			short currentFPS = 60;			
 			while (running) {				
 				if (!startTime) {
@@ -52,13 +56,11 @@ namespace ge {
 
 				SDL_Event event;
 				while (SDL_PollEvent(&event)) {
-					switch (event.type) {
-					case SDL_QUIT:
-						running = false;
-						break;
-					case SDL_KEYDOWN:
-						//Scene.UpdateKeyDownInput(event.key.keysym.sym);
-						break;
+					inputManager->UpdateKeyDown(&event);
+					switch (event.type) {					
+						case SDL_QUIT:
+							running = false;
+							break;
 					}
 				}
 				
@@ -69,9 +71,7 @@ namespace ge {
 				}							
 				if (delta > timePerFrame) {
 					currentFPS = 1000 / delta;
-				}						
-			
-				cout << currentFPS << endl;
+				}										
 				startTime = endTime;
 				endTime = SDL_GetTicks();
 			}

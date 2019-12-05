@@ -12,7 +12,7 @@ namespace ge{
 		void Render();
 		~Scene();
 	private:
-		std::vector<Sprite*> sprites;
+		std::vector<Sprite*> sprites;		
 	};
 }
 
