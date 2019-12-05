@@ -52,13 +52,13 @@ namespace ge {
 				ClearRender();
 				while (SDL_PollEvent(&event)) {
 					inputManager->UpdateKeyDown(&event);
-					currentScene->Update(delta);
-					switch (event.type) {					
+					switch (event.type) {	
 						case SDL_QUIT:
 							running = false;
 							break;
 					}
 				}					
+				currentScene->Update(delta);
 				frameTime = SDL_GetTicks() - frameStart;
 				delta = frameDelay - frameTime;
 				if (delta != 0)

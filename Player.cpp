@@ -40,32 +40,33 @@ namespace ge{
 	}
 
 	void Player::UpdateKeyInput(SDL_Event* event) {			
-		if((*event).type == SDL_KEYDOWN)
-		{
-			switch ((*event).key.keysym.sym)
-			{
-			case SDLK_RIGHT:
-				MoveRight();
+		switch ((*event).type) {
+			case SDL_KEYDOWN:
+				switch ((*event).key.keysym.sym)
+				{
+				case SDLK_RIGHT:
+					MoveRight();
+					break;
+				case SDLK_LEFT:
+					MoveLeft();
+					break;
+				case SDLK_SPACE:
+					Fire();
+					break;
+				}
 				break;
-			case SDLK_LEFT:
-				MoveLeft();
+			case SDL_KEYUP:
+				switch ((*event).key.keysym.sym)
+				{
+				case SDLK_RIGHT:
+					StopRight();
+					break;
+				case SDLK_LEFT:
+					StopLeft();
+					break;
+				}
 				break;
-			case SDLK_SPACE:
-				Fire();
-				break;
-			}
-		}
-		else if ((*event).type == SDL_KEYUP)
-		{
-			switch ((*event).key.keysym.sym)
-			{
-			case SDLK_RIGHT:
-				StopRight();
-				break;
-			case SDLK_LEFT:
-				StopLeft();
-				break;
-			}
+			
 		}
 	}
 
