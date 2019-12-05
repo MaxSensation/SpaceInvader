@@ -9,10 +9,12 @@ namespace ge{
 		sprites.push_back(sprite);
 	}	
 
-	void Scene::Render()
+	void Scene::Update(float delta)
 	{
-		for (Sprite* sprite : sprites) {							
-			SDL_RenderCopy(gameengine.GetRenderer(), sprite->GetTexture(), sprite->GetScreen(), sprite->GetSpriteRect());			
+		for (Sprite* sprite : sprites) {										
+			sprite->Update(delta);
+			sprite->UpdatePos();
+			sprite->Render();
 		}
 		SDL_RenderPresent(gameengine.GetRenderer());		
 	}

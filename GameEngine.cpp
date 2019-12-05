@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <vector>
+#include <chrono>
 
 using namespace std;
 
@@ -11,9 +12,10 @@ namespace ge {
 		screenWidth = &width;
 		screenHeight = &height;
 		fps = targetFramerate;
+		frameDelay = 1000.0f/fps;
 		SDL_Init(SDL_INIT_VIDEO);
-		win = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
-		ren = SDL_CreateRenderer(win, -1, 0);		
+		win = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
+		ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	}
 
 	void GameEngine::SetScene(Scene* scene)
@@ -30,50 +32,44 @@ namespace ge {
 		return inputManager;
 	}
 
-	void GameEngine::Render() {
+	void GameEngine::ClearRender() {
 		SDL_RenderClear(ren);
-		SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
-		currentScene->Render();
+		SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);		
 	}
 
 	void GameEngine::Launch()
-	{		
+	{				
 		if (currentScene != nullptr)
-		{
-			bool running = true;			
-			Uint32 startTime = 0;
-			Uint32 endTime = 0;
-			Uint32 delta = 0;
-			Uint32 timePerFrame = 1000/fps;
-			short currentFPS = 60;			
-			while (running) {				
-				if (!startTime) {
-					startTime = SDL_GetTicks();
-				}
-				else {
-					delta = endTime - startTime;
-				}
-
-				SDL_Event event;
+		{	
+			bool running = true;
+			Uint32 frameStart = 0.0f;;
+			Uint32 frameTime = 0.0f;;
+			float delta = 0.0f;
+			short currentFPS = 0;
+			SDL_Event event;
+			while (running) {		
+				frameStart = SDL_GetTicks();
+				ClearRender();
 				while (SDL_PollEvent(&event)) {
 					inputManager->UpdateKeyDown(&event);
+					currentScene->Update(delta);
 					switch (event.type) {					
 						case SDL_QUIT:
 							running = false;
 							break;
 					}
-				}
-				
-				Render();			
-				
-				if (delta < timePerFrame) {
-					SDL_Delay(timePerFrame - delta);
-				}							
-				if (delta > timePerFrame) {
+				}					
+				frameTime = SDL_GetTicks() - frameStart;
+				delta = frameDelay - frameTime;
+				if (delta != 0)
+				{
 					currentFPS = 1000 / delta;
-				}										
-				startTime = endTime;
-				endTime = SDL_GetTicks();
+					cout << "FPS: " << currentFPS << endl;
+				}
+				if (frameDelay > frameTime)
+				{
+					SDL_Delay(delta);
+				}								
 			}
 		}
 		else

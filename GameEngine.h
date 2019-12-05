@@ -16,7 +16,7 @@ namespace ge {
 		void Launch();
 		SDL_Renderer* GetRenderer();
 		InputManager* GetInputManager();
-		void Render();
+		void ClearRender();		
 		int* GetScreenHeight();
 		int* GetScreenWidth();
 	private:		
@@ -27,7 +27,8 @@ namespace ge {
 		InputManager* inputManager = nullptr;
 		int* screenWidth = nullptr;
 		int* screenHeight = nullptr;		
-		short fps = 0;
+		Uint32 fps = 0;
+		float frameDelay = 0.0f;
 		bool hasInitialised = false;
 	};
 	extern GameEngine gameengine;

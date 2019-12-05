@@ -12,12 +12,8 @@ namespace ge{
 	{
 		return &height;
 	}
-	int* GraphicObject2D::GetposX()
+	Vector2* GraphicObject2D::GetPosition()
 	{
-		return &posX;
-	}
-	int* GraphicObject2D::GetposY()
-	{
-		return &posY;
+		return &position;
 	}
 }

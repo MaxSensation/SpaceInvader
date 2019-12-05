@@ -31,6 +31,20 @@ namespace ge {
 		return texture;
 	}
 
+	void Sprite::Update(float delta)
+	{
+	}
+
+	void Sprite::Render()
+	{
+		SDL_RenderCopy(gameengine.GetRenderer(), GetTexture(), GetScreen(), GetSpriteRect());	
+	}
+
+	void Sprite::UpdatePos() {
+		spriteRect.x = static_cast<int>(position.x);
+		spriteRect.y = static_cast<int>(position.y);
+	}
+
 	void Sprite::Init()
 	{		
 		//TODO Fix transparency
@@ -38,6 +52,6 @@ namespace ge {
 		texture = SDL_CreateTextureFromSurface(gameengine.GetRenderer(), image);
 		SDL_FreeSurface(image);
 		screen = {0,0,*gameengine.GetScreenWidth(), *gameengine.GetScreenHeight()};
-		spriteRect = { posX, posY, width, height};
+		spriteRect = { static_cast<int>(position.x), static_cast<int>(position.y), width, height};
 	}
 }

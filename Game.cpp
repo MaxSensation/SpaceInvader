@@ -5,12 +5,10 @@ using namespace ge;
 Game::Game():	
 	scene(new Scene),
 	SCREENWITDH(500),
-	SCREENHEIGHT(500),
-	PLAYERWITDH(50),
-	PLAYERHEIGHT(50)
+	SCREENHEIGHT(500)
 {	
 	gameengine.Init("SpaceInvader", SCREENWITDH, SCREENHEIGHT, 60);
-	player = new Player("Player", (SCREENWITDH / 2) - (PLAYERWITDH / 2), SCREENHEIGHT - (PLAYERHEIGHT + 10), PLAYERWITDH, PLAYERHEIGHT, "Player.bmp");			
+	player = new Player("Player", (SCREENWITDH / 2) - (50 / 2), SCREENHEIGHT - (50 + 10), 50, 50, "Player.bmp");			
 	scene->AddSprite(player);
 	gameengine.SetScene(scene);	
 	gameengine.Launch();

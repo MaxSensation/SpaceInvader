@@ -11,10 +11,15 @@ namespace ge {
 			Player(const std::string name, int posX, int posY, int width, int height, const char* imgDestination);
 			void MoveRight();
 			void MoveLeft();
+			void StopLeft();
+			
+			void StopRight();
 			void Fire();
 			~Player();
 			void UpdateKeyInput(SDL_Event* event);
+			void Update(float delta);
 		private:
+			float playerSpeed = 0.0f;
 	};
 }
 #endif

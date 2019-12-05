@@ -2,6 +2,7 @@
 #define GRAPHICOBJECT2D_H
 #include "Component.h"
 #include <iostream>
+#include "Vector2.h"
 
 namespace ge {
 	class GraphicObject2D : public Component
@@ -10,16 +11,14 @@ namespace ge {
 		virtual ~GraphicObject2D();
 		int* GetWidth();
 		int* GetHeight();
-		int* GetposX();
-		int* GetposY();
+		Vector2* GetPosition();
 	protected:
-		GraphicObject2D(const std::string name, int posX, int posY, int width, int height) : Component(name), posX(posX), posY(posY), width(width), height(height) {
+		GraphicObject2D(const std::string name, int posX, int posY, int width, int height) : Component(name), position(posX,posY), width(width), height(height) {
 
 		};		
-		int posX;
-		int posY;
 		int width;
 		int height;
+		Vector2 position;
 	private:
 		GraphicObject2D(const GraphicObject2D&) = delete;
 		const GraphicObject2D& operator=(const GraphicObject2D&) = delete;

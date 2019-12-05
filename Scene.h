@@ -8,8 +8,8 @@ namespace ge{
 	class Scene
 	{
 	public:		
-		void AddSprite(Sprite* sprite);		
-		void Render();
+		void AddSprite(Sprite* sprite);				
+		void Update(float delta);
 		~Scene();
 	private:
 		std::vector<Sprite*> sprites;		
