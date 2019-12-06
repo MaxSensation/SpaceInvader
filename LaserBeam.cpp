@@ -19,8 +19,8 @@ namespace ge{
 	bool LaserBeam::OutsideBounce() {
 		if (position.y < 0)
 		{
-			return true;
-			std::cout << "LaserBeam Outside Bounce" << std::endl;
+			std::cout << "LaserBeam Outside Bounce and will be removed" << std::endl;
+			return true;			
 		}
 		else {
 			return false;

@@ -7,7 +7,8 @@ namespace ge{
 		MovingSprite("Player", (*sWidth / 2) - (50 / 2), *sHeight - (50 + 10), 50, 50, "Player.bmp"),
 		playerSpeed(1.0f),
 		scene(scene)
-	{		
+	{	
+		std::cout << "Player Spawned" << std::endl;
 	}
 
 	void Player::MoveRight()

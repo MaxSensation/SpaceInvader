@@ -16,6 +16,7 @@ namespace ge {
 			Scene* scene = nullptr;
 			int SCREENWITDH = 0;
 			int SCREENHEIGHT = 0;
+			int fpsCap = 0;
 	};
 }
 
