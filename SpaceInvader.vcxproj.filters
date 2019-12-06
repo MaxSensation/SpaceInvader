@@ -54,6 +54,9 @@
     <ClCompile Include="Vector2.cpp">
       <Filter>Source Files\Dependencies</Filter>
     </ClCompile>
+    <ClCompile Include="LaserBeam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Vector2.h">
       <Filter>Header Files\Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="LaserBeam.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

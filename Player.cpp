@@ -3,9 +3,10 @@
 
 
 namespace ge{
-	Player::Player(const std::string name, int posX, int posY, int width, int height, const char* imgDestination) :
-		MovingSprite(name, posX, posY, width, height, imgDestination),
-		playerSpeed(1.0f)
+	Player::Player(int* sWidth, int* sHeight, Scene* scene) :
+		MovingSprite("Player", (*sWidth / 2) - (50 / 2), *sHeight - (50 + 10), 50, 50, "Player.bmp"),
+		playerSpeed(1.0f),
+		scene(scene)
 	{		
 	}
 
@@ -37,9 +38,11 @@ namespace ge{
 	{
 		if (bReadyToFire)
 		{
+			std::cout << "Player Fired LaserBeam" << std::endl;
 			bReadyToFire = false;
-			//TODO Spawn Bullet
-			std::cout << "Player Fire" << std::endl;
+			LaserBeam* laser = new LaserBeam((position.x + width / 2) - 10, position.y, true);
+			laserBeams.push_back(laser);
+			scene->AddSprite(laser);			
 		}		
 	}
 
@@ -110,8 +113,34 @@ namespace ge{
 		}
 	}
 
+	void Player::RemoveLaserBeam(LaserBeam* laser) {
+		std::cout << "LaserBeam Removed" << std::endl;
+		scene->RemoveSprite(laser);
+		
+		auto it = laserBeams.begin();
+		while (it != laserBeams.end())
+		{
+			if (*it == laser) {
+				it = laserBeams.erase(it);
+			}
+			else {
+				++it;
+			}
+		}
+	}
+
+	void Player::CheckLaserBeams() {
+		for (LaserBeam *laser : laserBeams) {
+			if (laser->OutsideBounce())
+			{				
+				RemoveLaserBeam(laser);				
+			}
+		}
+	}
+
 	void Player::Update(float delta) {		
-		LimitPlayerMovement();		
+		LimitPlayerMovement();
+		CheckLaserBeams();
 		position += velocity * delta;
 	}
 

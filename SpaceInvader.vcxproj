@@ -163,6 +163,7 @@
     <ClCompile Include="GameInput.cpp" />
     <ClCompile Include="GraphicObject2D.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LaserBeam.cpp" />
     <ClCompile Include="MovingSprite.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="GameInput.h" />
     <ClInclude Include="GraphicObject2D.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LaserBeam.h" />
     <ClInclude Include="MovingSprite.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />

@@ -8,7 +8,8 @@ namespace ge{
 	class Scene
 	{
 	public:		
-		void AddSprite(Sprite* sprite);				
+		void AddSprite(Sprite* sprite);
+		void RemoveSprite(Sprite* sprite);
 		void Update(float delta);
 		~Scene();
 	private:

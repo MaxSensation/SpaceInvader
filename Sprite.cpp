@@ -48,10 +48,8 @@ namespace ge {
 	void Sprite::Init()
 	{		
 		//TODO Fix transparency		
-		SCREENWIDTH = *gameengine.GetScreenWidth();		
-		cout << SCREENWIDTH << endl;
-		SCREENHEIGHT = *gameengine.GetScreenHeight();
-		cout << SCREENHEIGHT << endl;
+		SCREENWIDTH = *gameengine.GetScreenWidth();				
+		SCREENHEIGHT = *gameengine.GetScreenHeight();		
 		SDL_Surface* image = IMG_Load(imgDestination);
 		texture = SDL_CreateTextureFromSurface(gameengine.GetRenderer(), image);
 		SDL_FreeSurface(image);
