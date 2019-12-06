@@ -14,13 +14,13 @@ namespace ge{
 	void Player::MoveRight()
 	{
 		velocity.x = playerSpeed;
-		std::cout << "Player Move Left" << std::endl;					
+		std::cout << "Player Move Right" << std::endl;					
 	}
 
 	void Player::MoveLeft()
 	{
 		velocity.x = -playerSpeed;
-		std::cout << "Player Move Right" << std::endl;	
+		std::cout << "Player Move Left" << std::endl;	
 	}
 
 	void Player::StopLeft()
