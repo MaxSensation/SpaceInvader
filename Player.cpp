@@ -147,6 +147,8 @@ namespace ge{
 
 	Player::~Player()
 	{
-
+		for (LaserBeam* laser : laserBeams) {
+			RemoveLaserBeam(laser);
+		}
 	}
 }

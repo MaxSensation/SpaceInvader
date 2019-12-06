@@ -60,16 +60,16 @@ namespace ge {
 				}					
 				currentScene->Update(delta);
 				frameTime = SDL_GetTicks() - frameStart;
-				delta = frameDelay - frameTime;
+				delta = frameDelay - frameTime;			
 				if (bFPSCounter && delta != 0)
-				{
+				{					
 					currentFPS = 1000 / delta;
 					cout << "FPS: " << currentFPS << endl;
 				}
 				if (frameDelay > frameTime)
 				{
 					SDL_Delay(delta);
-				}								
+				}										
 			}
 		}
 		else
@@ -94,7 +94,9 @@ namespace ge {
 		SDL_DestroyRenderer(ren);
 		SDL_DestroyWindow(win);
 		currentScene = nullptr;
-		delete(currentScene);		
+		delete(currentScene);
+		inputManager = nullptr;
+		delete(inputManager);
 		SDL_Quit();				
 	}
 
