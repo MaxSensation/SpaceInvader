@@ -25,9 +25,10 @@ namespace ge {
 		SDL_Renderer* ren = nullptr;
 		Scene* currentScene = nullptr;
 		InputManager* inputManager = nullptr;
-		int* screenWidth = nullptr;
-		int* screenHeight = nullptr;		
+		int screenWidth = 0;
+		int screenHeight = 0;		
 		Uint32 fps = 0;
+		bool bFPSCounter = false;
 		float frameDelay = 0.0f;
 		bool hasInitialised = false;
 	};

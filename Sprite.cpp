@@ -47,11 +47,15 @@ namespace ge {
 
 	void Sprite::Init()
 	{		
-		//TODO Fix transparency
+		//TODO Fix transparency		
+		SCREENWIDTH = *gameengine.GetScreenWidth();		
+		cout << SCREENWIDTH << endl;
+		SCREENHEIGHT = *gameengine.GetScreenHeight();
+		cout << SCREENHEIGHT << endl;
 		SDL_Surface* image = IMG_Load(imgDestination);
 		texture = SDL_CreateTextureFromSurface(gameengine.GetRenderer(), image);
 		SDL_FreeSurface(image);
-		screen = {0,0,*gameengine.GetScreenWidth(), *gameengine.GetScreenHeight()};
+		screen = {0,0,SCREENWIDTH,SCREENHEIGHT};
 		spriteRect = { static_cast<int>(position.x), static_cast<int>(position.y), width, height};
 	}
 }

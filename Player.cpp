@@ -12,7 +12,7 @@ namespace ge{
 	void Player::MoveRight()
 	{
 		velocity.x = playerSpeed;
-		std::cout << "Player Move Left" << std::endl;		
+		std::cout << "Player Move Left" << std::endl;					
 	}
 
 	void Player::MoveLeft()
@@ -24,7 +24,7 @@ namespace ge{
 	void Player::StopLeft()
 	{
 		velocity.x = 0;
-		std::cout << "Player Stopped Right" << std::endl;		
+		std::cout << "Player Stopped Left" << std::endl;		
 	}
 
 	void Player::StopRight()
@@ -35,8 +35,17 @@ namespace ge{
 
 	void Player::Fire()
 	{
-		//Add Fire Function
-		std::cout << "Player Fire" << std::endl;
+		if (bReadyToFire)
+		{
+			bReadyToFire = false;
+			//TODO Spawn Bullet
+			std::cout << "Player Fire" << std::endl;
+		}		
+	}
+
+	void Player::StopFire()
+	{
+		bReadyToFire = true;
 	}
 
 	void Player::UpdateKeyInput(SDL_Event* event) {			
@@ -45,16 +54,22 @@ namespace ge{
 				switch ((*event).key.keysym.sym)
 				{
 				case SDLK_RIGHT:
-					MoveRight();
+					if (bCanMoveRight)
+					{
+						MoveRight();
+					}					
 					break;
 				case SDLK_LEFT:
-					MoveLeft();
+					if (bCanMoveLeft)
+					{
+						MoveLeft();
+					}					
 					break;
 				case SDLK_SPACE:
 					Fire();
 					break;
 				}
-				break;
+				break;			
 			case SDL_KEYUP:
 				switch ((*event).key.keysym.sym)
 				{
@@ -64,13 +79,39 @@ namespace ge{
 				case SDLK_LEFT:
 					StopLeft();
 					break;
+				case SDLK_SPACE:
+					StopFire();
+					break;
 				}
 				break;
 			
 		}
+	}	
+
+	void Player::LimitPlayerMovement() {				
+		if (position.x > SCREENWIDTH-width)
+		{							
+			StopRight();
+			Translate(SCREENWIDTH - width,position.y);
+			bCanMoveRight = false;
+		}
+		if(position.x < SCREENWIDTH-width) {
+			bCanMoveRight = true;
+		}
+		if(position.x < 0)
+		{				
+			StopLeft();
+			Translate(0, position.y);
+			bCanMoveLeft = false;
+		}
+		if(position.x > 0)
+		{			
+			bCanMoveLeft = true;
+		}
 	}
 
-	void Player::Update(float delta) {
+	void Player::Update(float delta) {		
+		LimitPlayerMovement();		
 		position += velocity * delta;
 	}
 

@@ -9,8 +9,8 @@ using namespace std;
 namespace ge {	
 
 	void GameEngine::Init(const char* title, int width, int height, const int targetFramerate){
-		screenWidth = &width;
-		screenHeight = &height;
+		screenWidth = width;
+		screenHeight = height;
 		fps = targetFramerate;
 		frameDelay = 1000.0f/fps;
 		SDL_Init(SDL_INIT_VIDEO);
@@ -61,7 +61,7 @@ namespace ge {
 				currentScene->Update(delta);
 				frameTime = SDL_GetTicks() - frameStart;
 				delta = frameDelay - frameTime;
-				if (delta != 0)
+				if (bFPSCounter && delta != 0)
 				{
 					currentFPS = 1000 / delta;
 					cout << "FPS: " << currentFPS << endl;
@@ -83,11 +83,11 @@ namespace ge {
 	}
 
 	int* GameEngine::GetScreenHeight() {
-		return screenHeight;
+		return &screenHeight;
 	}
 
 	int* GameEngine::GetScreenWidth() {
-		return screenWidth;
+		return &screenWidth;
 	}
 
 	GameEngine::~GameEngine() {

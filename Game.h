@@ -14,8 +14,8 @@ namespace ge {
 		private:
 			Player* player = nullptr;
 			Scene* scene = nullptr;
-			int SCREENWITDH = NULL;
-			int SCREENHEIGHT = NULL;
+			int SCREENWITDH = 0;
+			int SCREENHEIGHT = 0;
 	};
 }
 
