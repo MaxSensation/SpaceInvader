@@ -45,6 +45,21 @@ namespace ge {
 		}
 	}
 
+	bool LaserHandler::CheckCollition(SDL_Rect* object) {				
+		for (LaserBeam* laser : laserBeams)
+		{
+			if (SDL_HasIntersection(object, laser->GetSpriteRect()))
+			{
+				RemoveLaserBeam(laser);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		return false;
+	}
 
 	void LaserHandler::Update(float delta)
 	{

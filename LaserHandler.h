@@ -14,6 +14,7 @@ namespace ge {
 			void AddLaser(LaserBeam* laser);
 			void CheckLaserBeams();
 			void RemoveLaserBeam(LaserBeam* laser);
+			bool CheckCollition(SDL_Rect* object);			
 			void Update(float delta);
 		private:
 			std::vector<LaserBeam*> laserBeams;
