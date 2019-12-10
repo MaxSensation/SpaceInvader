@@ -6,6 +6,7 @@
 #include "LaserBeam.h"
 #include <vector>
 #include "Scene.h"
+#include "LaserHandler.h"
 
 namespace ge {
 	class Player : public MovingSprite, public GameInput
@@ -21,8 +22,6 @@ namespace ge {
 			~Player();
 			void UpdateKeyInput(SDL_Event* event);
 			void LimitPlayerMovement();
-			void RemoveLaserBeam(LaserBeam* laser);
-			void CheckLaserBeams();
 			void Update(float delta);
 		private:
 			Scene* scene;
@@ -30,7 +29,6 @@ namespace ge {
 			bool bReadyToFire = true;
 			bool bCanMoveRight = true;
 			bool bCanMoveLeft = true;
-			std::vector<LaserBeam*> laserBeams;
 	};
 }
 #endif

@@ -165,10 +165,12 @@
     <ClCompile Include="GraphicObject2D.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LaserBeam.cpp" />
+    <ClCompile Include="LaserHandler.cpp" />
     <ClCompile Include="MovingSprite.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="UpdateEachFrame.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -180,10 +182,12 @@
     <ClInclude Include="GraphicObject2D.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LaserBeam.h" />
+    <ClInclude Include="LaserHandler.h" />
     <ClInclude Include="MovingSprite.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="UpdateEachFrame.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

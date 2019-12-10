@@ -9,6 +9,12 @@ namespace ge{
 	{
 		sprites.push_back(sprite);
 	}
+
+	void Scene::AddUpdatableObject(UpdateEachFrame* object)
+	{
+		UpdateEachFrames.push_back(object);
+	}
+
 	void Scene::RemoveSprite(Sprite* sprite)
 	{
 		auto it = sprites.begin();
@@ -31,6 +37,12 @@ namespace ge{
 			sprite->UpdatePos();
 			sprite->Render();
 		}
+
+		for (UpdateEachFrame* object : UpdateEachFrames)
+		{
+			object->Update(delta);
+		}
+
 		SDL_RenderPresent(gameengine.GetRenderer());		
 	}
 

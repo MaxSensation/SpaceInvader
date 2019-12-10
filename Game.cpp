@@ -9,12 +9,15 @@ Game::Game():
 	fpsCap(60)
 {	
 	gameengine.Init("SpaceInvader", SCREENWITDH, SCREENHEIGHT, fpsCap);	
-	std::cout << "Game Initiliezed" << "\n" << "FPS cap: " << fpsCap << "\n" << "ScreenWitdh: " << SCREENWITDH << "\n" << "ScreenHeight: " << SCREENHEIGHT << "\n" << std::endl;
+	laserHandler.Init(scene);	
 	player = new Player(&SCREENWITDH, &SCREENHEIGHT, scene);
+	enemy = new Enemy(SCREENWITDH/2, 100);
 	std::cout << "Player Created" << std::endl;
+	scene->AddUpdatableObject(&laserHandler);
 	scene->AddSprite(player);
-	
+	scene->AddSprite(enemy);	
 	gameengine.SetScene(scene);	
+	std::cout << "Game Initiliezed" << "\n" << "FPS cap: " << fpsCap << "\n" << "ScreenWitdh: " << SCREENWITDH << "\n" << "ScreenHeight: " << SCREENHEIGHT << "\n" << std::endl;
 	gameengine.Launch();
 }
 

@@ -5,7 +5,7 @@
 namespace ge{
 	Player::Player(int* sWidth, int* sHeight, Scene* scene) :
 		MovingSprite("Player", (*sWidth / 2) - (50 / 2), *sHeight - (50 + 10), 50, 50, "Player.png"),
-		playerSpeed(1.0f),
+		playerSpeed(0.5f),
 		scene(scene)
 	{	
 		std::cout << "Player Spawned" << std::endl;
@@ -42,8 +42,7 @@ namespace ge{
 			std::cout << "Player Fired LaserBeam" << std::endl;
 			bReadyToFire = false;
 			LaserBeam* laser = new LaserBeam((position.x + width / 2) - 10, position.y, true);
-			laserBeams.push_back(laser);
-			scene->AddSprite(laser);			
+			laserHandler.AddLaser(laser);			
 		}		
 	}
 
@@ -114,41 +113,13 @@ namespace ge{
 		}
 	}
 
-	void Player::RemoveLaserBeam(LaserBeam* laser) {
-		std::cout << "LaserBeam Removed" << std::endl;
-		scene->RemoveSprite(laser);
-		
-		auto it = laserBeams.begin();
-		while (it != laserBeams.end())
-		{
-			if (*it == laser) {
-				it = laserBeams.erase(it);
-			}
-			else {
-				++it;
-			}
-		}
-	}
-
-	void Player::CheckLaserBeams() {
-		for (LaserBeam *laser : laserBeams) {
-			if (laser->OutsideBounce())
-			{				
-				RemoveLaserBeam(laser);				
-			}
-		}
-	}
-
-	void Player::Update(float delta) {		
-		LimitPlayerMovement();
-		CheckLaserBeams();
-		position += velocity * delta;
-	}
-
 	Player::~Player()
 	{
-		for (LaserBeam* laser : laserBeams) {
-			RemoveLaserBeam(laser);
-		}
+
+	}
+
+	void Player::Update(float delta) {
+		LimitPlayerMovement();		
+		position += velocity * delta;
 	}
 }

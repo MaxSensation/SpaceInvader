@@ -20,7 +20,7 @@ namespace ge {
 		void ClearRender();		
 		int* GetScreenHeight();
 		int* GetScreenWidth();
-	private:		
+	private:
 		void Update();
 		SDL_Window* win = nullptr;
 		SDL_Renderer* ren = nullptr;
