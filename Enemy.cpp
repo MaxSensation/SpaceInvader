@@ -3,8 +3,9 @@
 
 namespace ge{
 	Enemy::Enemy(int posX, int posY) :
-		MovingSprite("Enemy", posX, posY, 40, 40, "Player.png")
+		MovingSprite("Enemy", posX, posY, 24, 24, "Enemy.png")
 	{
+		std::cout << "Enemy Created" << std::endl;
 	}
 
 	bool Enemy::IsDead()
