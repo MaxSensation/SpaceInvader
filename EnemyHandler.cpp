@@ -13,18 +13,28 @@ namespace ge {
 	}
 
 	void EnemyHandler::RemoveEnemy(Enemy* enemy) {
-		scene->RemoveSprite(enemy);		
+		scene->RemoveSprite(enemy);
+		auto it = enemies.begin();
+		while (it != enemies.end())
+		{
+			if (*it == enemy) {
+				it = enemies.erase(it);
+			}
+			else {
+				++it;
+			}
+		}
+		enemy = nullptr;
+		delete(enemy);
 	}
 
 	void EnemyHandler::RemoveDeadEnemies()
 	{
-		auto it = enemies.begin();
-		while (it != enemies.end())
-		{
-			if ((*it)->IsDead()) {
-				RemoveEnemy(*it);				
+		for (Enemy* enemy : enemies) {
+			if (enemy->IsDead())
+			{
+				RemoveEnemy(enemy);
 			}
-			++it;
 		}
 	}
 	void EnemyHandler::Update(float delta)
