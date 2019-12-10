@@ -13,6 +13,7 @@ Game::Game():
 	player = new Player(&SCREENWITDH, &SCREENHEIGHT, scene);
 	std::cout << "Player Created" << std::endl;
 	scene->AddSprite(player);
+	
 	gameengine.SetScene(scene);	
 	gameengine.Launch();
 }

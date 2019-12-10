@@ -2,7 +2,7 @@
 
 namespace ge{
 	LaserBeam::LaserBeam(int posX, int posY, bool bUp) :
-		MovingSprite("LaserBeam", posX, posY, 20, 20, "LaserBeam.bmp"),
+		MovingSprite("LaserBeam", posX, posY, 20, 20, "LaserBeam.png"),
 		laserSpeed(0.3f)
 	{
 		if (bUp)

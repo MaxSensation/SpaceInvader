@@ -15,6 +15,7 @@ namespace ge {
 		void Init(const char* title, int width, int height, const int targetFramerate);
 		void Launch();
 		SDL_Renderer* GetRenderer();
+		SDL_Surface* GetScreenSurface();
 		InputManager* GetInputManager();
 		void ClearRender();		
 		int* GetScreenHeight();
@@ -23,6 +24,7 @@ namespace ge {
 		void Update();
 		SDL_Window* win = nullptr;
 		SDL_Renderer* ren = nullptr;
+		SDL_Surface* gScreenSurface = nullptr;
 		Scene* currentScene = nullptr;
 		InputManager* inputManager = nullptr;
 		int screenWidth = 0;

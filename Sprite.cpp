@@ -46,14 +46,27 @@ namespace ge {
 	}
 
 	void Sprite::Init()
-	{		
-		//TODO Fix transparency		
-		SCREENWIDTH = *gameengine.GetScreenWidth();				
-		SCREENHEIGHT = *gameengine.GetScreenHeight();		
-		SDL_Surface* image = IMG_Load(imgDestination);
-		texture = SDL_CreateTextureFromSurface(gameengine.GetRenderer(), image);
-		SDL_FreeSurface(image);
-		screen = {0,0,SCREENWIDTH,SCREENHEIGHT};
-		spriteRect = { static_cast<int>(position.x), static_cast<int>(position.y), width, height};
+	{				
+		SDL_Surface* optimizedSurface = NULL;
+		SDL_Surface* loadedSurface = IMG_Load(imgDestination);
+		if (loadedSurface == NULL)
+		{
+			printf("Unable to load image %s! SDL_image Error: %s\n", imgDestination, IMG_GetError());
+		}
+		else
+		{
+			optimizedSurface = SDL_ConvertSurfaceFormat(loadedSurface, SDL_PIXELFORMAT_ARGB8888, 0);
+			if (optimizedSurface == NULL)
+			{
+				printf("Unable to optimize image %s! SDL Error: %s\n", imgDestination, SDL_GetError());
+			}			
+			texture = SDL_CreateTextureFromSurface(gameengine.GetRenderer(), optimizedSurface);									
+			SDL_FreeSurface(loadedSurface);
+			SDL_FreeSurface(optimizedSurface);
+		}
+		SCREENWIDTH = *gameengine.GetScreenWidth();
+		SCREENHEIGHT = *gameengine.GetScreenHeight();
+		screen = { 0,0,SCREENWIDTH,SCREENHEIGHT };
+		spriteRect = { static_cast<int>(position.x), static_cast<int>(position.y), width, height };
 	}
 }

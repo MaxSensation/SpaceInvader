@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <SDL_image.h>
 
 using namespace std;
 
@@ -13,9 +14,36 @@ namespace ge {
 		screenHeight = height;
 		fps = targetFramerate;
 		frameDelay = 1000.0f/fps;
-		SDL_Init(SDL_INIT_VIDEO);
-		win = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
-		ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+		bool success = true;
+		if (SDL_Init(SDL_INIT_VIDEO) < 0)
+		{
+			printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
+			success = false;
+		}
+		else
+		{	
+			win = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
+			Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
+			ren = SDL_CreateRenderer(win, -1, render_flags);
+			if (win == NULL)
+			{
+				printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
+				success = false;
+			}
+			else
+			{			
+				int imgFlags = IMG_INIT_PNG;
+				if (!(IMG_Init(imgFlags) & imgFlags))
+				{
+					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+					success = false;
+				}
+				else
+				{
+					gScreenSurface = SDL_GetWindowSurface(win);
+				}
+			}
+		}
 	}
 
 	void GameEngine::SetScene(Scene* scene)
@@ -26,6 +54,10 @@ namespace ge {
 	SDL_Renderer* GameEngine::GetRenderer()
 	{
 		return ren;
+	}
+
+	SDL_Surface* GameEngine::GetScreenSurface() {
+		return gScreenSurface;
 	}
 
 	InputManager* GameEngine::GetInputManager() {
