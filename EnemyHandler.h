@@ -12,6 +12,7 @@ namespace ge {
 	public:
 		EnemyHandler(Scene* scene);
 		void Add(Enemy* enemy);
+		void AddEnemySet(std::vector<int> enemySet);
 	private:		
 		void RemoveEnemy(Enemy* enemy);
 		void RemoveDeadEnemies();

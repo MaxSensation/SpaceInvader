@@ -10,6 +10,42 @@ namespace ge {
 	void EnemyHandler::Add(Enemy* enemy)
 	{
 		enemies.push_back(enemy);
+		scene->AddSprite(enemy);
+	}
+
+	void EnemyHandler::AddEnemySet(std::vector<int> enemySet)
+	{
+		int enemyWidth = 26;
+		int row = 1;
+		int prevEnemiesPerRow = enemySet[0];
+		int offset = 0;
+		int enemySpacing = -1;
+		int x = 0;
+		int y = 0;
+
+		for (int enemyPerRow : enemySet) {
+			for (int  i = 1;  i <= enemyPerRow;  i++)
+			{								
+				std::cout << "Row: " << row << " EnemiesPerRow: " << enemyPerRow << " current enemy: " << i << std::endl;
+				if (enemySpacing < 0)
+				{
+					enemySpacing = (600 / enemyPerRow) - (enemyWidth / 2);
+				}				
+
+				if (prevEnemiesPerRow - enemyPerRow > 0)
+				{
+					x = enemySpacing * (i + ((prevEnemiesPerRow - enemyPerRow) / 2));
+				}
+				else
+				{
+					x = enemySpacing * i;
+				}
+				
+				y = 200 / enemySet.size() * row;
+				Add(new Enemy(x, y));
+			}
+			row++;
+		}
 	}
 
 	void EnemyHandler::RemoveEnemy(Enemy* enemy) {
