@@ -119,6 +119,10 @@ namespace ge{
 		position += velocity * delta;
 	}
 
+	bool Player::isDead() {
+		return bIsDead;
+	}
+
 	Player::~Player()
 	{
 		delete(scene);

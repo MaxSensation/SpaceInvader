@@ -7,21 +7,29 @@
 #include "Enemy.h"
 #include "LaserHandler.h"
 #include "EnemyHandler.h"
+#include "UpdateEachFrame.h"
 
-namespace ge {
-	class Game
+namespace ge{
+	class Game : public UpdateEachFrame
 	{
 		public:
 			Game();
-			~Game();
+			~Game();		
 		private:
+			void playerWon();
+			void gameOver();
+			void checkGameStatus();
+			void update(float delta);
+
 			Player* player = nullptr;
 			Enemy* enemy = nullptr;
 			Scene* scene = nullptr;
 			EnemyHandler* enemyHandler = nullptr;
 			int SCREENWITDH = 0;
 			int SCREENHEIGHT = 0;
-			int fpsCap = 0;			
+			int fpsCap = 0;
+			bool bWon = false;
+			bool bGameOver = false;
 	};
 }
 

@@ -17,10 +17,10 @@ Game::Game():
 	scene->addSprite(player);
 	
 	enemyHandler = new EnemyHandler(scene);	
-	std::vector<int> enemySet = { 7,5,3,1 };
+	std::vector<int> enemySet = { 7,7,7,7 };
 	enemyHandler->addEnemySet(enemySet);
 	scene->addUpdatableObject(enemyHandler);
-			
+	scene->addUpdatableObject(this);
 	gameengine.setScene(scene);	
 	std::cout << "Game Initiliezed" << "\n" << "FPS cap: " << fpsCap << "\n" << "ScreenWitdh: " << SCREENWITDH << "\n" << "ScreenHeight: " << SCREENHEIGHT << "\n" << std::endl;
 	gameengine.launch();
@@ -32,6 +32,33 @@ Game::~Game()
 	delete(player);	
 	scene = nullptr;
 	delete(scene);
+}
+
+void Game::playerWon() {
+	std::cout << "Player Won!!!" << std::endl;
+}
+
+
+void Game::gameOver() {
+	std::cout << "GameOver!!!" << std::endl;
+}
+
+void Game::checkGameStatus() {
+	if (enemyHandler->allDead() && !bWon)
+	{
+		playerWon();
+		bWon = true;
+	}
+	if (player->isDead() && !bGameOver)
+	{
+		gameOver();
+		bGameOver = true;
+	}
+}
+
+void Game::update(float delta)
+{
+	checkGameStatus();
 }
 
 int main(int argc, char** argv)

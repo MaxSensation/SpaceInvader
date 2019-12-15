@@ -16,6 +16,7 @@ namespace ge {
 			~Player();
 			void updateKeyInput(SDL_Event* event);			
 			void update(float delta);
+			bool isDead();
 		private:
 			void limitPlayerMovement();
 			void moveRight();
@@ -26,6 +27,7 @@ namespace ge {
 			void stopFire();
 			
 			float playerSpeed = 0.0f;
+			bool bIsDead = false;
 			bool bReadyToFire = true;
 			bool bCanMoveRight = true;
 			bool bCanMoveLeft = true;
