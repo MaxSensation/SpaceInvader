@@ -2,7 +2,7 @@
 
 namespace ge{
 	LaserBeam::LaserBeam(int posX, int posY, bool bUp) :
-		MovingSprite("LaserBeam", posX, posY, 20, 20, "LaserBeam.png"),
+		MovingSprite(posX, posY, 20, 20, "LaserBeam.png"),
 		laserSpeed(0.3f)
 	{
 		if (bUp)
@@ -16,7 +16,7 @@ namespace ge{
 		std::cout << "LaserBeam Spawned" << std::endl;
 	}
 
-	bool LaserBeam::OutsideBounce() {
+	bool LaserBeam::outsideBounce() {
 		if (position.y < 0)
 		{
 			std::cout << "LaserBeam Outside Bounce and will be removed" << std::endl;
@@ -27,7 +27,7 @@ namespace ge{
 		}
 	}
 
-	void LaserBeam::Update(float delta) {		
+	void LaserBeam::update(float delta) {		
 		position += velocity * delta;
 	}
 }

@@ -12,23 +12,25 @@ namespace ge {
 	class Player : public MovingSprite, public GameInput
 	{
 		public:			
-			Player(int* sWidth, int* sHeight, Scene* scene);
-			void MoveRight();
-			void MoveLeft();
-			void StopLeft();			
-			void StopRight();
-			void Fire();
-			void StopFire();
+			Player(int* sWidth, int* sHeight, Scene* scene);			
 			~Player();
-			void UpdateKeyInput(SDL_Event* event);
-			void LimitPlayerMovement();
-			void Update(float delta);
+			void updateKeyInput(SDL_Event* event);			
+			void update(float delta);
 		private:
-			Scene* scene;
+			void limitPlayerMovement();
+			void moveRight();
+			void moveLeft();
+			void stopLeft();
+			void stopRight();
+			void fire();
+			void stopFire();
+			
 			float playerSpeed = 0.0f;
 			bool bReadyToFire = true;
 			bool bCanMoveRight = true;
 			bool bCanMoveLeft = true;
+
+			Scene* scene;
 	};
 }
 #endif

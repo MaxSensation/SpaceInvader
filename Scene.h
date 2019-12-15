@@ -8,10 +8,10 @@ namespace ge{
 	class Scene
 	{
 	public:		
-		void AddSprite(Sprite* sprite);
-		void AddUpdatableObject(UpdateEachFrame* object);
-		void RemoveSprite(Sprite* sprite);
-		void Update(float delta);
+		void addSprite(Sprite* sprite);
+		void addUpdatableObject(UpdateEachFrame* object);
+		void removeSprite(Sprite* sprite);
+		void update(float delta);
 		~Scene();
 	private:
 		std::vector<Sprite*> sprites;		

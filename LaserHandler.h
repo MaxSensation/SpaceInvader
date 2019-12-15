@@ -3,19 +3,20 @@
 #include <vector>
 #include "LaserBeam.h"
 #include "Scene.h"
+#include "CollisionHandler.h"
 
 namespace ge {
-	class LaserHandler : public UpdateEachFrame
+	class LaserHandler : public UpdateEachFrame, public CollisionHandler
 	{
 		public:		
 			LaserHandler();
-			void Init(Scene* scene);
+			void init(Scene* scene);			
+			void addLaser(LaserBeam* laser);
+			void checkLaserBeams();
+			void removeLaserBeam(LaserBeam* laser);
+			bool checkCollision(SDL_Rect* object);
+			void update(float delta);
 			~LaserHandler();
-			void AddLaser(LaserBeam* laser);
-			void CheckLaserBeams();
-			void RemoveLaserBeam(LaserBeam* laser);
-			bool CheckCollition(SDL_Rect* object);			
-			void Update(float delta);
 		private:
 			std::vector<LaserBeam*> laserBeams;
 			Scene* handlerScene;

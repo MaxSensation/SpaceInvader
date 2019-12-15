@@ -11,8 +11,9 @@ namespace ge{
 	{
 		public:
 			InputManager();
-			void UpdateKeyDown(SDL_Event* event);	
-			void AddGameInput(GameInput* gi);
+			~InputManager();
+			void update(SDL_Event* event);	
+			void addInput(GameInput* gi);
 		private:
 			std::vector<GameInput*> gameInputs;
 	};

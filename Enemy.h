@@ -8,13 +8,12 @@ namespace ge {
 	{
 	public:
 		Enemy(int posX, int posY);
-		bool IsDead();
+		bool isDead();
 	private:
-		void Destory();
-		void CheckCollision();
-		void Update(float delta);
-		bool isColliding = false;
-		bool isDead = false;
+		void die();
+		void checkCollision();
+		void update(float delta);
+		bool bIsDead = false;
 	};
 }
 

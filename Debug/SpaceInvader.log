@@ -1,4 +1,24 @@
-﻿  EnemyHandler.cpp
-D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,119): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Enemy.cpp
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  LaserBeam.cpp
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  LaserHandler.cpp
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Player.cpp
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\Player.cpp(45,76): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\Player.cpp(45,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\Player.cpp(99,59): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Scene.cpp
+D:\Github\SpaceInvader\SpaceInvader\Player.cpp(108,25): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Sprite.cpp
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   SpaceInvader.vcxproj -> D:\Github\SpaceInvader\Debug\SpaceInvader.exe

@@ -4,15 +4,11 @@
 
 namespace ge {
 	class Component {
-	public:		
-		virtual ~Component();
-		std::string GetName();
 	protected:
-		Component(std::string name);
+		Component();
 	private:
 		Component(const Component&) = delete;
-		const Component& operator=(const Component&) = delete;
-		std::string name;
+		const Component& operator=(const Component&) = delete;		
 	};
 }
 

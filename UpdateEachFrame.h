@@ -7,7 +7,7 @@ namespace ge {
 		public:
 			UpdateEachFrame();
 			~UpdateEachFrame();
-			virtual void Update(float delta) = 0;
+			virtual void update(float delta) = 0;
 	};
 }
 

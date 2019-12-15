@@ -7,8 +7,8 @@ namespace ge {
 	{
 	public:
 		virtual ~MovingSprite();
-		MovingSprite(const std::string name, int posX, int posY, int width, int height, const char* imgDestination) : Sprite(name, posX, posY, width, height, imgDestination) {};
-		void Translate(int x, int y);
+		MovingSprite(int posX, int posY, int width, int height, const char* imgDestination) : Sprite(posX, posY, width, height, imgDestination) {};
+		void translate(int x, int y);
 	protected:
 		Vector2 velocity;		
 	private:

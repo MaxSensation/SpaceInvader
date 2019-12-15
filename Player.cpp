@@ -1,57 +1,58 @@
 #include "Player.h"
+#include "GameEngine.h"
 #include <iostream>
 
 
 namespace ge{
 	Player::Player(int* sWidth, int* sHeight, Scene* scene) :
-		MovingSprite("Player", (*sWidth / 2) - (50 / 2), *sHeight - (50 + 10), 50, 50, "Player.png"),
+		MovingSprite((*sWidth / 2) - (50 / 2), *sHeight - (50 + 10), 50, 50, "Player.png"),
 		playerSpeed(0.5f),
 		scene(scene)
 	{	
 		std::cout << "Player Spawned" << std::endl;
 	}
 
-	void Player::MoveRight()
+	void Player::moveRight()
 	{
 		velocity.x = playerSpeed;
 		std::cout << "Player Move Right" << std::endl;					
 	}
 
-	void Player::MoveLeft()
+	void Player::moveLeft()
 	{
 		velocity.x = -playerSpeed;
 		std::cout << "Player Move Left" << std::endl;	
 	}
 
-	void Player::StopLeft()
+	void Player::stopLeft()
 	{
 		velocity.x = 0;
 		std::cout << "Player Stopped Left" << std::endl;		
 	}
 
-	void Player::StopRight()
+	void Player::stopRight()
 	{
 		velocity.x = 0;
 		std::cout << "Player Stopped Right" << std::endl;		
 	}
 
-	void Player::Fire()
+	void Player::fire()
 	{
 		if (bReadyToFire)
 		{
 			std::cout << "Player Fired LaserBeam" << std::endl;
 			bReadyToFire = false;
 			LaserBeam* laser = new LaserBeam((position.x + width / 2) - 10, position.y, true);
-			laserHandler.AddLaser(laser);			
+			laserHandler.addLaser(laser);			
 		}		
 	}
 
-	void Player::StopFire()
+	void Player::stopFire()
 	{
 		bReadyToFire = true;
 	}
 
-	void Player::UpdateKeyInput(SDL_Event* event) {			
+	void Player::updateKeyInput(SDL_Event* event) {			
 		switch ((*event).type) {
 			case SDL_KEYDOWN:
 				switch ((*event).key.keysym.sym)
@@ -59,17 +60,17 @@ namespace ge{
 				case SDLK_RIGHT:
 					if (bCanMoveRight)
 					{
-						MoveRight();
+						moveRight();
 					}					
 					break;
 				case SDLK_LEFT:
 					if (bCanMoveLeft)
 					{
-						MoveLeft();
+						moveLeft();
 					}					
 					break;
 				case SDLK_SPACE:
-					Fire();
+					fire();
 					break;
 				}
 				break;			
@@ -77,13 +78,13 @@ namespace ge{
 				switch ((*event).key.keysym.sym)
 				{
 				case SDLK_RIGHT:
-					StopRight();
+					stopRight();
 					break;
 				case SDLK_LEFT:
-					StopLeft();
+					stopLeft();
 					break;
 				case SDLK_SPACE:
-					StopFire();
+					stopFire();
 					break;
 				}
 				break;
@@ -91,20 +92,20 @@ namespace ge{
 		}
 	}	
 
-	void Player::LimitPlayerMovement() {				
-		if (position.x > SCREENWIDTH-width)
+	void Player::limitPlayerMovement() {				
+		if (position.x > *gameengine.getScreenWidth() -width)
 		{							
-			StopRight();
-			Translate(SCREENWIDTH - width,position.y);
+			stopRight();
+			translate(*gameengine.getScreenWidth() - width,position.y);
 			bCanMoveRight = false;
 		}
-		if(position.x < SCREENWIDTH-width) {
+		if(position.x < *gameengine.getScreenWidth() -width) {
 			bCanMoveRight = true;
 		}
 		if(position.x < 0)
 		{				
-			StopLeft();
-			Translate(0, position.y);
+			stopLeft();
+			translate(0, position.y);
 			bCanMoveLeft = false;
 		}
 		if(position.x > 0)
@@ -113,13 +114,13 @@ namespace ge{
 		}
 	}
 
-	Player::~Player()
-	{
-
+	void Player::update(float delta) {
+		limitPlayerMovement();		
+		position += velocity * delta;
 	}
 
-	void Player::Update(float delta) {
-		LimitPlayerMovement();		
-		position += velocity * delta;
+	Player::~Player()
+	{
+		delete(scene);
 	}
 }

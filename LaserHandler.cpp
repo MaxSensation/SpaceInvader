@@ -4,34 +4,34 @@ namespace ge {
 	LaserHandler::LaserHandler()
 	{	
 	}
-	void LaserHandler::Init(Scene* scene)
+	void LaserHandler::init(Scene* scene)
 	{		
 		handlerScene = scene;		
 	}
 	LaserHandler::~LaserHandler()
 	{		
 		for (LaserBeam* laser : laserBeams) {
-			RemoveLaserBeam(laser);
+			removeLaserBeam(laser);
 		}
 	}
 
-	void LaserHandler::AddLaser(LaserBeam* laser)
+	void LaserHandler::addLaser(LaserBeam* laser)
 	{
 		laserBeams.push_back(laser);
-		handlerScene->AddSprite(laser);
+		handlerScene->addSprite(laser);
 	}
 
-	void LaserHandler::CheckLaserBeams() {
+	void LaserHandler::checkLaserBeams() {
 		for (LaserBeam* laser : laserBeams) {
-			if (laser->OutsideBounce())
+			if (laser->outsideBounce())
 			{
-				RemoveLaserBeam(laser);
+				removeLaserBeam(laser);
 			}
 		}
 	}
 
-	void LaserHandler::RemoveLaserBeam(LaserBeam* laser) {
-		handlerScene->RemoveSprite(laser);
+	void LaserHandler::removeLaserBeam(LaserBeam* laser) {
+		handlerScene->removeSprite(laser);
 		auto it = laserBeams.begin();
 		while (it != laserBeams.end())
 		{
@@ -45,12 +45,12 @@ namespace ge {
 		}
 	}
 
-	bool LaserHandler::CheckCollition(SDL_Rect* object) {				
+	bool LaserHandler::checkCollision(SDL_Rect* object) {
 		for (LaserBeam* laser : laserBeams)
 		{
-			if (SDL_HasIntersection(object, laser->GetSpriteRect()))
+			if (checkRectCollision(*object, *laser->getSpriteRect()))
 			{
-				RemoveLaserBeam(laser);
+				removeLaserBeam(laser);
 				return true;
 			}
 			else
@@ -61,9 +61,9 @@ namespace ge {
 		return false;
 	}
 
-	void LaserHandler::Update(float delta)
+	void LaserHandler::update(float delta)
 	{
-		CheckLaserBeams();
+		checkLaserBeams();
 	}
 	LaserHandler laserHandler;
 }

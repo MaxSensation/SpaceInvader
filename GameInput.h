@@ -7,7 +7,7 @@ namespace ge{
 		public:
 			GameInput();
 			~GameInput();
-			virtual void UpdateKeyInput(SDL_Event* event) = 0;
+			virtual void updateKeyInput(SDL_Event* event) = 0;
 		private:						
 	};
 }

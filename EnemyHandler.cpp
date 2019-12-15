@@ -7,13 +7,13 @@ namespace ge {
 
 	}
 
-	void EnemyHandler::Add(Enemy* enemy)
+	void EnemyHandler::add(Enemy* enemy)
 	{
 		enemies.push_back(enemy);
-		scene->AddSprite(enemy);
+		scene->addSprite(enemy);
 	}
 
-	void EnemyHandler::AddEnemySet(std::vector<int> enemySet)
+	void EnemyHandler::addEnemySet(std::vector<int> enemySet)
 	{
 		int enemyWidth = 26;
 		int row = 1;
@@ -42,14 +42,14 @@ namespace ge {
 				}
 				
 				y = 200 / enemySet.size() * row;
-				Add(new Enemy(x, y));
+				add(new Enemy(x, y));
 			}
 			row++;
 		}
 	}
 
-	void EnemyHandler::RemoveEnemy(Enemy* enemy) {
-		scene->RemoveSprite(enemy);
+	void EnemyHandler::removeEnemy(Enemy* enemy) {
+		scene->removeSprite(enemy);
 		auto it = enemies.begin();
 		while (it != enemies.end())
 		{
@@ -64,17 +64,17 @@ namespace ge {
 		delete(enemy);
 	}
 
-	void EnemyHandler::RemoveDeadEnemies()
+	void EnemyHandler::removeDeadEnemies()
 	{
 		for (Enemy* enemy : enemies) {
-			if (enemy->IsDead())
+			if (enemy->isDead())
 			{
-				RemoveEnemy(enemy);
+				removeEnemy(enemy);
 			}
 		}
 	}
-	void EnemyHandler::Update(float delta)
+	void EnemyHandler::update(float delta)
 	{
-		RemoveDeadEnemies();
+		removeDeadEnemies();
 	}
 }

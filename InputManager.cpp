@@ -6,13 +6,21 @@ namespace ge {
 
 	}
 
-	void InputManager::UpdateKeyDown(SDL_Event* event) {
-		for (GameInput *input : gameInputs) {
-			input->UpdateKeyInput(event);
+	InputManager::~InputManager() {
+		auto it = gameInputs.begin();
+		while (it != gameInputs.end())
+		{			
+			it = gameInputs.erase(it);			
 		}
 	}
 
-	void InputManager::AddGameInput(GameInput* gi)
+	void InputManager::update(SDL_Event* event) {
+		for (GameInput *input : gameInputs) {
+			input->updateKeyInput(event);
+		}
+	}
+
+	void InputManager::addInput(GameInput* gi)
 	{
 		gameInputs.push_back(gi);
 	}

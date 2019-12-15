@@ -9,13 +9,11 @@ namespace ge {
 	{
 	public:
 		virtual ~GraphicObject2D();
-		int* GetWidth();
-		int* GetHeight();
-		Vector2* GetPosition();
+		int* getWidth();
+		int* getHeight();
+		Vector2* getPosition();
 	protected:
-		GraphicObject2D(const std::string name, int posX, int posY, int width, int height) : Component(name), position(posX,posY), width(width), height(height) {
-
-		};		
+		GraphicObject2D(int posX, int posY, int width, int height) : Component(), position(posX,posY), width(width), height(height) {};		
 		int width;
 		int height;
 		Vector2 position;

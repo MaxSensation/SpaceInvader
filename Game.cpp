@@ -8,22 +8,22 @@ Game::Game():
 	SCREENHEIGHT(600),
 	fpsCap(60)
 {	
-	gameengine.Init("SpaceInvader", SCREENWITDH, SCREENHEIGHT, fpsCap);	
+	gameengine.init("SpaceInvader", SCREENWITDH, SCREENHEIGHT, fpsCap);	
 	
-	laserHandler.Init(scene);
-	scene->AddUpdatableObject(&laserHandler);
+	laserHandler.init(scene);
+	scene->addUpdatableObject(&laserHandler);
 
 	player = new Player(&SCREENWITDH, &SCREENHEIGHT, scene);
-	scene->AddSprite(player);
+	scene->addSprite(player);
 	
 	enemyHandler = new EnemyHandler(scene);	
 	std::vector<int> enemySet = { 7,5,3,1 };
-	enemyHandler->AddEnemySet(enemySet);
-	scene->AddUpdatableObject(enemyHandler);
+	enemyHandler->addEnemySet(enemySet);
+	scene->addUpdatableObject(enemyHandler);
 			
-	gameengine.SetScene(scene);	
+	gameengine.setScene(scene);	
 	std::cout << "Game Initiliezed" << "\n" << "FPS cap: " << fpsCap << "\n" << "ScreenWitdh: " << SCREENWITDH << "\n" << "ScreenHeight: " << SCREENHEIGHT << "\n" << std::endl;
-	gameengine.Launch();
+	gameengine.launch();
 }
 
 Game::~Game()

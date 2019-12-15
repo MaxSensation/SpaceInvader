@@ -9,8 +9,8 @@ namespace ge{
 	{
 		public:
 			LaserBeam(int posX, int posY, bool bUp);
-			bool OutsideBounce();			
-			void Update(float delta);
+			bool outsideBounce();			
+			void update(float delta);
 		private:		
 			float laserSpeed = 0.0f;
 	};

@@ -5,17 +5,17 @@
 #include "GameEngine.h"
 
 namespace ge{
-	void Scene::AddSprite(Sprite* sprite)
+	void Scene::addSprite(Sprite* sprite)
 	{
 		sprites.push_back(sprite);
 	}
 
-	void Scene::AddUpdatableObject(UpdateEachFrame* object)
+	void Scene::addUpdatableObject(UpdateEachFrame* object)
 	{
 		UpdateEachFrames.push_back(object);
 	}
 
-	void Scene::RemoveSprite(Sprite* sprite)
+	void Scene::removeSprite(Sprite* sprite)
 	{
 		auto it = sprites.begin();
 		while (it != sprites.end())
@@ -30,20 +30,20 @@ namespace ge{
 	}
 
 
-	void Scene::Update(float delta)
+	void Scene::update(float delta)
 	{
 		for (Sprite* sprite : sprites) {										
-			sprite->Update(delta);
-			sprite->UpdatePos();
-			sprite->Render();
+			sprite->update(delta);
+			sprite->updatePos();
+			sprite->render();
 		}
 
 		for (UpdateEachFrame* object : UpdateEachFrames)
 		{
-			object->Update(delta);
+			object->update(delta);
 		}
 
-		SDL_RenderPresent(gameengine.GetRenderer());		
+		SDL_RenderPresent(gameengine.getRenderer());		
 	}
 
 	Scene::~Scene()

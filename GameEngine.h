@@ -8,31 +8,37 @@
 
 namespace ge {
 	class GameEngine {	
-	public:
-		GameEngine() : inputManager(new InputManager) {};
+	public:		
+		void init(const char* title, int width, int height, const int targetFramerate);
+		void setScene(Scene* scene);
+		void launch();				
+		void clearRender();		
+		int* getScreenHeight();
+		int* getScreenWidth();
+		SDL_Renderer* getRenderer();
+		SDL_Surface* getScreenSurface();
+		InputManager* getInputManager();
+		
 		~GameEngine();
-		void SetScene(Scene* scene);
-		void Init(const char* title, int width, int height, const int targetFramerate);
-		void Launch();
-		SDL_Renderer* GetRenderer();
-		SDL_Surface* GetScreenSurface();
-		InputManager* GetInputManager();
-		void ClearRender();		
-		int* GetScreenHeight();
-		int* GetScreenWidth();
 	private:
-		void Update();
+		bool initVideo();
+		bool initWindow();
+		bool initRenderer();
+		bool initImage();
+
+		const char* title;
+		int screenWidth = 0;
+		int screenHeight = 0;		
+		Uint32 targetFramerate = 0;
+		bool bFPSCounter = false;
+		float frameDelay = 0.0f;
+		bool hasInitialised = false;
+
 		SDL_Window* win = nullptr;
 		SDL_Renderer* ren = nullptr;
 		SDL_Surface* gScreenSurface = nullptr;
 		Scene* currentScene = nullptr;
-		InputManager* inputManager = nullptr;
-		int screenWidth = 0;
-		int screenHeight = 0;		
-		Uint32 fps = 0;
-		bool bFPSCounter = false;
-		float frameDelay = 0.0f;
-		bool hasInitialised = false;
+		InputManager* inputManager = new InputManager;
 	};
 	extern GameEngine gameengine;
 }

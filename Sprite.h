@@ -9,25 +9,24 @@ namespace ge {
 	{
 	public:
 		virtual ~Sprite();
-		const char* GetImgDest();		
-		SDL_Rect* GetScreen();
-		SDL_Rect* GetSpriteRect();
-		SDL_Texture* GetTexture();
-		virtual void Update(float delta);
-		Sprite(const std::string name, int posX, int posY, int width, int height, const char* imgDestination) :
-			GraphicObject2D(name, posX, posY, width, height),
+		const char* getImgDest();		
+		SDL_Rect* getScreen();
+		SDL_Rect* getSpriteRect();
+		SDL_Texture* getTexture();
+		virtual void update(float delta);
+		Sprite(int posX, int posY, int width, int height, const char* imgDestination) :
+			GraphicObject2D(posX, posY, width, height),
 			imgDestination(imgDestination)
 		{
-			Init();
+			init();
 		};
-		void Render();
-		void UpdatePos();
+		void render();
+		void updatePos();
 	protected:		
-		void Init();
+		void init();
+
 		const char* imgDestination;
 		SDL_Texture* texture = nullptr;
-		int SCREENWIDTH = 0;
-		int SCREENHEIGHT = 0;
 		SDL_Rect screen;
 		SDL_Rect spriteRect;		
 	};

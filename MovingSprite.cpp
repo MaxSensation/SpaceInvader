@@ -5,7 +5,7 @@ namespace ge{
 	MovingSprite::~MovingSprite()
 	{
 	}
-	void MovingSprite::Translate(int x, int y)
+	void MovingSprite::translate(int x, int y)
 	{				
 		position.x = x;
 		position.y = y;

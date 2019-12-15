@@ -9,116 +9,146 @@ using namespace std;
 
 namespace ge {	
 
-	void GameEngine::Init(const char* title, int width, int height, const int targetFramerate){
-		screenWidth = width;
-		screenHeight = height;
-		fps = targetFramerate;
-		frameDelay = 1000.0f/fps;
-		bool success = true;
-		if (SDL_Init(SDL_INIT_VIDEO) < 0)
-		{
-			printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
-			success = false;
-		}
+	bool GameEngine::initVideo()
+	{
+		if (SDL_Init(SDL_INIT_VIDEO) == 0)
+			return true;
 		else
-		{	
-			win = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
-			Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
-			ren = SDL_CreateRenderer(win, -1, render_flags);
-			if (win == NULL)
-			{
-				printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
-				success = false;
-			}
-			else
-			{			
-				int imgFlags = IMG_INIT_PNG;
-				if (!(IMG_Init(imgFlags) & imgFlags))
-				{
-					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
-					success = false;
-				}
-				else
-				{
-					gScreenSurface = SDL_GetWindowSurface(win);
-				}
-			}
-		}
+			return false;
 	}
 
-	void GameEngine::SetScene(Scene* scene)
+	bool GameEngine::initWindow()
+	{
+		win = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
+		
+		if (win != NULL)
+			return true;
+		else
+			return false;
+	}
+
+	bool GameEngine::initRenderer()
+	{
+		Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
+		ren = SDL_CreateRenderer(win, -1, render_flags);
+	
+		if (ren != NULL)		
+			return true;
+		else
+			return false;
+	}
+
+	bool GameEngine::initImage()
+	{
+		int imgFlags = IMG_INIT_PNG;
+		if (IMG_Init(imgFlags) & imgFlags)
+		{
+			gScreenSurface = SDL_GetWindowSurface(win);
+			return true;
+		}
+		else		
+			return false;			
+	}
+
+	void GameEngine::init(const char* title, int screenWidth, int screenHeight, const int targetFramerate) {
+		this->title = title;
+		this->screenWidth = screenWidth;
+		this->screenHeight = screenHeight;
+		this->targetFramerate = targetFramerate;
+		frameDelay = 1000.0f / targetFramerate;
+
+		if (initVideo())
+			if (initWindow())
+				if (initRenderer())
+					if (initImage())
+						hasInitialised = true;
+					else
+						printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+				else
+					printf("SDL Renderer could not initialize! SDL Renderer Error: %s\n", SDL_GetError());
+			else
+				printf("SDL Window could not initialize! SDL Window Error: %s\n", SDL_GetError());
+		else
+			printf("SDL Video could not initialize! SDL Video Error: %s\n", SDL_GetError());
+	}
+
+	void GameEngine::setScene(Scene* scene)
 	{
 		currentScene = scene;
 	}
 
-	SDL_Renderer* GameEngine::GetRenderer()
+	SDL_Renderer* GameEngine::getRenderer()
 	{
 		return ren;
 	}
 
-	SDL_Surface* GameEngine::GetScreenSurface() {
+	SDL_Surface* GameEngine::getScreenSurface() {
 		return gScreenSurface;
 	}
 
-	InputManager* GameEngine::GetInputManager() {
+	InputManager* GameEngine::getInputManager() {
 		return inputManager;
 	}
 
-	void GameEngine::ClearRender() {
+	void GameEngine::clearRender() {
 		SDL_RenderClear(ren);
 		SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);		
 	}
 
-	void GameEngine::Launch()
-	{				
-		if (currentScene != nullptr)
-		{	
-			bool running = true;
-			Uint32 frameStart = 0.0f;;
-			Uint32 frameTime = 0.0f;;
-			float delta = 0.0f;
-			short currentFPS = 0;
-			SDL_Event event;
-			while (running) {		
-				frameStart = SDL_GetTicks();
-				ClearRender();
-				while (SDL_PollEvent(&event)) {
-					inputManager->UpdateKeyDown(&event);
-					switch (event.type) {	
+	void GameEngine::launch()
+	{		
+		if (hasInitialised) {
+			if (currentScene != nullptr)
+			{
+				bool running = true;
+				Uint32 frameStart = 0.0f;;
+				Uint32 frameTime = 0.0f;;
+				float delta = 0.0f;
+				short currentFPS = 0;
+				SDL_Event event;
+				while (running) {
+					frameStart = SDL_GetTicks();
+					
+					clearRender();
+					while (SDL_PollEvent(&event)) {
+						inputManager->update(&event);
+						switch (event.type) {
 						case SDL_QUIT:
 							running = false;
 							break;
+						}
 					}
-				}					
-				currentScene->Update(delta);
-				frameTime = SDL_GetTicks() - frameStart;
-				delta = frameDelay - frameTime;			
-				if (bFPSCounter && delta != 0)
-				{					
-					currentFPS = 1000 / delta;
-					cout << "FPS: " << currentFPS << endl;
+					currentScene->update(delta);
+					
+					frameTime = SDL_GetTicks() - frameStart;
+					delta = frameDelay - frameTime;
+					if (bFPSCounter && delta != 0)
+					{
+						currentFPS = 1000 / delta;
+						cout << "FPS: " << currentFPS << endl;
+					}
+					if (frameDelay > frameTime)
+					{
+						SDL_Delay(delta);
+					}
 				}
-				if (frameDelay > frameTime)
-				{
-					SDL_Delay(delta);
-				}										
+			}
+			else
+			{
+				cout << "Error: No scene is selected! please use SetScene()" << endl;
 			}
 		}
 		else
 		{
-			cout << "Error: No scene is selected! please use SetScene()" << endl;
+			cout << "Error: Need to use init(title, screenWidth, screenHeight, targetFramerate)" << endl;
 		}
 	}
 
-	void GameEngine::Update()
-	{
-	}
-
-	int* GameEngine::GetScreenHeight() {
+	int* GameEngine::getScreenHeight() {
 		return &screenHeight;
 	}
 
-	int* GameEngine::GetScreenWidth() {
+	int* GameEngine::getScreenWidth() {
 		return &screenWidth;
 	}
 
@@ -130,7 +160,15 @@ namespace ge {
 		inputManager = nullptr;
 		delete(inputManager);
 		SDL_Quit();				
-	}
 
+		/*
+		TODO Memory
+		win
+		ren
+		gScreenSurface
+		currentScene
+		inputManager
+		*/
+	}
 	GameEngine gameengine;
 }
