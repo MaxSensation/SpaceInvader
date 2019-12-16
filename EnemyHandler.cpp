@@ -15,6 +15,7 @@ namespace ge {
 
 	void EnemyHandler::addEnemySet(std::vector<int> enemySet)
 	{
+		totalCreatedEnemies = 0;
 		enemyWidth = 24;
 		enemySpeed = 0.05f;
 		int row = 1;
@@ -47,9 +48,10 @@ namespace ge {
 
 				y = 200 / enemySet.size() * row;				
 				add(new Enemy(x, y, enemySpeed));
+				totalCreatedEnemies++;
 			}
 			row++;
-		}
+		}		
 	}
 
 	void EnemyHandler::move()
@@ -233,5 +235,13 @@ namespace ge {
 		checkEnemyWalls();		
 		fire();
 		move();				
+	}
+
+	int EnemyHandler::getTotalAliveEnemies() {
+		return enemies.size();
+	}
+
+	int EnemyHandler::getTotalCreatedEnemies() {
+		return totalCreatedEnemies;
 	}
 }

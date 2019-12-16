@@ -10,6 +10,11 @@ namespace ge{
 		sprites.push_back(sprite);
 	}
 
+	void Scene::addText(Text* text)
+	{
+		texts.push_back(text);
+	}
+
 	void Scene::addUpdatableObject(UpdateEachFrame* object)
 	{
 		UpdateEachFrames.push_back(object);
@@ -41,6 +46,10 @@ namespace ge{
 		for (UpdateEachFrame* object : UpdateEachFrames)
 		{
 			object->update(delta);
+		}
+
+		for (Text* text : texts) {
+			text->render();
 		}
 
 		SDL_RenderPresent(gameengine.getRenderer());		

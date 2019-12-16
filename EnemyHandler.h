@@ -14,7 +14,9 @@ namespace ge {
 		void addEnemySet(std::vector<int> enemySet);
 		bool allDead();	
 		bool enemyWon();
-		void fire();		
+		void fire();	
+		int getTotalAliveEnemies();
+		int getTotalCreatedEnemies();
 	private:		
 		void generateFirePoints();
 		void add(Enemy* enemy);
@@ -31,6 +33,7 @@ namespace ge {
 		void update(float delta);
 		bool bMovingRight = true;
 		int enemyWidth;
+		int totalCreatedEnemies;
 		float enemySpeed;
 		std::vector<int> firePoints;
 		Scene* scene = nullptr;

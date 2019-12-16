@@ -8,6 +8,7 @@
 #include "LaserHandler.h"
 #include "EnemyHandler.h"
 #include "UpdateEachFrame.h"
+#include "Text.h"
 
 namespace ge{
 	class Game : public UpdateEachFrame
@@ -19,9 +20,14 @@ namespace ge{
 			void playerWon();
 			void gameOver();
 			void checkGameStatus();
+			void calcScore();
 			void update(float delta);
 
 			Player* player = nullptr;
+			Text* textScore = nullptr;
+			Text* score = nullptr;			
+			Text* winningText = nullptr;
+			Text* gameOverText = nullptr;
 			Enemy* enemy = nullptr;
 			Scene* scene = nullptr;
 			EnemyHandler* enemyHandler = nullptr;

@@ -16,6 +16,14 @@ Game::Game():
 	player = new Player(&SCREENWITDH, &SCREENHEIGHT, scene);
 	scene->addSprite(player);
 	
+	textScore = new Text(10, 10, 100, 100, "arial.ttf", 30, "Score: ");
+	score = new Text(110, 10, 100, 100, "arial.ttf", 30, "0");
+	scene->addText(textScore);
+	scene->addText(score);
+	
+	winningText = new Text(SCREENWITDH/2 - 100, SCREENHEIGHT/2 - 100, 100, 100, "arial.ttf", 50, "You Won!");
+	gameOverText = new Text(SCREENWITDH / 2 - 125, SCREENHEIGHT / 2 - 100, 100, 100, "arial.ttf", 50, "GameOver!");
+
 	enemyHandler = new EnemyHandler(scene);	
 	std::vector<int> enemySet = { 8,8,8,8 };
 	enemyHandler->addEnemySet(enemySet);
@@ -35,15 +43,17 @@ Game::~Game()
 }
 
 void Game::playerWon() {
-	std::cout << "--------------- Player Won!!! ---------------" << std::endl;
+	std::cout << "--------------- Player Won!!! ---------------" << std::endl;	
+	scene->addText(winningText);
 }
 
 
 void Game::gameOver() {
 	std::cout << "--------------- GameOver!!! ---------------" << std::endl;
+	scene->addText(gameOverText);
 }
 
-void Game::checkGameStatus() {	
+void Game::checkGameStatus() {		
 	if (enemyHandler->enemyWon())
 	{
 		player->die();
@@ -61,8 +71,15 @@ void Game::checkGameStatus() {
 	}
 }
 
+void Game::calcScore() {
+	int scorePerEnemy = 10;
+	int newScore = (enemyHandler->getTotalCreatedEnemies() - enemyHandler->getTotalAliveEnemies()) * scorePerEnemy;
+	score->setText(std::to_string(newScore));
+}
+
 void Game::update(float delta)
 {
+	calcScore();
 	checkGameStatus();
 }
 

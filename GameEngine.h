@@ -5,6 +5,7 @@
 #include "InputManager.h"
 #include <SDL.h>
 #include <vector>
+#include <sstream> 
 
 namespace ge {
 	class GameEngine {	
@@ -25,6 +26,7 @@ namespace ge {
 		bool initWindow();
 		bool initRenderer();
 		bool initImage();
+		bool initText();
 
 		const char* title;
 		int screenWidth = 0;

@@ -4,6 +4,7 @@
 #include <vector>
 #include <chrono>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 using namespace std;
 
@@ -50,6 +51,14 @@ namespace ge {
 			return false;			
 	}
 
+	bool GameEngine::initText() {
+		if (TTF_Init() == 0)
+		{
+			return true;
+		}
+		return false;
+	}
+
 	void GameEngine::init(const char* title, int screenWidth, int screenHeight, const int targetFramerate) {
 		this->title = title;
 		this->screenWidth = screenWidth;
@@ -61,9 +70,14 @@ namespace ge {
 			if (initWindow())
 				if (initRenderer())
 					if (initImage())
-						hasInitialised = true;
+						if (initText())
+						{
+							hasInitialised = true;
+						}
+						else
+							printf("SDL Text could not initialize! SDL Text Error: %s\n", SDL_GetError());
 					else
-						printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+						printf("SDL Image could not initialize! SDL Image Error: %s\n", IMG_GetError());
 				else
 					printf("SDL Renderer could not initialize! SDL Renderer Error: %s\n", SDL_GetError());
 			else
@@ -153,22 +167,15 @@ namespace ge {
 	}
 
 	GameEngine::~GameEngine() {
+		TTF_Quit();
+		IMG_Quit();
 		SDL_DestroyRenderer(ren);
 		SDL_DestroyWindow(win);
+		SDL_Quit();						
 		currentScene = nullptr;
 		delete(currentScene);
 		inputManager = nullptr;
 		delete(inputManager);
-		SDL_Quit();				
-
-		/*
-		TODO Memory
-		win
-		ren
-		gScreenSurface
-		currentScene
-		inputManager
-		*/
 	}
 	GameEngine gameengine;
 }

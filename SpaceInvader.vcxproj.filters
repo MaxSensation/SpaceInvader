@@ -72,6 +72,9 @@
     <ClCompile Include="CollisionHandler.cpp">
       <Filter>Source Files\Dependencies</Filter>
     </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Dependencies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -123,6 +126,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CollisionHandler.h">
+      <Filter>Header Files\Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
       <Filter>Header Files\Dependencies</Filter>
     </ClInclude>
   </ItemGroup>
