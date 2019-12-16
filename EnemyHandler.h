@@ -10,23 +10,29 @@ namespace ge {
 	class EnemyHandler : public UpdateEachFrame
 	{
 	public:
-		EnemyHandler(Scene* scene);
-		void add(Enemy* enemy);
+		EnemyHandler(Scene* scene);		
 		void addEnemySet(std::vector<int> enemySet);
 		bool allDead();	
+		bool enemyWon();
+		void fire();		
 	private:		
+		void generateFirePoints();
+		void add(Enemy* enemy);
 		void move();
 		void moveDown();
 		void removeEnemy(Enemy* enemy);
 		void updateSpeed();
 		void removeDeadEnemies();
 		void checkEnemyWalls();
+		void resetEnemiesFireState();
 		int getEnemyMaxPosX();
 		int getEnemyMinPosX();
+		int getEnemyMaxPosY();		
 		void update(float delta);
 		bool bMovingRight = true;
 		int enemyWidth;
 		float enemySpeed;
+		std::vector<int> firePoints;
 		Scene* scene = nullptr;
 		std::vector<Enemy*> enemies;
 	};

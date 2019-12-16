@@ -1,13 +1,8 @@
-﻿  Enemy.cpp
-D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Github\SpaceInvader\SpaceInvader\Enemy.cpp(29,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  EnemyHandler.cpp
-D:\Github\SpaceInvader\SpaceInvader\Enemy.cpp(29,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  EnemyHandler.cpp
 D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(16,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Github\SpaceInvader\SpaceInvader\EnemyHandler.cpp(97,22): warning C4305: '*=': truncation from 'double' to 'float'
-D:\Github\SpaceInvader\SpaceInvader\EnemyHandler.cpp(138,71): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
-D:\Github\SpaceInvader\SpaceInvader\EnemyHandler.cpp(150,71): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\EnemyHandler.cpp(148,71): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\EnemyHandler.cpp(160,71): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\EnemyHandler.cpp(172,71): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   SpaceInvader.vcxproj -> D:\Github\SpaceInvader\Debug\SpaceInvader.exe

@@ -4,7 +4,7 @@ namespace ge {
 	EnemyHandler::EnemyHandler(Scene* scene) :
 	scene(scene)
 	{
-
+		generateFirePoints();		
 	}
 
 	void EnemyHandler::add(Enemy* enemy)
@@ -28,7 +28,7 @@ namespace ge {
 		for (int enemyPerRow : enemySet) {
 			for (int  i = 1;  i <= enemyPerRow;  i++)
 			{								
-				std::cout << "Row: " << row << " EnemiesPerRow: " << enemyPerRow << " current enemy: " << i << std::endl;
+				//std::cout << "Row: " << row << " EnemiesPerRow: " << enemyPerRow << " current enemy: " << i << std::endl;
 				if (enemySpacing < 0)
 				{
 					enemySpacing = (400 / enemyPerRow) - (enemyWidth / 2);					
@@ -122,13 +122,23 @@ namespace ge {
 		{
 			moveDown();
 			bMovingRight = false;
+			generateFirePoints();
+			resetEnemiesFireState();
 		}
 		if (getEnemyMinPosX() <= 0 && !bMovingRight)
 		{
 			moveDown();
 			bMovingRight = true;
+			generateFirePoints();
+			resetEnemiesFireState();
 		}		
 	};
+
+	void EnemyHandler::resetEnemiesFireState() {
+		for (Enemy* enemy : enemies) {
+			enemy->setFire(true);
+		}
+	}
 
 	int EnemyHandler::getEnemyMaxPosX(){
 		if (enemies.size() > 0)
@@ -154,10 +164,74 @@ namespace ge {
 		return -1;
 	};
 
+	int EnemyHandler::getEnemyMaxPosY() {
+		if (enemies.size() > 0)
+		{
+			int maxPosY = 0;
+			for (Enemy* enemy : enemies) {
+				enemy->getPosition()->y > maxPosY ? maxPosY = enemy->getPosition()->y : NULL;
+			}
+			return maxPosY;
+		}
+		return -1;
+	};
+
+	bool EnemyHandler::enemyWon() {
+		for (Enemy *enemy : enemies)
+		{
+			if (getEnemyMaxPosY() >= 600 - enemyWidth)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void EnemyHandler::fire() {
+		int maxPosY = getEnemyMaxPosY();		
+		for (Enemy *enemy : enemies)
+		{			
+			if (enemy->canFire())
+			{		
+				if (enemy->getPosition()->y == maxPosY)
+				{				
+					auto firePoint = firePoints.begin();
+					while (firePoint != firePoints.end())
+					{
+						if (*firePoint == (int)enemy->getPosition()->x) {												
+							if (rand() % 2 + 1 == 1)
+							{
+								enemy->fire();
+								firePoint = firePoints.erase(firePoint);
+							}
+							else
+							{
+								enemy->setFire(false);
+								++firePoint;
+							}
+						}
+						else {
+							++firePoint;
+						}
+					}		
+				}
+			}
+		}
+	}
+
+	void EnemyHandler::generateFirePoints() {
+		firePoints.clear();
+		for (int i = 600/10; i < 600; i += 600/10)
+		{			
+			firePoints.push_back(i);
+		}		
+	}
+
 	void EnemyHandler::update(float delta)
 	{
 		removeDeadEnemies();
-		checkEnemyWalls();
-		move();
+		checkEnemyWalls();		
+		fire();
+		move();				
 	}
 }

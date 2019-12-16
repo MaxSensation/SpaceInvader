@@ -42,7 +42,7 @@ namespace ge{
 		{
 			std::cout << "Player Fired LaserBeam" << std::endl;
 			bReadyToFire = false;
-			LaserBeam* laser = new LaserBeam((position.x + width / 2) - 10, position.y, true);
+			LaserBeam* laser = new LaserBeam((position.x + width / 2) - 10, position.y - 20, true);
 			laserHandler.addLaser(laser);			
 		}		
 	}
@@ -115,12 +115,26 @@ namespace ge{
 	}
 
 	void Player::update(float delta) {
-		limitPlayerMovement();		
+		checkCollision();
+		limitPlayerMovement();				
 		position += velocity * delta;
 	}
 
 	bool Player::isDead() {
 		return bIsDead;
+	}
+
+	void Player::die()
+	{
+		bIsDead = true;
+	}
+
+	void Player::checkCollision() {
+		if (laserHandler.checkCollision(&spriteRect))
+		{
+			std::cout << "Player hit!" << std::endl;
+			die();
+		}
 	}
 
 	Player::~Player()

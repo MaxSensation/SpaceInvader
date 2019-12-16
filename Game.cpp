@@ -17,7 +17,7 @@ Game::Game():
 	scene->addSprite(player);
 	
 	enemyHandler = new EnemyHandler(scene);	
-	std::vector<int> enemySet = { 7,7,7,7 };
+	std::vector<int> enemySet = { 8,8,8,8 };
 	enemyHandler->addEnemySet(enemySet);
 	scene->addUpdatableObject(enemyHandler);
 	scene->addUpdatableObject(this);
@@ -35,15 +35,19 @@ Game::~Game()
 }
 
 void Game::playerWon() {
-	std::cout << "Player Won!!!" << std::endl;
+	std::cout << "--------------- Player Won!!! ---------------" << std::endl;
 }
 
 
 void Game::gameOver() {
-	std::cout << "GameOver!!!" << std::endl;
+	std::cout << "--------------- GameOver!!! ---------------" << std::endl;
 }
 
-void Game::checkGameStatus() {
+void Game::checkGameStatus() {	
+	if (enemyHandler->enemyWon())
+	{
+		player->die();
+	}
 	if (enemyHandler->allDead() && !bWon)
 	{
 		playerWon();
@@ -51,6 +55,7 @@ void Game::checkGameStatus() {
 	}
 	if (player->isDead() && !bGameOver)
 	{
+		scene->removeSprite(player);
 		gameOver();
 		bGameOver = true;
 	}

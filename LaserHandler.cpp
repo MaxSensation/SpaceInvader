@@ -46,16 +46,12 @@ namespace ge {
 	}
 
 	bool LaserHandler::checkCollision(SDL_Rect* object) {
-		for (LaserBeam* laser : laserBeams)
+		for (LaserBeam *laser : laserBeams)
 		{
 			if (checkRectCollision(*object, *laser->getSpriteRect()))
 			{
 				removeLaserBeam(laser);
 				return true;
-			}
-			else
-			{
-				return false;
 			}
 		}
 		return false;

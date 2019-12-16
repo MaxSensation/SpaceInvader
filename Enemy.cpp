@@ -47,8 +47,22 @@ namespace ge{
 		}
 	}
 
+	void Enemy::fire() {
+		std::cout << "Enemy fired" << std::endl;
+		LaserBeam* laser = new LaserBeam((position.x + width / 2 - 5), position.y + height, false);
+		laserHandler.addLaser(laser);
+	}
+
 	void Enemy::update(float delta) {
 		checkCollision();
 		position += velocity * delta;
+	}
+
+	void Enemy::setFire(bool status) {
+		bCanFire = status;
+	}
+
+	bool Enemy::canFire() {
+		return bCanFire;
 	}
 }

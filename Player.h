@@ -17,6 +17,8 @@ namespace ge {
 			void updateKeyInput(SDL_Event* event);			
 			void update(float delta);
 			bool isDead();
+			void die();
+			void checkCollision();
 		private:
 			void limitPlayerMovement();
 			void moveRight();
