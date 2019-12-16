@@ -4,10 +4,11 @@
 
 
 namespace ge{
-	Player::Player(int* sWidth, int* sHeight, Scene* scene) :
+	Player::Player(int* sWidth, int* sHeight, Scene* scene, bool* bGameOver) :
 		MovingSprite((*sWidth / 2) - (50 / 2), *sHeight - (50 + 10), 50, 50, "Player.png"),
 		playerSpeed(0.5f),
-		scene(scene)
+		scene(scene),
+		bGameOver(bGameOver)
 	{	
 		std::cout << "Player Spawned" << std::endl;
 	}
@@ -37,8 +38,8 @@ namespace ge{
 	}
 
 	void Player::fire()
-	{
-		if (bReadyToFire)
+	{		
+		if (bReadyToFire && !*bGameOver)
 		{
 			std::cout << "Player Fired LaserBeam" << std::endl;
 			bReadyToFire = false;

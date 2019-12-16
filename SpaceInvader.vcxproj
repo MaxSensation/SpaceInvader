@@ -168,6 +168,8 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LaserBeam.cpp" />
     <ClCompile Include="LaserHandler.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelHandler.cpp" />
     <ClCompile Include="MovingSprite.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -188,6 +190,8 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LaserBeam.h" />
     <ClInclude Include="LaserHandler.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelHandler.h" />
     <ClInclude Include="MovingSprite.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
