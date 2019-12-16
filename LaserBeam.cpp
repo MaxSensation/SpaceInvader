@@ -1,4 +1,5 @@
 #include "LaserBeam.h"
+#include "GameEngine.h"
 
 namespace ge{
 	LaserBeam::LaserBeam(int posX, int posY, bool bUp) :
@@ -17,7 +18,7 @@ namespace ge{
 	}
 
 	bool LaserBeam::outsideBounce() {
-		if (position.y < 0)
+		if (position.y < 0 || position.y > *gameengine.getScreenHeight())
 		{
 			std::cout << "LaserBeam Outside Bounce and will be removed" << std::endl;
 			return true;			
