@@ -19,34 +19,29 @@ namespace ge {
 		enemyWidth = 24;
 		enemySpeed = 0.05f;
 		int row = 1;
-		int prevEnemiesPerRow = enemySet[0];
 		int offset = 0;
 		int enemySpacing = -1;
 		int x = 0;
 		int y = 0;
-		int xMax = -1;
+		int maxEnemiesPerRow = 0;
+		int middleOfRow = 0;
+
+		for (int enemyPerRow : enemySet) {
+			enemyPerRow > maxEnemiesPerRow ? maxEnemiesPerRow = enemyPerRow : NULL;
+		}
+		
+		enemySpacing = (*gameengine.getScreenWidth() / maxEnemiesPerRow) - (enemyWidth / 2);
+		offset = (enemySpacing * -1);
+
+		int maxMiddleOfRow = (int)(maxEnemiesPerRow + 0.5) / 2.0;
 
 		for (int enemyPerRow : enemySet) {
 			for (int  i = 1;  i <= enemyPerRow;  i++)
 			{								
-				//std::cout << "Row: " << row << " EnemiesPerRow: " << enemyPerRow << " current enemy: " << i << std::endl;
-				if (enemySpacing < 0)
-				{
-					enemySpacing = (*gameengine.getScreenWidth() / enemyPerRow) - (enemyWidth / 2);					
-					offset = (enemySpacing * -1);
-				}				
-
-				if (prevEnemiesPerRow - enemyPerRow > 0)
-				{
-					x = enemySpacing * (i + ((prevEnemiesPerRow - enemyPerRow) / 2));
-				}
-				else
-				{
-					x = enemySpacing * i;
-				}
-
-				x += offset;
-				y = 200 / enemySet.size() * row;				
+				middleOfRow = (int)(enemyPerRow + 0.5) / 2.0;
+				x = enemySpacing * i + offset;
+				x += (maxMiddleOfRow - middleOfRow) * enemySpacing;
+				y = 200 / enemySet.size() * row;
 				add(new Enemy(x, y, enemySpeed));
 				totalCreatedEnemies++;
 			}
