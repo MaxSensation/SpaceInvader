@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "UpdateEachFrame.h"
 #include <vector>
+#include "GameEngine.h"
 
 namespace ge {
 	class EnemyHandler : public UpdateEachFrame

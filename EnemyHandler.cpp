@@ -32,7 +32,7 @@ namespace ge {
 				//std::cout << "Row: " << row << " EnemiesPerRow: " << enemyPerRow << " current enemy: " << i << std::endl;
 				if (enemySpacing < 0)
 				{
-					enemySpacing = (400 / enemyPerRow) - (enemyWidth / 2);					
+					enemySpacing = (*gameengine.getScreenWidth() / enemyPerRow) - (enemyWidth / 2);					
 					offset = (enemySpacing * -1);
 				}				
 
@@ -44,8 +44,8 @@ namespace ge {
 				{
 					x = enemySpacing * i;
 				}
-				x += offset;
 
+				x += offset;
 				y = 200 / enemySet.size() * row;				
 				add(new Enemy(x, y, enemySpeed));
 				totalCreatedEnemies++;
@@ -120,7 +120,7 @@ namespace ge {
 	}
 
 	void EnemyHandler::checkEnemyWalls(){
-		if (getEnemyMaxPosX() >= 600 - enemyWidth && bMovingRight)
+		if (getEnemyMaxPosX() >= *gameengine.getScreenWidth() - enemyWidth && bMovingRight)
 		{
 			moveDown();
 			bMovingRight = false;
@@ -157,7 +157,7 @@ namespace ge {
 	int EnemyHandler::getEnemyMinPosX() {
 		if (enemies.size() > 0)
 		{
-			int minPosX = 600;
+			int minPosX = *gameengine.getScreenHeight();
 			for (Enemy* enemy : enemies) {
 				enemy->getPosition()->x < minPosX ? minPosX = enemy->getPosition()->x : NULL;
 			}
@@ -181,7 +181,7 @@ namespace ge {
 	bool EnemyHandler::enemyWon() {
 		for (Enemy *enemy : enemies)
 		{
-			if (getEnemyMaxPosY() >= 600 - enemyWidth)
+			if (getEnemyMaxPosY() >= *gameengine.getScreenHeight() - enemyWidth)
 			{
 				return true;
 			}
@@ -223,7 +223,7 @@ namespace ge {
 
 	void EnemyHandler::generateFirePoints() {
 		firePoints.clear();
-		for (int i = 600/10; i < 600; i += 600/10)
+		for (int i = *gameengine.getScreenWidth()/10; i < *gameengine.getScreenWidth(); i += *gameengine.getScreenWidth()/10)
 		{			
 			firePoints.push_back(i);
 		}		
