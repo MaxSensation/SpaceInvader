@@ -4,7 +4,8 @@ namespace ge {
 	EnemyHandler::EnemyHandler(Scene* scene) :
 	scene(scene)
 	{
-		generateFirePoints();		
+		generateFirePoints();	
+		totalCreatedEnemies = 0;
 	}
 
 	void EnemyHandler::add(Enemy* enemy)
@@ -15,7 +16,6 @@ namespace ge {
 
 	void EnemyHandler::addEnemySet(std::vector<int> enemySet)
 	{
-		totalCreatedEnemies = 0;
 		enemyWidth = 24;
 		enemySpeed = 0.05f;
 		int row = 1;

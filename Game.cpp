@@ -33,9 +33,9 @@ Game::Game():
 	enemyHandler = new EnemyHandler(scene);		
 	
 	levelHandler = new LevelHandler(enemyHandler);
-	Level level1({ 2,2 });
-	Level level2({ 4,4,4 });
-	Level level3({ 5,5,5,5 });
+	Level level1({ 1,3,5 });
+	Level level2({ 5,3,1 });
+	Level level3({ 5,3,3,5 });
 	Level level4({ 6,6,6,6,6 });
 	Level level5({ 7,7,7,7,7,7 });
 	Level level6({ 8,8,8,8,8,8 });
@@ -124,7 +124,7 @@ void Game::update(float delta)
 }
 
 int main(int argc, char** argv)
-{
+{	
 	Game game;
 	return 0;
 }
