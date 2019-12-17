@@ -47,7 +47,7 @@ namespace ge {
 
 	void Sprite::init()
 	{				
-		SDL_Surface* optimizedSurface = NULL;
+		SDL_Surface* optimizedSurface = nullptr;
 		SDL_Surface* loadedSurface = IMG_Load(imgDestination);
 		if (loadedSurface == NULL)
 		{

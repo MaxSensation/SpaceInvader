@@ -12,14 +12,15 @@ namespace ge {
 	{
 	public:
 		EnemyHandler(Scene* scene);		
+		~EnemyHandler();
 		void addEnemySet(std::vector<int> enemySet);
 		bool allDead();	
-		bool enemyWon();
-		void fire();	
+		bool enemyWon();	
 		int getTotalAliveEnemies();
 		int getTotalCreatedEnemies();
 	private:		
 		void generateFirePoints();
+		void fire();
 		void add(Enemy* enemy);
 		void move();
 		void moveDown();

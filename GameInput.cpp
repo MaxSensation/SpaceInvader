@@ -7,8 +7,4 @@ namespace ge{
 	{	
 		gameengine.getInputManager()->addInput(this);
 	}
-
-	GameInput::~GameInput()
-	{		
-	}
 }

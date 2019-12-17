@@ -7,12 +7,12 @@ namespace ge {
 	class Enemy : public MovingSprite
 	{
 	public:
-		Enemy(int posX, int posY, float speed);
+		Enemy(int posX, int posY, double speed);
 		bool isDead();
 		void moveRight();
 		void moveLeft();
 		void moveDown();
-		void updateSpeed(float speed);
+		void updateSpeed(double speed);
 		void fire();
 		bool canFire();
 		void setFire(bool status);
@@ -22,7 +22,7 @@ namespace ge {
 		void update(float delta);		
 		bool bIsDead = false;
 		bool bCanFire = true;
-		float speed;
+		double speed;
 	};
 }
 

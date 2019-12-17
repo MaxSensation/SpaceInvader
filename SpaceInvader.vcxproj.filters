@@ -63,9 +63,6 @@
     <ClCompile Include="LaserHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UpdateEachFrame.cpp">
-      <Filter>Source Files\Dependencies</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -1,9 +1,6 @@
 #include "GraphicObject2D.h"
 
-namespace ge{
-	GraphicObject2D::~GraphicObject2D()
-	{
-	}
+namespace ge{	
 	int* GraphicObject2D::getWidth()
 	{
 		return &width;

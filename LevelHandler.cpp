@@ -1,6 +1,18 @@
 #include "LevelHandler.h"
 
 namespace ge {
+	LevelHandler::~LevelHandler()
+	{
+		auto level = levels.begin();
+		while (level != levels.end())
+		{			
+			level = levels.erase(level);
+			*level = nullptr;
+			delete(*level);
+		}
+		enemyHandler = nullptr;
+		delete(enemyHandler);
+	}
 	void LevelHandler::addLevel(Level* level)
 	{
 		levels.push_back(level);

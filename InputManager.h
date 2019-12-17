@@ -9,8 +9,7 @@ namespace ge{
 
 	class InputManager
 	{
-		public:
-			InputManager();
+		public:			
 			~InputManager();
 			void update(SDL_Event* event);	
 			void addInput(GameInput* gi);

@@ -1,18 +1,19 @@
 #include "LaserHandler.h"
 
 namespace ge {
-	LaserHandler::LaserHandler()
-	{	
-	}
 	void LaserHandler::init(Scene* scene)
 	{		
 		handlerScene = scene;		
 	}
 	LaserHandler::~LaserHandler()
 	{		
-		for (LaserBeam* laser : laserBeams) {
+		for (LaserBeam* laser : laserBeams) {			
 			removeLaserBeam(laser);
-		}
+			laser = nullptr;
+			delete(laser);
+		}		
+		handlerScene = nullptr;
+		delete(handlerScene);
 	}
 
 	void LaserHandler::addLaser(LaserBeam* laser)
@@ -46,9 +47,9 @@ namespace ge {
 	}
 
 	bool LaserHandler::checkCollision(SDL_Rect* object) {
-		for (LaserBeam *laser : laserBeams)
+		for (LaserBeam* laser : laserBeams)
 		{
-			if (checkRectCollision(*object, *laser->getSpriteRect()))
+			if (checkRectCollision(object, laser->getSpriteRect()))
 			{
 				removeLaserBeam(laser);
 				return true;

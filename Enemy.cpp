@@ -2,7 +2,7 @@
 #include "LaserHandler.h"
 
 namespace ge{
-	Enemy::Enemy(int posX, int posY, float speed) :
+	Enemy::Enemy(int posX, int posY, double speed) :
 		MovingSprite(posX, posY, 24, 24, "Enemy.png"),
 		speed(speed)
 	{
@@ -29,7 +29,7 @@ namespace ge{
 		translate(position.x, position.y + 15);
 	}
 
-	void Enemy::updateSpeed(float speed) {
+	void Enemy::updateSpeed(double speed) {
 		this->speed = speed;
 	}
 

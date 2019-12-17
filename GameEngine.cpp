@@ -167,15 +167,17 @@ namespace ge {
 	}
 
 	GameEngine::~GameEngine() {
-		TTF_Quit();
-		IMG_Quit();
-		SDL_DestroyRenderer(ren);
-		SDL_DestroyWindow(win);
-		SDL_Quit();						
+		gScreenSurface = nullptr;
+		delete(gScreenSurface);
 		currentScene = nullptr;
 		delete(currentScene);
 		inputManager = nullptr;
 		delete(inputManager);
+		TTF_Quit();
+		IMG_Quit();
+		SDL_DestroyRenderer(ren);
+		SDL_DestroyWindow(win);
+		SDL_Quit();								
 	}
 	GameEngine gameengine;
 }

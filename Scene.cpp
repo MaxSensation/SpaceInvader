@@ -40,7 +40,7 @@ namespace ge{
 		for (Sprite* sprite : sprites) {										
 			sprite->update(delta);
 			sprite->updatePos();
-			sprite->render();
+			sprite->render();			
 		}
 
 		for (UpdateEachFrame* object : UpdateEachFrames)
@@ -57,6 +57,29 @@ namespace ge{
 
 	Scene::~Scene()
 	{
+		auto sprite = sprites.begin();
+		while (sprite != sprites.end())
+		{						
+			sprite = sprites.erase(sprite);
+			*sprite = nullptr;
+			delete(*sprite);
+		}
+		
+		auto text = texts.begin();
+		while (text != texts.end())
+		{			
+			text = texts.erase(text);
+			*text = nullptr;
+			delete(*text);
+		}
+		
+		auto updateEachFrame = UpdateEachFrames.begin();
+		while (updateEachFrame != UpdateEachFrames.end())
+		{			
+			updateEachFrame = UpdateEachFrames.erase(updateEachFrame);
+			*updateEachFrame = nullptr;
+			delete(*updateEachFrame);
+		}
 	}	
 }
 

@@ -33,14 +33,17 @@ Game::Game():
 	enemyHandler = new EnemyHandler(scene);		
 	
 	levelHandler = new LevelHandler(enemyHandler);
-	Level level1({ 1,3,5 });
-	Level level2({ 5,3,1 });
-	Level level3({ 5,3,3,5 });
-	Level level4({ 6,6,6,6,6 });
-	Level level5({ 7,7,7,7,7,7 });
-	Level level6({ 8,8,8,8,8,8 });
-	Level level7({ 9,9,9,9,9,9 });
-	Level level8({ 10,10,10,10,10,10 });
+	Level 
+		level1({ 1,3,5 }), 
+		level2({ 5,3,1 }),
+		level3({ 5,3,3,5 }),
+		level4({ 6,6,6,6,6 }),
+		level5({ 7,7,7,7,7,7 }),
+		level6({ 8,8,8,8,8,8 }),
+		level7({ 9,9,9,9,9,9 }),
+		level8({ 10,10,10,10,10,10 })
+	;
+	
 	levelHandler->addLevel(&level1);
 	levelHandler->addLevel(&level2);
 	levelHandler->addLevel(&level3);
@@ -50,7 +53,6 @@ Game::Game():
 	levelHandler->addLevel(&level6);
 	levelHandler->addLevel(&level7);
 	levelHandler->addLevel(&level8);
-
 	levelHandler->loadLevel(1);
 
 	scene->addUpdatableObject(enemyHandler);
@@ -58,14 +60,6 @@ Game::Game():
 	gameengine.setScene(scene);	
 	std::cout << "Game Initiliezed" << "\n" << "FPS cap: " << fpsCap << "\n" << "ScreenWitdh: " << SCREENWITDH << "\n" << "ScreenHeight: " << SCREENHEIGHT << "\n" << std::endl;
 	gameengine.launch();
-}
-
-Game::~Game()
-{	
-	player = nullptr;
-	delete(player);	
-	scene = nullptr;
-	delete(scene);
 }
 
 void Game::playerWon() {		
@@ -117,10 +111,36 @@ void Game::updateLevelText() {
 }
 
 void Game::update(float delta)
-{
-	calcScore();	
+{	
 	checkGameStatus();
 	updateLevelText();
+	calcScore();
+}
+
+Game::~Game()
+{
+	player = nullptr;
+	delete(player);
+	textScore = nullptr;
+	delete(textScore);
+	score = nullptr;
+	delete(score);
+	winningText = nullptr;
+	delete(winningText);
+	gameOverText = nullptr;
+	delete(gameOverText);
+	textLevel = nullptr;
+	delete(textLevel);
+	level = nullptr;
+	delete(level);
+	enemy = nullptr;
+	delete(enemy);
+	scene = nullptr;
+	delete(scene);
+	enemyHandler = nullptr;
+	delete(enemyHandler);
+	levelHandler = nullptr;
+	delete(levelHandler);
 }
 
 int main(int argc, char** argv)

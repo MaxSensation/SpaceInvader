@@ -7,8 +7,7 @@
 namespace ge {
 	class GraphicObject2D : public Component
 	{
-	public:
-		virtual ~GraphicObject2D();
+	public:		
 		int* getWidth();
 		int* getHeight();
 		Vector2* getPosition();

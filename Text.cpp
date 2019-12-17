@@ -6,29 +6,30 @@ namespace ge {
 		font(TTF_OpenFont(fontFile.c_str(), fontSize)),
 		text(text)
 	{
-		surface = TTF_RenderText_Solid(font, text.c_str(), color);
-		texture = SDL_CreateTextureFromSurface(gameengine.getRenderer(), surface);
-		SDL_FreeSurface(surface);
+		UpdateTextues();
 	}
 		
 	Text::~Text() {
-		SDL_DestroyTexture(texture);
+		SDL_DestroyTexture(texture);		
 		TTF_CloseFont(font);
 	}
 	void Text::setColor(SDL_Color newColor)
 	{
 		color = newColor;
-		surface = TTF_RenderText_Solid(font, text.c_str(), color);
-		texture = SDL_CreateTextureFromSurface(gameengine.getRenderer(), surface);
-		SDL_FreeSurface(surface);
+		UpdateTextues();
 	}
 	void Text::setText(std::string newText)
 	{
 		text = newText;		
+		UpdateTextues();
+	}
+
+	void Text::UpdateTextues() {
 		surface = TTF_RenderText_Solid(font, text.c_str(), color);
 		texture = SDL_CreateTextureFromSurface(gameengine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
 	}
+
 	void Text::render()
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &width, &height);

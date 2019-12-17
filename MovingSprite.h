@@ -5,13 +5,13 @@
 namespace ge {
 	class MovingSprite : public Sprite
 	{
-	public:
-		virtual ~MovingSprite();
-		MovingSprite(int posX, int posY, int width, int height, const char* imgDestination) : Sprite(posX, posY, width, height, imgDestination) {};
+	public:		
 		void translate(int x, int y);
 	protected:
-		Vector2 velocity;		
-	private:
+		MovingSprite(int posX, int posY, int width, int height, const char* imgDestination) : Sprite(posX, posY, width, height, imgDestination) {};
+		MovingSprite(const MovingSprite&) = delete;
+		const MovingSprite& operator=(const MovingSprite&) = delete;
+		Vector2 velocity;
 	};
 }
 

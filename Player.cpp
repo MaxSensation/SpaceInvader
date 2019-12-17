@@ -140,6 +140,9 @@ namespace ge{
 
 	Player::~Player()
 	{
+		bGameOver = nullptr;
+		delete(bGameOver);
+		scene = nullptr;
 		delete(scene);
 	}
 }

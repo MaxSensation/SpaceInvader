@@ -8,6 +8,17 @@ namespace ge {
 		totalCreatedEnemies = 0;
 	}
 
+	EnemyHandler::~EnemyHandler()
+	{
+		auto enemy = enemies.begin();
+		while (enemy != enemies.end())
+		{
+			delete(*enemy);
+			enemy = enemies.erase(enemy);
+		}
+		delete(scene);
+	}
+
 	void EnemyHandler::add(Enemy* enemy)
 	{
 		enemies.push_back(enemy);

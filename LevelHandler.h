@@ -12,6 +12,7 @@ namespace ge {
 			LevelHandler(EnemyHandler* enemyHandler) :
 				enemyHandler(enemyHandler)
 			{};
+			~LevelHandler();
 			void addLevel(Level* level);
 			void NextLevel();
 			bool hasNextLevel();

@@ -8,8 +8,7 @@
 namespace ge {
 	class LaserHandler : public UpdateEachFrame, public CollisionHandler
 	{
-		public:		
-			LaserHandler();
+		public:					
 			void init(Scene* scene);			
 			void addLaser(LaserBeam* laser);
 			void checkLaserBeams();
