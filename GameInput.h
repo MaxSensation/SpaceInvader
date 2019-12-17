@@ -1,6 +1,6 @@
-#include <SDL.h>
 #ifndef GAMEINPUT_H
 #define GAMEINPUT_H
+#include <SDL.h>
 #include "Component.h"
 
 namespace ge{

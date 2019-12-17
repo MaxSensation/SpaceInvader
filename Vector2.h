@@ -1,4 +1,6 @@
-#pragma once
+#ifndef VECTOR_H
+#define VECTOR_H
+
 class Vector2
 {
 	public:
@@ -9,3 +11,5 @@ class Vector2
 		Vector2 operator*(float other);
 		float x, y;
 };
+
+#endif // !VECTOR_H
