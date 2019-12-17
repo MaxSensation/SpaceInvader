@@ -10,7 +10,7 @@ namespace ge {
 	{
 		public:					
 			void init(Scene* scene);			
-			void addLaser(LaserBeam* laser);
+			void addLaser(int posX, int posY, bool bUp);
 			void checkLaserBeams();
 			void removeLaserBeam(LaserBeam* laser);
 			bool checkCollision(SDL_Rect* object);

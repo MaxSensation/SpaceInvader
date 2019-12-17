@@ -33,8 +33,7 @@ namespace ge{
 			Text* winningText = nullptr;
 			Text* gameOverText = nullptr;
 			Text* textLevel = nullptr;
-			Text* level = nullptr;			
-			Enemy* enemy = nullptr;
+			Text* level = nullptr;	
 			Scene* scene = nullptr;
 			EnemyHandler* enemyHandler = nullptr;
 			LevelHandler* levelHandler = nullptr;

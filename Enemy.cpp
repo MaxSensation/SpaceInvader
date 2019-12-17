@@ -48,9 +48,8 @@ namespace ge{
 	}
 
 	void Enemy::fire() {
-		std::cout << "Enemy fired" << std::endl;
-		LaserBeam* laser = new LaserBeam((position.x + width / 2 - 5), position.y + height, false);
-		laserHandler.addLaser(laser);
+		std::cout << "Enemy fired" << std::endl;		
+		laserHandler.addLaser((position.x + width / 2 - 5), position.y + height, false);
 	}
 
 	void Enemy::update(float delta) {

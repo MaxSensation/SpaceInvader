@@ -21,7 +21,7 @@ namespace ge {
 	private:		
 		void generateFirePoints();
 		void fire();
-		void add(Enemy* enemy);
+		void add(int posX, int posY, double enemySpeed);
 		void move();
 		void moveDown();
 		void removeEnemy(Enemy* enemy);

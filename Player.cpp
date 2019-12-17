@@ -42,9 +42,8 @@ namespace ge{
 		if (bReadyToFire && !*bGameOver)
 		{
 			std::cout << "Player Fired LaserBeam" << std::endl;
-			bReadyToFire = false;
-			LaserBeam* laser = new LaserBeam((position.x + width / 2) - 10, position.y - 20, true);
-			laserHandler.addLaser(laser);			
+			bReadyToFire = false;			
+			laserHandler.addLaser((position.x + width / 2) - 10, position.y - 20, true);
 		}		
 	}
 

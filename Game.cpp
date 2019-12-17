@@ -118,23 +118,14 @@ void Game::update(float delta)
 }
 
 Game::~Game()
-{
-	player = nullptr;
-	delete(player);
-	textScore = nullptr;
-	delete(textScore);
-	score = nullptr;
+{	
+	delete(player);	
+	delete(textScore);	
 	delete(score);
-	winningText = nullptr;
-	delete(winningText);
-	gameOverText = nullptr;
-	delete(gameOverText);
-	textLevel = nullptr;
-	delete(textLevel);
-	level = nullptr;
+	delete(winningText);	
+	delete(gameOverText);	
+	delete(textLevel);	
 	delete(level);
-	enemy = nullptr;
-	delete(enemy);
 	scene = nullptr;
 	delete(scene);
 	enemyHandler = nullptr;

@@ -60,25 +60,25 @@ namespace ge{
 		auto sprite = sprites.begin();
 		while (sprite != sprites.end())
 		{						
-			sprite = sprites.erase(sprite);
 			*sprite = nullptr;
 			delete(*sprite);
+			sprite = sprites.erase(sprite);
 		}
 		
 		auto text = texts.begin();
 		while (text != texts.end())
-		{			
-			text = texts.erase(text);
+		{	
 			*text = nullptr;
 			delete(*text);
+			text = texts.erase(text);
 		}
 		
 		auto updateEachFrame = UpdateEachFrames.begin();
 		while (updateEachFrame != UpdateEachFrames.end())
 		{			
-			updateEachFrame = UpdateEachFrames.erase(updateEachFrame);
 			*updateEachFrame = nullptr;
 			delete(*updateEachFrame);
+			updateEachFrame = UpdateEachFrames.erase(updateEachFrame);
 		}
 	}	
 }

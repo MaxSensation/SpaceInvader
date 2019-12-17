@@ -15,14 +15,17 @@ namespace ge {
 		{
 			delete(*enemy);
 			enemy = enemies.erase(enemy);
+			removeEnemy(*enemy);
 		}
-		delete(scene);
 	}
 
-	void EnemyHandler::add(Enemy* enemy)
+	void EnemyHandler::add(int posX, int posY, double enemySpeed)
 	{
+		Enemy* enemy = new Enemy(posX, posY, enemySpeed);
 		enemies.push_back(enemy);
 		scene->addSprite(enemy);
+		enemy = nullptr;
+		delete(enemy);
 	}
 
 	void EnemyHandler::addEnemySet(std::vector<int> enemySet)
@@ -53,7 +56,7 @@ namespace ge {
 				x = enemySpacing * i + offset;
 				x += (maxMiddleOfRow - middleOfRow) * enemySpacing;
 				y = 200 / enemySet.size() * row;
-				add(new Enemy(x, y, enemySpeed));
+				add(x, y, enemySpeed);
 				totalCreatedEnemies++;
 			}
 			row++;

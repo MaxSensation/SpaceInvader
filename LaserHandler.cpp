@@ -7,19 +7,22 @@ namespace ge {
 	}
 	LaserHandler::~LaserHandler()
 	{		
-		for (LaserBeam* laser : laserBeams) {			
+		for (LaserBeam* laser : laserBeams) {						
 			removeLaserBeam(laser);
 			laser = nullptr;
-			delete(laser);
+			delete(laser);			
 		}		
 		handlerScene = nullptr;
 		delete(handlerScene);
 	}
 
-	void LaserHandler::addLaser(LaserBeam* laser)
+	void LaserHandler::addLaser(int posX, int posY, bool bUp)
 	{
+		LaserBeam* laser = new LaserBeam(posX, posY, bUp);
 		laserBeams.push_back(laser);
 		handlerScene->addSprite(laser);
+		laser = nullptr;
+		delete(laser);
 	}
 
 	void LaserHandler::checkLaserBeams() {
