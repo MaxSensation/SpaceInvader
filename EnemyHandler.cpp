@@ -9,10 +9,13 @@ namespace ge {
 	}
 
 	EnemyHandler::~EnemyHandler()
-	{
-		for (Enemy* enemy : enemies)
+	{		
+		auto enemy = enemies.begin();
+		while (enemy != enemies.end())
 		{
-			removeEnemy(enemy);
+			scene->removeSprite(*enemy);
+			delete(*enemy);
+			enemy = enemies.erase(enemy);
 		}
 	}
 
@@ -83,7 +86,6 @@ namespace ge {
 
 	void EnemyHandler::removeEnemy(Enemy* enemy) {		
 		scene->removeSprite(enemy);
-
 		auto it = enemies.begin();
 		while (it != enemies.end())
 		{

@@ -128,10 +128,9 @@ Game::~Game()
 	delete(level);
 	scene = nullptr;
 	delete(scene);
-	enemyHandler = nullptr;
 	delete(enemyHandler);
 	levelHandler = nullptr;
-	delete(levelHandler);
+	delete(levelHandler);	
 }
 
 int main(int argc, char** argv)

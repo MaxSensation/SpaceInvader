@@ -52,7 +52,7 @@ namespace ge{
 			text->render();
 		}
 
-		SDL_RenderPresent(gameengine.getRenderer());		
+		SDL_RenderPresent(gameengine.getRenderer());
 	}
 
 	Scene::~Scene()

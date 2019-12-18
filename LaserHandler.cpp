@@ -6,10 +6,14 @@ namespace ge {
 		handlerScene = scene;		
 	}
 	LaserHandler::~LaserHandler()
-	{		
-		for (LaserBeam* laser : laserBeams) {						
-			removeLaserBeam(laser);									
-		}		
+	{			
+		auto laser = laserBeams.begin();
+		while (laser != laserBeams.end())
+		{
+			handlerScene->removeSprite(*laser);
+			delete(*laser);
+			laser = laserBeams.erase(laser);					
+		}
 		handlerScene = nullptr;
 		delete(handlerScene);
 	}
