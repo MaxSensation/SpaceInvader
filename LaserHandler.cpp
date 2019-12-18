@@ -8,21 +8,16 @@ namespace ge {
 	LaserHandler::~LaserHandler()
 	{		
 		for (LaserBeam* laser : laserBeams) {						
-			removeLaserBeam(laser);
-			laser = nullptr;
-			delete(laser);			
+			removeLaserBeam(laser);									
 		}		
 		handlerScene = nullptr;
 		delete(handlerScene);
 	}
 
 	void LaserHandler::addLaser(int posX, int posY, bool bUp)
-	{
-		LaserBeam* laser = new LaserBeam(posX, posY, bUp);
-		laserBeams.push_back(laser);
-		handlerScene->addSprite(laser);
-		laser = nullptr;
-		delete(laser);
+	{		
+		laserBeams.push_back(new LaserBeam(posX, posY, bUp));
+		handlerScene->addSprite(laserBeams.back());
 	}
 
 	void LaserHandler::checkLaserBeams() {
@@ -34,19 +29,20 @@ namespace ge {
 		}
 	}
 
-	void LaserHandler::removeLaserBeam(LaserBeam* laser) {
-		handlerScene->removeSprite(laser);
+	void LaserHandler::removeLaserBeam(LaserBeam* laser) {		
+		handlerScene->removeSprite(laser);		
 		auto it = laserBeams.begin();
 		while (it != laserBeams.end())
 		{
 			if (*it == laser) {
-				it = laserBeams.erase(it);
-				std::cout << "LaserBeam Removed" << std::endl;
+				it = laserBeams.erase(it);				
 			}
 			else {
 				++it;
 			}
 		}
+		delete(laser);
+		std::cout << "LaserBeam Removed" << std::endl;
 	}
 
 	bool LaserHandler::checkCollision(SDL_Rect* object) {

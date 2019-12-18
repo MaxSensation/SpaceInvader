@@ -10,22 +10,16 @@ namespace ge {
 
 	EnemyHandler::~EnemyHandler()
 	{
-		auto enemy = enemies.begin();
-		while (enemy != enemies.end())
+		for (Enemy* enemy : enemies)
 		{
-			delete(*enemy);
-			enemy = enemies.erase(enemy);
-			removeEnemy(*enemy);
+			removeEnemy(enemy);
 		}
 	}
 
 	void EnemyHandler::add(int posX, int posY, double enemySpeed)
-	{
-		Enemy* enemy = new Enemy(posX, posY, enemySpeed);
-		enemies.push_back(enemy);
-		scene->addSprite(enemy);
-		enemy = nullptr;
-		delete(enemy);
+	{		
+		enemies.push_back(new Enemy(posX, posY, enemySpeed));
+		scene->addSprite(enemies.back());		
 	}
 
 	void EnemyHandler::addEnemySet(std::vector<int> enemySet)
@@ -87,20 +81,22 @@ namespace ge {
 	}
 
 
-	void EnemyHandler::removeEnemy(Enemy* enemy) {
+	void EnemyHandler::removeEnemy(Enemy* enemy) {		
 		scene->removeSprite(enemy);
+
 		auto it = enemies.begin();
 		while (it != enemies.end())
 		{
-			if (*it == enemy) {
-				it = enemies.erase(it);
+			if (*it == enemy) {								
+				it = enemies.erase(it);				
 			}
 			else {
 				++it;
 			}
 		}
-		enemy = nullptr;
+
 		delete(enemy);
+		std::cout << "Enemy Removed" << std::endl;
 		updateSpeed();
 	}
 

@@ -57,29 +57,7 @@ namespace ge{
 
 	Scene::~Scene()
 	{
-		auto sprite = sprites.begin();
-		while (sprite != sprites.end())
-		{						
-			*sprite = nullptr;
-			delete(*sprite);
-			sprite = sprites.erase(sprite);
-		}
 		
-		auto text = texts.begin();
-		while (text != texts.end())
-		{	
-			*text = nullptr;
-			delete(*text);
-			text = texts.erase(text);
-		}
-		
-		auto updateEachFrame = UpdateEachFrames.begin();
-		while (updateEachFrame != UpdateEachFrames.end())
-		{			
-			*updateEachFrame = nullptr;
-			delete(*updateEachFrame);
-			updateEachFrame = UpdateEachFrames.erase(updateEachFrame);
-		}
 	}	
 }
 
