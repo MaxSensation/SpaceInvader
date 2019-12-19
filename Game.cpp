@@ -8,7 +8,7 @@ Game::Game():
 	fpsCap(60)
 {	
 	gameengine.init("SpaceInvader", SCREENWITDH, SCREENHEIGHT, fpsCap);	
-	scene = new Scene;
+	scene = gameengine.getScene();
 	laserHandler.init(scene);
 	scene->addUpdatableObject(&laserHandler);
 
@@ -45,8 +45,7 @@ Game::Game():
 	levelHandler->loadLevel(1);
 
 	scene->addUpdatableObject(enemyHandler);
-	scene->addUpdatableObject(this);
-	gameengine.setScene(scene);	
+	scene->addUpdatableObject(this);	
 	std::cout << "Game Initiliezed" << "\n" << "FPS cap: " << fpsCap << "\n" << "ScreenWitdh: " << SCREENWITDH << "\n" << "ScreenHeight: " << SCREENHEIGHT << "\n" << std::endl;
 	gameengine.launch();
 }
@@ -116,8 +115,9 @@ Game::~Game()
 	delete(textLevel);		
 	delete(level);
 	delete(enemyHandler);
-	delete(levelHandler);
-	//delete(scene);
+	delete(levelHandler);	
+	scene = nullptr;
+	delete(scene);
 }
 
 int main(int argc, char** argv)

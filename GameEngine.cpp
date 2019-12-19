@@ -43,8 +43,7 @@ namespace ge {
 	{
 		int imgFlags = IMG_INIT_PNG;
 		if (IMG_Init(imgFlags) & imgFlags)
-		{
-			gScreenSurface = SDL_GetWindowSurface(win);
+		{			
 			return true;
 		}
 		else		
@@ -65,7 +64,9 @@ namespace ge {
 		this->screenHeight = screenHeight;
 		this->targetFramerate = targetFramerate;
 		frameDelay = 1000.0f / targetFramerate;
-
+		inputManager = new InputManager();
+		currentScene = new Scene();
+		
 		if (initVideo())
 			if (initWindow())
 				if (initRenderer())
@@ -86,22 +87,17 @@ namespace ge {
 			printf("SDL Video could not initialize! SDL Video Error: %s\n", SDL_GetError());
 	}
 
-	void GameEngine::setScene(Scene* scene)
-	{
-		currentScene = scene;
-	}
-
 	SDL_Renderer* GameEngine::getRenderer()
 	{
 		return ren;
 	}
 
-	SDL_Surface* GameEngine::getScreenSurface() {
-		return gScreenSurface;
-	}
-
 	InputManager* GameEngine::getInputManager() {
 		return inputManager;
+	}
+
+	Scene* GameEngine::getScene() {
+		return currentScene;
 	}
 
 	void GameEngine::clearRender() {
@@ -167,10 +163,8 @@ namespace ge {
 	}
 
 	GameEngine::~GameEngine() {
-		gScreenSurface = nullptr;
-		delete(gScreenSurface);
-		inputManager = nullptr;
 		delete(inputManager);
+		delete(currentScene);
 		TTF_Quit();
 		IMG_Quit();
 		SDL_DestroyRenderer(ren);

@@ -141,5 +141,7 @@ namespace ge{
 	{
 		bGameOver = nullptr;
 		delete(bGameOver);
+		scene = nullptr;
+		delete(scene);
 	}
 }

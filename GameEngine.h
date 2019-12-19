@@ -11,14 +11,14 @@ namespace ge {
 	class GameEngine {	
 	public:		
 		void init(const char* title, int width, int height, const int targetFramerate);
-		void setScene(Scene* scene);
 		void launch();				
 		void clearRender();		
 		int* getScreenHeight();
 		int* getScreenWidth();
 		SDL_Renderer* getRenderer();
-		SDL_Surface* getScreenSurface();
 		InputManager* getInputManager();
+
+		Scene* getScene();
 		
 		~GameEngine();
 	private:
@@ -38,9 +38,8 @@ namespace ge {
 
 		SDL_Window* win = nullptr;
 		SDL_Renderer* ren = nullptr;
-		SDL_Surface* gScreenSurface = nullptr;
 		Scene* currentScene = nullptr;
-		InputManager* inputManager = new InputManager;
+		InputManager* inputManager = nullptr;
 	};
 	extern GameEngine gameengine;
 }

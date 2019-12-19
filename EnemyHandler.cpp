@@ -17,6 +17,8 @@ namespace ge {
 			delete(*enemy);
 			enemy = enemies.erase(enemy);
 		}		
+		scene = nullptr;
+		delete(scene);
 	}
 
 	void EnemyHandler::add(int posX, int posY, double enemySpeed)
