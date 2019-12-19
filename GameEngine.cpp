@@ -169,8 +169,6 @@ namespace ge {
 	GameEngine::~GameEngine() {
 		gScreenSurface = nullptr;
 		delete(gScreenSurface);
-		currentScene = nullptr;
-		delete(currentScene);
 		inputManager = nullptr;
 		delete(inputManager);
 		TTF_Quit();

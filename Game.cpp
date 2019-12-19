@@ -2,14 +2,13 @@
 
 using namespace ge;
 
-Game::Game():	
-	scene(new Scene),
+Game::Game():		
 	SCREENWITDH(600),
 	SCREENHEIGHT(600),
 	fpsCap(60)
 {	
 	gameengine.init("SpaceInvader", SCREENWITDH, SCREENHEIGHT, fpsCap);	
-	
+	scene = new Scene;
 	laserHandler.init(scene);
 	scene->addUpdatableObject(&laserHandler);
 
@@ -114,12 +113,11 @@ Game::~Game()
 	delete(score);
 	delete(winningText);	
 	delete(gameOverText);	
-	delete(textLevel);	
+	delete(textLevel);		
 	delete(level);
-	scene = nullptr;
-	delete(scene);
-	delete(enemyHandler);	
-	delete(levelHandler);	
+	delete(enemyHandler);
+	delete(levelHandler);
+	//delete(scene);
 }
 
 int main(int argc, char** argv)

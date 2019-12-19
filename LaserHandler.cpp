@@ -14,8 +14,6 @@ namespace ge {
 			delete(*laser);
 			laser = laserBeams.erase(laser);					
 		}
-		handlerScene = nullptr;
-		delete(handlerScene);
 	}
 
 	void LaserHandler::addLaser(int posX, int posY, bool bUp)
