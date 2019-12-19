@@ -13,7 +13,7 @@ namespace ge {
 				enemyHandler(enemyHandler)
 			{};
 			~LevelHandler();
-			void addLevel(Level* level);
+			void addLevel(std::vector<int> enemySet);
 			void NextLevel();
 			bool hasNextLevel();
 			int getCurrentLevelnr();

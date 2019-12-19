@@ -2,20 +2,20 @@
 
 namespace ge {
 	LevelHandler::~LevelHandler()
-	{
+	{		
 		auto level = levels.begin();
 		while (level != levels.end())
 		{			
-			level = levels.erase(level);
-			*level = nullptr;
 			delete(*level);
+			level = levels.erase(level);
 		}
 		enemyHandler = nullptr;
 		delete(enemyHandler);
 	}
-	void LevelHandler::addLevel(Level* level)
+
+	void LevelHandler::addLevel(std::vector<int> enemySet)
 	{
-		levels.push_back(level);
+		levels.push_back(new Level(enemySet));
 	}
 
 	void LevelHandler::NextLevel()

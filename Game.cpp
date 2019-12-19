@@ -33,26 +33,16 @@ Game::Game():
 	enemyHandler = new EnemyHandler(scene);		
 	
 	levelHandler = new LevelHandler(enemyHandler);
-	Level 
-		level1({ 1,3,5 }), 
-		level2({ 5,3,1 }),
-		level3({ 5,3,3,5 }),
-		level4({ 6,6,6,6,6 }),
-		level5({ 7,7,7,7,7,7 }),
-		level6({ 8,8,8,8,8,8 }),
-		level7({ 9,9,9,9,9,9 }),
-		level8({ 10,10,10,10,10,10 })
-	;
-	
-	levelHandler->addLevel(&level1);
-	levelHandler->addLevel(&level2);
-	levelHandler->addLevel(&level3);
-	levelHandler->addLevel(&level4);
-	levelHandler->addLevel(&level5);
-	levelHandler->addLevel(&level5);
-	levelHandler->addLevel(&level6);
-	levelHandler->addLevel(&level7);
-	levelHandler->addLevel(&level8);
+
+	levelHandler->addLevel({ 1,3,5 });
+	levelHandler->addLevel({ 5,3,1 });
+	levelHandler->addLevel({ 5,3,3,5 });
+	levelHandler->addLevel({ 6,6,6,6,6 });
+	levelHandler->addLevel({ 7,7,7,7,7,7 });
+	levelHandler->addLevel({ 8,8,8,8,8,8 });
+	levelHandler->addLevel({ 9,9,9,9,9,9 });
+	levelHandler->addLevel({ 9,9,9,9,9,9 });
+	levelHandler->addLevel({ 10,10,10,10,10,10 });
 	levelHandler->loadLevel(1);
 
 	scene->addUpdatableObject(enemyHandler);
@@ -128,8 +118,7 @@ Game::~Game()
 	delete(level);
 	scene = nullptr;
 	delete(scene);
-	delete(enemyHandler);
-	levelHandler = nullptr;
+	delete(enemyHandler);	
 	delete(levelHandler);	
 }
 

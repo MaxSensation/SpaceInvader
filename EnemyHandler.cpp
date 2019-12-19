@@ -16,7 +16,7 @@ namespace ge {
 			scene->removeSprite(*enemy);
 			delete(*enemy);
 			enemy = enemies.erase(enemy);
-		}
+		}		
 	}
 
 	void EnemyHandler::add(int posX, int posY, double enemySpeed)
