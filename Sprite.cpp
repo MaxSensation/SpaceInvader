@@ -8,7 +8,7 @@ using namespace std;
 namespace ge {
 	Sprite::~Sprite()
 	{
-		SDL_DestroyTexture(texture);
+   		SDL_DestroyTexture(texture);
 	}
 
 	const char* Sprite::getImgDest()
@@ -25,11 +25,6 @@ namespace ge {
 	{
 		return &spriteRect;
 	}
-	
-	SDL_Texture* Sprite::getTexture()
-	{
-		return texture;
-	}
 
 	void Sprite::update(float delta)
 	{
@@ -37,7 +32,7 @@ namespace ge {
 
 	void Sprite::render()
 	{
-		SDL_RenderCopy(gameengine.getRenderer(), getTexture(), getScreen(), getSpriteRect());	
+		SDL_RenderCopy(gameengine.getRenderer(), texture, getScreen(), getSpriteRect());	
 	}
 
 	void Sprite::updatePos() {

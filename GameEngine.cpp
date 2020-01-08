@@ -30,7 +30,7 @@ namespace ge {
 
 	bool GameEngine::initRenderer()
 	{
-		Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
+		Uint32 render_flags = SDL_RENDERER_ACCELERATED;
 		ren = SDL_CreateRenderer(win, -1, render_flags);
 	
 		if (ren != NULL)		

@@ -12,7 +12,6 @@ namespace ge {
 		const char* getImgDest();
 		SDL_Rect* getScreen();
 		SDL_Rect* getSpriteRect();
-		SDL_Texture* getTexture();
 		virtual void update(float delta);
 		void updatePos();
 		void render();

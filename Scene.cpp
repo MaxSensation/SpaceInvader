@@ -38,7 +38,7 @@ namespace ge{
 	void Scene::update(float delta)
 	{
 		for (Sprite* sprite : sprites) {										
-			sprite->update(delta);
+	 		sprite->update(delta);
 			sprite->updatePos();
 			sprite->render();			
 		}

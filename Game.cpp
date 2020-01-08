@@ -107,6 +107,10 @@ void Game::update(float delta)
 
 Game::~Game()
 {	
+	if (!bGameOver)
+	{
+		scene->removeSprite(player);
+	}
 	delete(player);	
 	delete(textScore);	
 	delete(score);
