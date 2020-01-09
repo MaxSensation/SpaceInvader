@@ -42,6 +42,8 @@ namespace ge{
 			int fpsCap = 0;
 			bool bWon = false;
 			bool bGameOver = false;
+			Sound* winSound = nullptr;
+			Sound* gameoverSound = nullptr;
 	};
 }
 

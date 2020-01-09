@@ -4,6 +4,7 @@
 #include "LaserBeam.h"
 #include "Scene.h"
 #include "CollisionHandler.h"
+#include "Sound.h"
 
 namespace ge {
 	class LaserHandler : public UpdateEachFrame, public CollisionHandler
@@ -18,7 +19,8 @@ namespace ge {
 			~LaserHandler();
 		private:
 			std::vector<LaserBeam*> laserBeams;
-			Scene* handlerScene;
+			Scene* handlerScene = nullptr;	
+			Sound* laserSound = nullptr;
 	};
 	extern LaserHandler laserHandler;
 }

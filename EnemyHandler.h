@@ -40,6 +40,7 @@ namespace ge {
 		std::vector<int> firePoints;
 		Scene* scene = nullptr;
 		std::vector<Enemy*> enemies;
+		Sound* enemyDestroydSound = nullptr;
 	};
 }
 

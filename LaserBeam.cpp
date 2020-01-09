@@ -2,6 +2,9 @@
 #include "GameEngine.h"
 
 namespace ge{
+	LaserBeam::~LaserBeam()
+	{
+	}
 	LaserBeam::LaserBeam(int posX, int posY, bool bUp) :
 		MovingSprite(posX, posY, 20, 20, "LaserBeam.png"),
 		laserSpeed(0.3f)

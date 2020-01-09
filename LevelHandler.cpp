@@ -9,6 +9,8 @@ namespace ge {
 			delete(*level);
 			level = levels.erase(level);
 		}
+		nextLevel = nullptr;
+		delete(nextLevel);
 		enemyHandler = nullptr;
 		delete(enemyHandler);
 	}
@@ -24,6 +26,7 @@ namespace ge {
 		{
 			loadLevel(levels[currentLevel - 1]);
 			currentLevel += 1;
+			nextLevel->play();
 		}
 	}
 

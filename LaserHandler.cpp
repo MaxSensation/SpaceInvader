@@ -1,9 +1,11 @@
 #include "LaserHandler.h"
+#include "GameEngine.h"
 
 namespace ge {
 	void LaserHandler::init(Scene* scene)
 	{		
-		handlerScene = scene;		
+		handlerScene = scene;	
+		laserSound = gameengine.getSoundManager()->createSound("laser.wav");
 	}
 	LaserHandler::~LaserHandler()
 	{			
@@ -16,13 +18,14 @@ namespace ge {
 			laser = laserBeams.erase(laser);								
 		}
 		handlerScene = nullptr;
-		delete(handlerScene);
+		delete(handlerScene);		
 	}
 
 	void LaserHandler::addLaser(int posX, int posY, bool bUp)
 	{		
 		laserBeams.push_back(new LaserBeam(posX, posY, bUp));
-		handlerScene->addSprite(laserBeams.back());
+		handlerScene->addSprite(laserBeams.back());		
+		laserSound->play();
 	}
 
 	void LaserHandler::checkLaserBeams() {

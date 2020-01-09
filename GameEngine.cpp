@@ -5,6 +5,7 @@
 #include <chrono>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 using namespace std;
 
@@ -17,6 +18,22 @@ namespace ge {
 		else
 			return false;
 	}
+
+	bool GameEngine::initAudio()
+	{		
+		if (SDL_Init(SDL_INIT_AUDIO) == 0)
+			return true;
+		else
+			return false;
+	}
+
+	bool GameEngine::initMixer()
+	{
+		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == 0)
+			return true;
+		else
+			return false;
+	}	
 
 	bool GameEngine::initWindow()
 	{
@@ -65,26 +82,32 @@ namespace ge {
 		this->targetFramerate = targetFramerate;
 		frameDelay = 1000.0f / targetFramerate;
 		inputManager = new InputManager();
-		currentScene = new Scene();
-		
+		soundManager = new SoundManager();
+		currentScene = new Scene();		
 		if (initVideo())
-			if (initWindow())
-				if (initRenderer())
-					if (initImage())
-						if (initText())
-						{
-							hasInitialised = true;
-						}
+			if (initAudio())	
+				if (initMixer())
+					if (initWindow())
+						if (initRenderer())
+							if (initImage())
+								if (initText())
+								{
+									hasInitialised = true;
+								}
+								else
+									printf("SDL Text could not initialize! SDL Text Error: %s\n", SDL_GetError());
+							else
+								printf("SDL Image could not initialize! SDL Image Error: %s\n", IMG_GetError());
 						else
-							printf("SDL Text could not initialize! SDL Text Error: %s\n", SDL_GetError());
+							printf("SDL Renderer could not initialize! SDL Renderer Error: %s\n", SDL_GetError());
 					else
-						printf("SDL Image could not initialize! SDL Image Error: %s\n", IMG_GetError());
+						printf("SDL Window could not initialize! SDL Window Error: %s\n", SDL_GetError());
 				else
-					printf("SDL Renderer could not initialize! SDL Renderer Error: %s\n", SDL_GetError());
+					printf("SDL Mixer could not initialize! SDL Mixer Error: %s\n", SDL_GetError());
 			else
-				printf("SDL Window could not initialize! SDL Window Error: %s\n", SDL_GetError());
+				printf("SDL Audio could not initialize! SDL Audio Error: %s\n", SDL_GetError());
 		else
-			printf("SDL Video could not initialize! SDL Video Error: %s\n", SDL_GetError());
+			printf("SDL Video could not initialize! SDL Video Error: %s\n", SDL_GetError());		
 	}
 
 	SDL_Renderer* GameEngine::getRenderer()
@@ -94,6 +117,11 @@ namespace ge {
 
 	InputManager* GameEngine::getInputManager() {
 		return inputManager;
+	}
+
+	SoundManager* GameEngine::getSoundManager()
+	{
+		return soundManager;
 	}
 
 	Scene* GameEngine::getScene() {
@@ -164,6 +192,7 @@ namespace ge {
 	GameEngine::~GameEngine() {
 		delete(inputManager);
 		delete(currentScene);
+		Mix_Quit();
 		TTF_Quit();
 		IMG_Quit();
 		SDL_DestroyRenderer(ren);

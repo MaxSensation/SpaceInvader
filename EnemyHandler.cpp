@@ -6,6 +6,7 @@ namespace ge {
 	{
 		generateFirePoints();	
 		totalCreatedEnemies = 0;
+		enemyDestroydSound = gameengine.getSoundManager()->createSound("explosion.wav");
 	}
 
 	EnemyHandler::~EnemyHandler()
@@ -91,15 +92,15 @@ namespace ge {
 		auto it = enemies.begin();		
 		while (it != enemies.end())
 		{
-			if ((*it)->isDestroyd()) {				
-				//delete(*it);
-				it = enemies.erase(it);								
+			if ((*it)->isDestroyd()) {								
+				it = enemies.erase(it);
 			}
 			else {
 				++it;
 			}
 		}				
 		enemy->removeSprite();
+		enemyDestroydSound->play();
 		std::cout << "Enemy Removed" << std::endl;
 		updateSpeed();
 	}

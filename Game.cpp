@@ -12,6 +12,9 @@ Game::Game():
 	laserHandler.init(scene);
 	scene->addUpdatableObject(&laserHandler);
 
+	winSound = gameengine.getSoundManager()->createSound("win.wav");
+	gameoverSound = gameengine.getSoundManager()->createSound("gameover.wav");
+	
 	player = new Player(&SCREENWITDH, &SCREENHEIGHT, scene, &bGameOver);
 	scene->addSprite(player);
 	
@@ -44,6 +47,9 @@ Game::Game():
 	levelHandler->addLevel({ 10,10,10,10,10,10 });
 	levelHandler->loadLevel(1);
 
+	gameengine.getSoundManager()->setMusic("music.wav");
+	gameengine.getSoundManager()->playMusic();
+	
 	scene->addUpdatableObject(enemyHandler);
 	scene->addUpdatableObject(this);	
 	std::cout << "Game Initiliezed" << "\n" << "FPS cap: " << fpsCap << "\n" << "ScreenWitdh: " << SCREENWITDH << "\n" << "ScreenHeight: " << SCREENHEIGHT << "\n" << std::endl;
@@ -53,6 +59,7 @@ Game::Game():
 void Game::playerWon() {		
 	std::cout << "--------------- Player Won!!! ---------------" << std::endl;
 	scene->addText(winningText);
+	winSound->play();
 }
 
 void Game::nextLevel() {
@@ -63,6 +70,7 @@ void Game::nextLevel() {
 void Game::gameOver() {
 	std::cout << "--------------- GameOver!!! ---------------" << std::endl;
 	scene->addText(gameOverText);
+	gameoverSound->play();
 }
 
 void Game::checkGameStatus() {		
@@ -112,7 +120,11 @@ Game::~Game()
 		player->removeSprite();		
 	}
 	player = nullptr;
-	delete(player);
+	winSound = nullptr;
+	gameoverSound = nullptr;
+	delete(winSound);
+	delete(gameoverSound);
+	delete(player);		
 	delete(textScore);	
 	delete(score);
 	delete(winningText);	
