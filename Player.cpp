@@ -127,6 +127,7 @@ namespace ge{
 	void Player::die()
 	{
 		bIsDead = true;
+		gameengine.getInputManager()->removeInput(this);
 	}
 
 	void Player::checkCollision() {
@@ -138,10 +139,10 @@ namespace ge{
 	}
 
 	Player::~Player()
-	{
+	{		
 		bGameOver = nullptr;
 		delete(bGameOver);
 		scene = nullptr;
-		delete(scene);
+		delete(scene);		
 	}
 }

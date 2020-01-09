@@ -20,32 +20,29 @@ namespace ge{
 		UpdateEachFrames.push_back(object);
 	}
 
-	void Scene::removeSprite(Sprite* sprite)
-	{
-		auto it = sprites.begin();
-		while (it != sprites.end())
-		{
-			if (*it == sprite) {				
-				it = sprites.erase(it);
-			}			
-			else {
-				++it;
-			}
-		}
-	}
-
-
 	void Scene::update(float delta)
-	{
-		for (Sprite* sprite : sprites) {										
-	 		sprite->update(delta);
-			sprite->updatePos();
-			sprite->render();			
-		}
-
+	{		
 		for (UpdateEachFrame* object : UpdateEachFrames)
 		{
 			object->update(delta);
+		}
+
+		for (Sprite* sprite : sprites) {						
+			sprite->update(delta);
+			sprite->updatePos();			
+			sprite->render();			
+		}
+
+		auto sprite = sprites.begin();
+		while (sprite != sprites.end())
+		{
+			if ((*sprite)->isDestroyd()) {
+				delete(*sprite);
+				sprite = sprites.erase(sprite);
+			}
+			else {
+				++sprite;
+			}
 		}
 
 		for (Text* text : texts) {

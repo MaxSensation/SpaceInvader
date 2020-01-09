@@ -1,4 +1,4 @@
 ﻿  LaserHandler.cpp
-C:\Users\Max\Documents\GitHub\SpaceInvader\GraphicObject2D.h(15,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Max\Documents\GitHub\SpaceInvader\GraphicObject2D.h(15,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  SpaceInvader.vcxproj -> C:\Users\Max\Documents\GitHub\SpaceInvader\Debug\SpaceInvader.exe
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(15,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(15,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  SpaceInvader.vcxproj -> D:\Github\SpaceInvader\Debug\SpaceInvader.exe

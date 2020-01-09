@@ -82,7 +82,7 @@ void Game::checkGameStatus() {
 	}
 	if (player->isDead() && !bGameOver)
 	{
-		scene->removeSprite(player);
+		player->removeSprite();
 		gameOver();
 		bGameOver = true;
 	}
@@ -108,10 +108,11 @@ void Game::update(float delta)
 Game::~Game()
 {	
 	if (!bGameOver)
-	{
-		scene->removeSprite(player);
+	{		
+		player->removeSprite();		
 	}
-	delete(player);	
+	player = nullptr;
+	delete(player);
 	delete(textScore);	
 	delete(score);
 	delete(winningText);	

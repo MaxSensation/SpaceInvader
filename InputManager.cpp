@@ -11,7 +11,23 @@ namespace ge {
 
 	void InputManager::update(SDL_Event* event) {
 		for (GameInput *input : gameInputs) {
-			input->updateKeyInput(event);
+			input->updateKeyInput(event);			
+		}		
+	}
+
+	void InputManager::removeInput(GameInput* gi)
+	{
+		auto it = gameInputs.begin();
+		while (it != gameInputs.end())
+		{
+			if (*it = gi)
+			{			
+				it = gameInputs.erase(it);
+			}
+			else
+			{
+				++it;
+			}
 		}		
 	}
 

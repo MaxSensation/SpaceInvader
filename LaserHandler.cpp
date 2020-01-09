@@ -10,9 +10,10 @@ namespace ge {
 		auto laser = laserBeams.begin();
 		while (laser != laserBeams.end())
 		{
-			handlerScene->removeSprite(*laser);
+			(*laser)->removeSprite();
+			*laser = nullptr;
 			delete(*laser);
-			laser = laserBeams.erase(laser);					
+			laser = laserBeams.erase(laser);								
 		}
 		handlerScene = nullptr;
 		delete(handlerScene);
@@ -33,36 +34,38 @@ namespace ge {
 		}
 	}
 
-	void LaserHandler::removeLaserBeam(LaserBeam* laser) {		
-		handlerScene->removeSprite(laser);		
-		auto it = laserBeams.begin();
+	void LaserHandler::removeLaserBeam(LaserBeam* laser) {					
+		auto it = laserBeams.begin();		
 		while (it != laserBeams.end())
 		{
-			if (*it == laser) {
-				it = laserBeams.erase(it);				
+			if ((*it)->isDestroyd()) {					
+				it = laserBeams.erase(it);			
 			}
 			else {
 				++it;
 			}
-		}
-		delete(laser);
+		}		
+		laser->removeSprite();
 		std::cout << "LaserBeam Removed" << std::endl;
 	}
 
 	bool LaserHandler::checkCollision(SDL_Rect* object) {
 		for (LaserBeam* laser : laserBeams)
 		{
-			if (checkRectCollision(object, laser->getSpriteRect()))
+			if (!(laser->isDestroyd()))
 			{
-				removeLaserBeam(laser);
-				return true;
-			}
+				if (checkRectCollision(object, laser->getSpriteRect()))
+				{
+					removeLaserBeam(laser);
+					return true;
+				}
+			}			
 		}
 		return false;
 	}
 
 	void LaserHandler::update(float delta)
-	{
+	{				
 		checkLaserBeams();
 	}
 	LaserHandler laserHandler;

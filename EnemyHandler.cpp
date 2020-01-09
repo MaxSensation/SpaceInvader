@@ -12,8 +12,9 @@ namespace ge {
 	{		
 		auto enemy = enemies.begin();
 		while (enemy != enemies.end())
-		{
-			scene->removeSprite(*enemy);
+		{			
+			(*enemy)->removeSprite();
+			*enemy = nullptr;
 			delete(*enemy);
 			enemy = enemies.erase(enemy);
 		}		
@@ -86,20 +87,19 @@ namespace ge {
 	}
 
 
-	void EnemyHandler::removeEnemy(Enemy* enemy) {		
-		scene->removeSprite(enemy);
-		auto it = enemies.begin();
+	void EnemyHandler::removeEnemy(Enemy* enemy) {				
+		auto it = enemies.begin();		
 		while (it != enemies.end())
 		{
-			if (*it == enemy) {								
-				it = enemies.erase(it);				
+			if ((*it)->isDestroyd()) {				
+				//delete(*it);
+				it = enemies.erase(it);								
 			}
 			else {
 				++it;
 			}
-		}
-
-		delete(enemy);
+		}				
+		enemy->removeSprite();
 		std::cout << "Enemy Removed" << std::endl;
 		updateSpeed();
 	}
@@ -239,7 +239,7 @@ namespace ge {
 	}
 
 	void EnemyHandler::update(float delta)
-	{
+	{		
 		removeDeadEnemies();
 		checkEnemyWalls();		
 		fire();

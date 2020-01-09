@@ -12,7 +12,6 @@ namespace ge{
 		void addSprite(Sprite* sprite);
 		void addText(Text* text);
 		void addUpdatableObject(UpdateEachFrame* object);
-		void removeSprite(Sprite* sprite);
 		void update(float delta);
 		~Scene();
 	private:

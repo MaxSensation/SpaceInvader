@@ -8,7 +8,7 @@ using namespace std;
 namespace ge {
 	Sprite::~Sprite()
 	{
-   		SDL_DestroyTexture(texture);
+ 		SDL_DestroyTexture(texture);
 	}
 
 	const char* Sprite::getImgDest()
@@ -35,7 +35,16 @@ namespace ge {
 		SDL_RenderCopy(gameengine.getRenderer(), texture, getScreen(), getSpriteRect());	
 	}
 
-	void Sprite::updatePos() {
+	bool Sprite::isDestroyd()
+	{
+		return bDestroyd;
+	}
+
+	void Sprite::removeSprite() {
+		bDestroyd = true;
+	}
+
+	void Sprite::updatePos() {		
 		spriteRect.x = static_cast<int>(position.x);
 		spriteRect.y = static_cast<int>(position.y);
 	}

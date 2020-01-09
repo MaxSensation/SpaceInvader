@@ -52,7 +52,7 @@ namespace ge{
 		laserHandler.addLaser((position.x + width / 2 - 5), position.y + height, false);
 	}
 
-	void Enemy::update(float delta) {
+	void Enemy::update(float delta) {		
 		checkCollision();
 		position += velocity * delta;
 	}

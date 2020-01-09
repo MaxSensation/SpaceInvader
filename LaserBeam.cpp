@@ -28,7 +28,7 @@ namespace ge{
 		}
 	}
 
-	void LaserBeam::update(float delta) {		
+	void LaserBeam::update(float delta) {			
 		position += velocity * delta;
 	}
 }

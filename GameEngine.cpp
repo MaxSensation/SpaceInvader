@@ -127,11 +127,10 @@ namespace ge {
 							running = false;
 							break;
 						}
-					}
-					currentScene->update(delta);
-					
+					}										
 					frameTime = SDL_GetTicks() - frameStart;
 					delta = frameDelay - frameTime;
+					currentScene->update(delta);
 					if (bFPSCounter && delta != 0)
 					{
 						currentFPS = 1000 / delta;
