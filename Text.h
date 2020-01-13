@@ -14,6 +14,7 @@ namespace ge{
 			void setText(std::string newText);			
 			void render();
 		private:
+			const Text& operator=(const Text&) = delete;
 			void UpdateTextues();
 			TTF_Font* font = nullptr;
 			SDL_Surface* surface = nullptr;

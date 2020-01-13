@@ -8,7 +8,7 @@ namespace ge {
 	class Sprite : public GraphicObject2D
 	{
 	public:		
-		~Sprite();
+		virtual ~Sprite() = 0;
 		const char* getImgDest();
 		SDL_Rect* getScreen();
 		SDL_Rect* getSpriteRect();
@@ -24,12 +24,15 @@ namespace ge {
 		{
 			init();
 		};
+	private:
 		void init();	
 		bool bDestroyd = false;
 		SDL_Texture* texture = nullptr;
 		SDL_Rect screen;
 		SDL_Rect spriteRect;		
 		const char* imgDestination;
+		Sprite(const Sprite&) = delete;
+		const Sprite& operator=(const Sprite&) = delete;
 	};
 }
 

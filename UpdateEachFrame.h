@@ -9,9 +9,10 @@ namespace ge {
 		public:
 			virtual void update(float delta) = 0;
 		protected:
-			UpdateEachFrame() {};
-			UpdateEachFrame(const UpdateEachFrame&) = delete;
+			UpdateEachFrame() {};			
+		private:
 			const UpdateEachFrame& operator=(const UpdateEachFrame&) = delete;
+			UpdateEachFrame(const UpdateEachFrame&) = delete;
 	};
 }
 

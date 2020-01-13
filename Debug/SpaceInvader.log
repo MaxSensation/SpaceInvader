@@ -1,4 +1,8 @@
 ﻿  Game.cpp
 D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(15,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(15,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Sprite.cpp
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(15,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(15,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
   SpaceInvader.vcxproj -> D:\Github\SpaceInvader\Debug\SpaceInvader.exe

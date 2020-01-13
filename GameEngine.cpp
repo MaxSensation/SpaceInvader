@@ -190,8 +190,9 @@ namespace ge {
 	}
 
 	GameEngine::~GameEngine() {
+		delete(soundManager);
 		delete(inputManager);
-		delete(currentScene);
+		delete(currentScene);		
 		Mix_Quit();
 		TTF_Quit();
 		IMG_Quit();

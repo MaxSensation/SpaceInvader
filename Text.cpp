@@ -33,7 +33,7 @@ namespace ge {
 	void Text::render()
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &width, &height);
-		SDL_Rect dstrect = { position.x, position.y, width, height };
+		SDL_Rect dstrect = { position.getX(), position.getY(), width, height };
 		SDL_RenderCopy(gameengine.getRenderer(), texture, NULL, &dstrect);
 	}
 }

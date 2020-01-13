@@ -1,5 +1,6 @@
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
 #include "Game.h"
-
 using namespace ge;
 
 Game::Game():		
@@ -63,6 +64,7 @@ void Game::playerWon() {
 }
 
 void Game::nextLevel() {
+	laserHandler.removeAllLaserBeams();
 	levelHandler->NextLevel();
 	std::cout << "--------------- Next Level!!! ---------------" << std::endl;	
 }
@@ -118,13 +120,13 @@ Game::~Game()
 	if (!bGameOver)
 	{		
 		player->removeSprite();		
-	}
-	player = nullptr;
-	winSound = nullptr;
-	gameoverSound = nullptr;
+	}	
 	delete(winSound);
 	delete(gameoverSound);
-	delete(player);		
+	if (!player)
+	{
+		delete(player);
+	}	
 	delete(textScore);	
 	delete(score);
 	delete(winningText);	
@@ -139,6 +141,8 @@ Game::~Game()
 
 int main(int argc, char** argv)
 {	
+	//_CrtSetDbgFlag(_CRTDBG_CHECK_ALWAYS_DF | _CRTDBG_LEAK_CHECK_DF);
 	Game game;
+	_CrtDumpMemoryLeaks();
 	return 0;
 }

@@ -4,7 +4,7 @@
 namespace ge{
 	void MovingSprite::translate(int x, int y)
 	{				
-		position.x = x;
-		position.y = y;
+		position.setX(x);
+		position.setY(y);
 	}	
 }

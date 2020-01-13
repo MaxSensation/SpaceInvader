@@ -8,10 +8,11 @@ namespace ge {
 	public:		
 		void translate(int x, int y);
 	protected:
-		MovingSprite(int posX, int posY, int width, int height, const char* imgDestination) : Sprite(posX, posY, width, height, imgDestination) {};
-		MovingSprite(const MovingSprite&) = delete;
-		const MovingSprite& operator=(const MovingSprite&) = delete;
 		Vector2 velocity;
+		MovingSprite(int posX, int posY, int width, int height, const char* imgDestination) : Sprite(posX, posY, width, height, imgDestination) {};
+	private:		
+		MovingSprite(const MovingSprite&) = delete;
+		const MovingSprite& operator=(const MovingSprite&) = delete;		
 	};
 }
 

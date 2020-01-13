@@ -16,17 +16,17 @@ namespace ge{
 
 	void Enemy::moveRight()
 	{
-		velocity.x = speed;
+		velocity.setX(speed);
 	}
 
 	void Enemy::moveLeft()
 	{
-		velocity.x = speed * -1;
+		velocity.setX(speed * -1);
 	}
 
 	void Enemy::moveDown()
 	{
-		translate(position.x, position.y + 15);
+		translate(position.getX(), position.setY(position.getY() + 15));
 	}
 
 	void Enemy::updateSpeed(double speed) {
@@ -40,7 +40,7 @@ namespace ge{
 	}
 
 	void Enemy::checkCollision() {
-		if (laserHandler.checkCollision(&spriteRect))
+		if (laserHandler.checkCollision(getSpriteRect()))
 		{
 			std::cout << "Enemy hit!" << std::endl;
 			die();
@@ -49,7 +49,7 @@ namespace ge{
 
 	void Enemy::fire() {
 		std::cout << "Enemy fired" << std::endl;		
-		laserHandler.addLaser((position.x + width / 2 - 5), position.y + height, false);
+		laserHandler.addLaser((position.getX() + width / 2 - 5), position.getY() + height, false);
 	}
 
 	void Enemy::update(float delta) {		
@@ -59,6 +59,11 @@ namespace ge{
 
 	void Enemy::setFire(bool status) {
 		bCanFire = status;
+	}
+
+	Enemy* Enemy::getInstance(int posX, int posY, double speed)
+	{
+		return new Enemy(posX, posY, speed);
 	}
 
 	bool Enemy::canFire() {

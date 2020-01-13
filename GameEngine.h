@@ -32,7 +32,7 @@ namespace ge {
 		bool initImage();
 		bool initText();
 
-		const char* title;
+		const char* title = "";
 		int screenWidth = 0;
 		int screenHeight = 0;		
 		Uint32 targetFramerate = 0;

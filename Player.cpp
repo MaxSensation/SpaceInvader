@@ -15,25 +15,25 @@ namespace ge{
 
 	void Player::moveRight()
 	{
-		velocity.x = playerSpeed;
+		velocity.setX(playerSpeed);
 		std::cout << "Player Move Right" << std::endl;					
 	}
 
 	void Player::moveLeft()
 	{
-		velocity.x = -playerSpeed;
+		velocity.setX(-playerSpeed);
 		std::cout << "Player Move Left" << std::endl;	
 	}
 
 	void Player::stopLeft()
 	{
-		velocity.x = 0;
+		velocity.setX(0);
 		std::cout << "Player Stopped Left" << std::endl;		
 	}
 
 	void Player::stopRight()
 	{
-		velocity.x = 0;
+		velocity.setX(0);
 		std::cout << "Player Stopped Right" << std::endl;		
 	}
 
@@ -43,7 +43,7 @@ namespace ge{
 		{
 			std::cout << "Player Fired LaserBeam" << std::endl;
 			bReadyToFire = false;			
-			laserHandler.addLaser((position.x + width / 2) - 10, position.y - 20, true);
+			laserHandler.addLaser((position.getX() + width / 2) - 10, position.getY() - 20, true);
 		}		
 	}
 
@@ -93,22 +93,22 @@ namespace ge{
 	}	
 
 	void Player::limitPlayerMovement() {				
-		if (position.x > *gameengine.getScreenWidth() -width)
+		if (position.getX() > *gameengine.getScreenWidth() -width)
 		{							
 			stopRight();
-			translate(*gameengine.getScreenWidth() - width,position.y);
+			translate(*gameengine.getScreenWidth() - width,position.getY());
 			bCanMoveRight = false;
 		}
-		if(position.x < *gameengine.getScreenWidth() -width) {
+		if(position.getX() < *gameengine.getScreenWidth() -width) {
 			bCanMoveRight = true;
 		}
-		if(position.x < 0)
+		if(position.getX() < 0)
 		{				
 			stopLeft();
-			translate(0, position.y);
+			translate(0, position.getY());
 			bCanMoveLeft = false;
 		}
-		if(position.x > 0)
+		if(position.getX() > 0)
 		{			
 			bCanMoveLeft = true;
 		}
@@ -131,7 +131,7 @@ namespace ge{
 	}
 
 	void Player::checkCollision() {
-		if (laserHandler.checkCollision(&spriteRect))
+		if (laserHandler.checkCollision(getSpriteRect()))
 		{
 			std::cout << "Player hit!" << std::endl;
 			die();

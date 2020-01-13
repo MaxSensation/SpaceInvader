@@ -45,12 +45,12 @@ namespace ge {
 	}
 
 	void Sprite::updatePos() {		
-		spriteRect.x = static_cast<int>(position.x);
-		spriteRect.y = static_cast<int>(position.y);
+		spriteRect.x = static_cast<int>(position.getX());
+		spriteRect.y = static_cast<int>(position.getY());
 	}
 
 	void Sprite::init()
-	{				
+	{						
 		SDL_Surface* optimizedSurface = nullptr;
 		SDL_Surface* loadedSurface = IMG_Load(imgDestination);
 		if (loadedSurface == NULL)
@@ -70,6 +70,6 @@ namespace ge {
 		}
 				
 		screen = { 0,0,*gameengine.getScreenWidth() ,* gameengine.getScreenHeight() };
-		spriteRect = { static_cast<int>(position.x), static_cast<int>(position.y), width, height };
+		spriteRect = { static_cast<int>(position.getX()), static_cast<int>(position.getY()), width, height };
 	}
 }

@@ -11,17 +11,17 @@ namespace ge{
 	{
 		if (bUp)
 		{
-			velocity.y = -laserSpeed;
+			velocity.setY(-laserSpeed);
 		}
 		else
 		{
-			velocity.y = laserSpeed;
+			velocity.setY(laserSpeed);
 		}
 		std::cout << "LaserBeam Spawned" << std::endl;
 	}
 
 	bool LaserBeam::outsideBounce() {
-		if (position.y < 0 || position.y > *gameengine.getScreenHeight())
+		if (position.getY() < 0 || position.getY() > *gameengine.getScreenHeight())
 		{
 			std::cout << "LaserBeam Outside Bounce and will be removed" << std::endl;
 			return true;			
@@ -33,5 +33,9 @@ namespace ge{
 
 	void LaserBeam::update(float delta) {			
 		position += velocity * delta;
+	}
+	LaserBeam* LaserBeam::getInstance(int posX, int posY, bool bUp)
+	{
+		return new LaserBeam(posX, posY, bUp);
 	}
 }

@@ -13,11 +13,11 @@ class SoundManager
 			void setMusic(std::string audioFile);
 			void playMusic();
 			void stopMusic();
-			Sound* createSound(std::string audioFile);
-			void deleteSound(Sound* sound);
+			Sound* createSound(std::string audioFile);			
 		private:
 			std::vector<Sound*> sounds;			
 			Mix_Music* music = nullptr;
+			const SoundManager& operator=(const SoundManager&) = delete;
 	};
 }
 #endif SOUNDMANAGER_H

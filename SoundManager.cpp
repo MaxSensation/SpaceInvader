@@ -2,16 +2,8 @@
 
 namespace ge{
 	SoundManager::~SoundManager()
-	{
-		auto soundIT = sounds.begin();
-		while (soundIT != sounds.end())
-		{
-			delete(*soundIT);
-			sounds.erase(soundIT);
-		}
+	{		
 		Mix_FreeMusic(music);
-		music = nullptr;
-		delete(music);
 	}
 
 	void SoundManager::setMusic(std::string audioFile) {
@@ -43,21 +35,5 @@ namespace ge{
 	{
 		sounds.push_back(new Sound(audioFile));
 		return sounds.back();		
-	}
-	void SoundManager::deleteSound(Sound* sound)
-	{
-		auto soundIT = sounds.begin();
-		while (soundIT != sounds.end())
-		{
-			if (sound == *soundIT)
-			{
-				delete(*soundIT);
-				sounds.erase(soundIT);
-			}
-			else
-			{
-				++soundIT;
-			}
-		}
-	}
+	}	
 }

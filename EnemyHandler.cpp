@@ -14,8 +14,7 @@ namespace ge {
 		auto enemy = enemies.begin();
 		while (enemy != enemies.end())
 		{			
-			(*enemy)->removeSprite();
-			*enemy = nullptr;
+			(*enemy)->removeSprite();			
 			delete(*enemy);
 			enemy = enemies.erase(enemy);
 		}		
@@ -25,8 +24,9 @@ namespace ge {
 
 	void EnemyHandler::add(int posX, int posY, double enemySpeed)
 	{		
-		enemies.push_back(new Enemy(posX, posY, enemySpeed));
-		scene->addSprite(enemies.back());		
+		Enemy* e = Enemy::getInstance(posX, posY, enemySpeed);
+		enemies.push_back(e);
+		scene->addSprite(enemies.back());
 	}
 
 	void EnemyHandler::addEnemySet(std::vector<int> enemySet)
@@ -157,7 +157,7 @@ namespace ge {
 		{
 			int maxPosX = -1;
 			for (Enemy* enemy : enemies) {
-				enemy->getPosition()->x > maxPosX ? maxPosX = enemy->getPosition()->x : NULL;
+				enemy->getPosition()->getX() > maxPosX ? maxPosX = enemy->getPosition()->getX() : NULL;
 			}
 			return maxPosX;
 		}
@@ -169,7 +169,7 @@ namespace ge {
 		{
 			int minPosX = *gameengine.getScreenHeight();
 			for (Enemy* enemy : enemies) {
-				enemy->getPosition()->x < minPosX ? minPosX = enemy->getPosition()->x : NULL;
+				enemy->getPosition()->getX() < minPosX ? minPosX = enemy->getPosition()->getX() : NULL;
 			}
 			return minPosX;
 		}
@@ -181,7 +181,7 @@ namespace ge {
 		{
 			int maxPosY = 0;
 			for (Enemy* enemy : enemies) {
-				enemy->getPosition()->y > maxPosY ? maxPosY = enemy->getPosition()->y : NULL;
+				enemy->getPosition()->getY() > maxPosY ? maxPosY = enemy->getPosition()->getY() : NULL;
 			}
 			return maxPosY;
 		}
@@ -205,12 +205,12 @@ namespace ge {
 		{			
 			if (enemy->canFire())
 			{		
-				if (enemy->getPosition()->y == maxPosY)
+				if (enemy->getPosition()->getY() == maxPosY)
 				{				
 					auto firePoint = firePoints.begin();
 					while (firePoint != firePoints.end())
 					{
-						if (*firePoint == (int)enemy->getPosition()->x) {												
+						if (*firePoint == (int)enemy->getPosition()->getX()) {												
 							if (rand() % 2 + 1 == 1)
 							{
 								enemy->fire();

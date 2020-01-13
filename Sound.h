@@ -13,6 +13,7 @@ namespace ge {
 			void play();
 		private:
 			Mix_Chunk* sound;
+			const Sound& operator=(const Sound&) = delete;
 	};
 }
 #endif // !SOUND_H

@@ -17,6 +17,7 @@ namespace ge {
 			bool checkCollision(SDL_Rect* object);
 			void update(float delta);
 			~LaserHandler();
+			void removeAllLaserBeams();
 		private:
 			std::vector<LaserBeam*> laserBeams;
 			Scene* handlerScene = nullptr;	

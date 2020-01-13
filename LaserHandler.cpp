@@ -8,22 +8,25 @@ namespace ge {
 		laserSound = gameengine.getSoundManager()->createSound("laser.wav");
 	}
 	LaserHandler::~LaserHandler()
-	{			
+	{					 
+		delete(laserSound);
+		handlerScene = nullptr;
+		delete(handlerScene);	
+	}
+
+	void LaserHandler::removeAllLaserBeams() {
 		auto laser = laserBeams.begin();
 		while (laser != laserBeams.end())
 		{
 			(*laser)->removeSprite();
-			*laser = nullptr;
-			delete(*laser);
-			laser = laserBeams.erase(laser);								
+			laser = laserBeams.erase(laser);
 		}
-		handlerScene = nullptr;
-		delete(handlerScene);		
 	}
 
 	void LaserHandler::addLaser(int posX, int posY, bool bUp)
 	{		
-		laserBeams.push_back(new LaserBeam(posX, posY, bUp));
+		LaserBeam* l = LaserBeam::getInstance(posX, posY, bUp);
+		laserBeams.push_back(l);
 		handlerScene->addSprite(laserBeams.back());		
 		laserSound->play();
 	}

@@ -6,8 +6,7 @@
 namespace ge {
 	class Enemy : public MovingSprite
 	{
-	public:
-		Enemy(int posX, int posY, double speed);
+	public:		
 		bool isDead();
 		void moveRight();
 		void moveLeft();
@@ -15,8 +14,10 @@ namespace ge {
 		void updateSpeed(double speed);
 		void fire();
 		bool canFire();
-		void setFire(bool status);
+		void setFire(bool status);		
+		static Enemy* getInstance(int posX, int posY, double speed);			
 	private:
+		Enemy(int posX, int posY, double speed);
 		void die();
 		void checkCollision();		
 		void update(float delta);		
