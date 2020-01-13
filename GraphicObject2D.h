@@ -12,7 +12,7 @@ namespace ge {
 		int* getHeight();
 		Vector2* getPosition();
 	protected:
-		GraphicObject2D(int posX, int posY, int width, int height) : Component(), position(posX,posY), width(width), height(height) {};		
+		GraphicObject2D(float posX, float posY, int width, int height) : Component(), position(posX ,posY), width(width), height(height) {};		
 		int width;
 		int height;
 		Vector2 position;

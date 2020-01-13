@@ -12,7 +12,7 @@ namespace ge {
 		public:							
 			static LaserHandler* getInstance();
 			static void deleteInstance();
-			void addLaser(int posX, int posY, bool bUp);
+			void addLaser(float posX, float posY, bool bUp);
 			void checkLaserBeams();
 			void removeLaserBeam(LaserBeam* laser);
 			bool checkCollision(SDL_Rect* object);

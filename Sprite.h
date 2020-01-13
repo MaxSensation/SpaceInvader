@@ -16,7 +16,7 @@ namespace ge {
 		void render();
 	protected:			
 		~Sprite();
-		Sprite(int posX, int posY, int width, int height, const char* imgDestination) :
+		Sprite(float posX, float posY, int width, int height, const char* imgDestination) :
 			GraphicObject2D(posX, posY, width, height),
 			imgDestination(imgDestination)
 		{

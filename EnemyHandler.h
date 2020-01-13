@@ -24,7 +24,7 @@ namespace ge {
 		EnemyHandler();
 		void generateFirePoints();
 		void fire();
-		void add(int posX, int posY, double enemySpeed);
+		void add(float posX, float posY, float enemySpeed);
 		void move();
 		void moveDown();
 		void removeEnemy(Enemy* enemy);
@@ -32,9 +32,9 @@ namespace ge {
 		void removeDeadEnemies();
 		void checkEnemyWalls();
 		void resetEnemiesFireState();
-		int getEnemyMaxPosX();
-		int getEnemyMinPosX();
-		int getEnemyMaxPosY();		
+		float getEnemyMaxPosX();
+		float getEnemyMinPosX();
+		float getEnemyMaxPosY();
 		void update(float delta);
 		bool bMovingRight = true;
 		int enemyWidth;

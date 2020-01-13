@@ -35,7 +35,7 @@ namespace ge {
 		}		
 	}
 
-	void EnemyHandler::add(int posX, int posY, double enemySpeed)
+	void EnemyHandler::add(float posX, float posY, float enemySpeed)
 	{		
 		Enemy* e = Enemy::getInstance(posX, posY, enemySpeed);
 		enemies.push_back(e);
@@ -46,29 +46,29 @@ namespace ge {
 		enemyWidth = 24;
 		enemySpeed = 0.05f;
 		int row = 1;
-		int offset = 0;
-		int enemySpacing = -1;
-		int x = 0;
-		int y = 0;
-		int maxEnemiesPerRow = 0;
-		int middleOfRow = 0;
+		float offset = 0.0f;
+		float enemySpacing = -1.0f;
+		float x = 0.0f;
+		float y = 0.0f;
+		float maxEnemiesPerRow = 0.0f;
+		float middleOfRow = 0.0f;
 
 		for (int enemyPerRow : enemySet) {
-			enemyPerRow > maxEnemiesPerRow ? maxEnemiesPerRow = enemyPerRow : NULL;
+			enemyPerRow > maxEnemiesPerRow ? maxEnemiesPerRow = (float)enemyPerRow : NULL;
 		}
 		
-		enemySpacing = (*GameEngine::getInstance()->getScreenWidth() / maxEnemiesPerRow) - (enemyWidth / 2);
-		offset = (enemySpacing * -1);
+		enemySpacing = (float) (*GameEngine::getInstance()->getScreenWidth() / maxEnemiesPerRow) - (enemyWidth / 2.0f);
+		offset = (enemySpacing * -1.0f);
 
-		int maxMiddleOfRow = (int)(maxEnemiesPerRow + 0.5) / 2.0;
+		float maxMiddleOfRow = (maxEnemiesPerRow + 0.5f) / 2.0f;
 
 		for (int enemyPerRow : enemySet) {
 			for (int  i = 1;  i <= enemyPerRow;  i++)
 			{								
-				middleOfRow = (int)(enemyPerRow + 0.5) / 2.0;
-				x = enemySpacing * i + offset;
-				x += (maxMiddleOfRow - middleOfRow) * enemySpacing;
-				y = 200 / enemySet.size() * row;
+				middleOfRow = (enemyPerRow + 0.5f) / 2.0f;
+				x = (float) enemySpacing * i + offset;
+				x += (float)(maxMiddleOfRow - middleOfRow) * enemySpacing;
+				y = 200.0f / enemySet.size() * row;
 				add(x, y, enemySpeed);
 				totalCreatedEnemies++;
 			}
@@ -108,7 +108,7 @@ namespace ge {
 	}
 
 	void EnemyHandler::updateSpeed() {
-		enemySpeed *= 1.075;
+		enemySpeed *= 1.075f;
 		for (Enemy* enemy : enemies) {
 			enemy->updateSpeed(enemySpeed);
 		}
@@ -161,22 +161,22 @@ namespace ge {
 		}
 	}
 
-	int EnemyHandler::getEnemyMaxPosX(){
+	float EnemyHandler::getEnemyMaxPosX(){
 		if (enemies.size() > 0)
 		{
-			int maxPosX = -1;
+			float maxPosX = -1.0f;
 			for (Enemy* enemy : enemies) {
 				enemy->getPosition()->getX() > maxPosX ? maxPosX = enemy->getPosition()->getX() : NULL;
 			}
 			return maxPosX;
 		}
-		return -1;
+		return -1.0f;
 	};
 
-	int EnemyHandler::getEnemyMinPosX() {
+	float EnemyHandler::getEnemyMinPosX() {
 		if (enemies.size() > 0)
 		{
-			int minPosX = *GameEngine::getInstance()->getScreenHeight();
+			float minPosX = (float)*GameEngine::getInstance()->getScreenHeight();
 			for (Enemy* enemy : enemies) {
 				enemy->getPosition()->getX() < minPosX ? minPosX = enemy->getPosition()->getX() : NULL;
 			}
@@ -185,10 +185,10 @@ namespace ge {
 		return -1;
 	};
 
-	int EnemyHandler::getEnemyMaxPosY() {
+	float EnemyHandler::getEnemyMaxPosY() {
 		if (enemies.size() > 0)
 		{
-			int maxPosY = 0;
+			float maxPosY = 0;
 			for (Enemy* enemy : enemies) {
 				enemy->getPosition()->getY() > maxPosY ? maxPosY = enemy->getPosition()->getY() : NULL;
 			}
@@ -209,7 +209,7 @@ namespace ge {
 	}
 
 	void EnemyHandler::fire() {
-		int maxPosY = getEnemyMaxPosY();		
+		float maxPosY = getEnemyMaxPosY();		
 		for (Enemy *enemy : enemies)
 		{			
 			if (enemy->canFire())

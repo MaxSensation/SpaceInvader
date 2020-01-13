@@ -11,20 +11,20 @@ namespace ge {
 		void moveRight();
 		void moveLeft();
 		void moveDown();
-		void updateSpeed(double speed);
+		void updateSpeed(float speed);
 		void fire();
 		bool canFire();
 		void setFire(bool status);		
-		static Enemy* getInstance(int posX, int posY, double speed);
+		static Enemy* getInstance(float posX, float posY, float speed);
 		~Enemy();
 	private:		
-		Enemy(int posX, int posY, double speed);
+		Enemy(float posX, float posY, float speed);
 		void die();
 		void checkCollision();		
 		void update(float delta);		
 		bool bIsDead = false;
 		bool bCanFire = true;
-		double speed;
+		float speed;
 	};
 }
 

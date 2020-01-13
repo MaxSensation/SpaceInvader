@@ -6,7 +6,7 @@
 namespace ge{
 	Player* Player::instance = 0;
 	Player::Player(int* sWidth, int* sHeight, bool* bGameOver) :
-		MovingSprite((*sWidth / 2) - (50 / 2), *sHeight - (50 + 10), 50, 50, "Player.png"),
+		MovingSprite((*sWidth / 2.0f) - (50.0f / 2.0f), *sHeight - (50.0f + 10.0f), 50, 50, "Player.png"),
 		playerSpeed(0.5f),
 		bGameOver(bGameOver)
 	{	
@@ -43,7 +43,7 @@ namespace ge{
 		{
 			std::cout << "Player Fired LaserBeam" << std::endl;
 			bReadyToFire = false;			
-			LaserHandler::getInstance()->addLaser((position.getX() + width / 2) - 10, position.getY() - 20, true);
+			LaserHandler::getInstance()->addLaser((position.getX() + width / 2.0f) - 10.0f, position.getY() - 20.0f, true);
 		}		
 	}
 
@@ -96,7 +96,7 @@ namespace ge{
 		if (position.getX() > * GameEngine::getInstance()->getScreenWidth() -width)
 		{							
 			stopRight();
-			translate(*GameEngine::getInstance()->getScreenWidth() - width,position.getY());
+			translate((float)*GameEngine::getInstance()->getScreenWidth() - width,position.getY());
 			bCanMoveRight = false;
 		}
 		if(position.getX() < *GameEngine::getInstance()->getScreenWidth() -width) {

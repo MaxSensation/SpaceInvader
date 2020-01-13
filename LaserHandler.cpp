@@ -37,7 +37,7 @@ namespace ge {
 		}
 	}
 
-	void LaserHandler::addLaser(int posX, int posY, bool bUp)
+	void LaserHandler::addLaser(float posX, float posY, bool bUp)
 	{		
 		LaserBeam* l = LaserBeam::getInstance(posX, posY, bUp);
 		laserBeams.push_back(l);	

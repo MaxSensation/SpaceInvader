@@ -2,7 +2,7 @@
 #include "LaserHandler.h"
 
 namespace ge{
-	Enemy* Enemy::getInstance(int posX, int posY, double speed)
+	Enemy* Enemy::getInstance(float posX, float posY, float speed)
 	{
 		return new Enemy(posX, posY, speed);
 	}
@@ -11,7 +11,7 @@ namespace ge{
 	{		
 	}
 
-	Enemy::Enemy(int posX, int posY, double speed) :
+	Enemy::Enemy(float posX, float posY, float speed) :
 		MovingSprite(posX, posY, 24, 24, "Enemy.png"),
 		speed(speed)
 	{
@@ -35,10 +35,10 @@ namespace ge{
 
 	void Enemy::moveDown()
 	{
-		translate(position.getX(), position.setY(position.getY() + 15));
+		translate(position.getX(), position.setY(position.getY() + 15.0f));
 	}
 
-	void Enemy::updateSpeed(double speed) {
+	void Enemy::updateSpeed(float speed) {
 		this->speed = speed;
 	}
 
