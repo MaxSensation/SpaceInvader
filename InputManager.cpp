@@ -1,12 +1,29 @@
 #include "InputManager.h"
 
 namespace ge {
+	InputManager* InputManager::instance = 0;
+
 	InputManager::~InputManager() {
 		auto it = gameInputs.begin();
 		while (it != gameInputs.end())
 		{			
 			it = gameInputs.erase(it);			
 		}		
+	}
+
+	InputManager* InputManager::getInstance()
+	{
+		if (instance == 0)
+		{
+			instance = new InputManager();
+		}
+		return instance;
+	}
+
+	void InputManager::deleteInstance()
+	{
+		delete(instance);
+		instance = NULL;
 	}
 
 	void InputManager::update(SDL_Event* event) {

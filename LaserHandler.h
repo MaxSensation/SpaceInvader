@@ -9,18 +9,18 @@
 namespace ge {
 	class LaserHandler : public UpdateEachFrame, public CollisionHandler
 	{
-		public:										
+		public:							
+			static LaserHandler* getInstance();
+			static void deleteInstance();
 			void addLaser(int posX, int posY, bool bUp);
 			void checkLaserBeams();
 			void removeLaserBeam(LaserBeam* laser);
 			bool checkCollision(SDL_Rect* object);
-			void update(float delta);
-			~LaserHandler();			
-			void removeAllLaserBeams();
-			static LaserHandler* getInstance();
-			static void deleteInstance();
+			void update(float delta);						
+			void removeAllLaserBeams();			
 		private:			
 			static LaserHandler* instance;
+			~LaserHandler();
 			LaserHandler();
 			std::vector<LaserBeam*> laserBeams;
 			Sound* laserSound = nullptr;

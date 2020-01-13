@@ -6,6 +6,7 @@ namespace ge {
 		font(TTF_OpenFont(fontFile.c_str(), fontSize)),
 		text(text)
 	{
+		Scene::getInstance()->addText(this);
 		UpdateTextues();		
 	}
 		

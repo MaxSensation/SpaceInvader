@@ -12,6 +12,40 @@ using namespace std;
 namespace ge {	
 	GameEngine* GameEngine::instance = 0;
 
+	GameEngine::GameEngine(const char* title, int width, int height, const int targetFramerate) :
+		title(title),
+		screenWidth(width),
+		screenHeight(height),
+		targetFramerate(targetFramerate)
+
+	{		
+		frameDelay = 1000.0f / targetFramerate;
+		if (initVideo())
+			if (initAudio())
+				if (initMixer())
+					if (initWindow())
+						if (initRenderer())
+							if (initImage())
+								if (initText())
+								{
+									hasInitialised = true;
+								}
+								else
+									printf("SDL Text could not initialize! SDL Text Error: %s\n", SDL_GetError());
+							else
+								printf("SDL Image could not initialize! SDL Image Error: %s\n", IMG_GetError());
+						else
+							printf("SDL Renderer could not initialize! SDL Renderer Error: %s\n", SDL_GetError());
+					else
+						printf("SDL Window could not initialize! SDL Window Error: %s\n", SDL_GetError());
+				else
+					printf("SDL Mixer could not initialize! SDL Mixer Error: %s\n", SDL_GetError());
+			else
+				printf("SDL Audio could not initialize! SDL Audio Error: %s\n", SDL_GetError());
+		else
+			printf("SDL Video could not initialize! SDL Video Error: %s\n", SDL_GetError());
+	}
+
 	bool GameEngine::initVideo()
 	{
 		if (SDL_Init(SDL_INIT_VIDEO) == 0)
@@ -76,12 +110,17 @@ namespace ge {
 		return false;
 	}
 
-	GameEngine* GameEngine::getInstance()
+	GameEngine* GameEngine::getInstance(const char* title, int width, int height, const int targetFramerate)
 	{
 		if (instance == 0)
 		{
-			instance = new GameEngine();
+			instance = new GameEngine(title, width, height, targetFramerate);
 		}
+		return instance;
+	}
+
+	GameEngine* GameEngine::getInstance()
+	{				
 		return instance;
 	}
 
@@ -91,52 +130,18 @@ namespace ge {
 		instance = NULL;
 	}
 
-	void GameEngine::init(const char* title, int screenWidth, int screenHeight, const int targetFramerate) {
-		this->title = title;
-		this->screenWidth = screenWidth;
-		this->screenHeight = screenHeight;
-		this->targetFramerate = targetFramerate;		
-		frameDelay = 1000.0f / targetFramerate;
-		inputManager = new InputManager();
-		soundManager = new SoundManager();			
-		if (initVideo())
-			if (initAudio())	
-				if (initMixer())
-					if (initWindow())
-						if (initRenderer())
-							if (initImage())
-								if (initText())
-								{
-									hasInitialised = true;
-								}
-								else
-									printf("SDL Text could not initialize! SDL Text Error: %s\n", SDL_GetError());
-							else
-								printf("SDL Image could not initialize! SDL Image Error: %s\n", IMG_GetError());
-						else
-							printf("SDL Renderer could not initialize! SDL Renderer Error: %s\n", SDL_GetError());
-					else
-						printf("SDL Window could not initialize! SDL Window Error: %s\n", SDL_GetError());
-				else
-					printf("SDL Mixer could not initialize! SDL Mixer Error: %s\n", SDL_GetError());
-			else
-				printf("SDL Audio could not initialize! SDL Audio Error: %s\n", SDL_GetError());
-		else
-			printf("SDL Video could not initialize! SDL Video Error: %s\n", SDL_GetError());		
-	}
-
 	SDL_Renderer* GameEngine::getRenderer()
 	{
 		return ren;
 	}
 
 	InputManager* GameEngine::getInputManager() {
-		return inputManager;
+		return InputManager::getInstance();
 	}
 
 	SoundManager* GameEngine::getSoundManager()
 	{
-		return soundManager;
+		return SoundManager::getInstance();
 	}
 
 	void GameEngine::clearRender() {
@@ -158,7 +163,7 @@ namespace ge {
 					
 				clearRender();
 				while (SDL_PollEvent(&event)) {
-					inputManager->update(&event);
+					InputManager::getInstance()->update(&event);
 					switch (event.type) {
 					case SDL_QUIT:
 						running = false;
@@ -194,8 +199,8 @@ namespace ge {
 	}
 
 	GameEngine::~GameEngine() {
-		delete(soundManager);
-		delete(inputManager);		
+		SoundManager::deleteInstance();
+		InputManager::deleteInstance();
 		Scene::deleteInstance();
 		Mix_Quit();
 		TTF_Quit();

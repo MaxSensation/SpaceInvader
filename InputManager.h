@@ -10,11 +10,15 @@ namespace ge{
 	class InputManager
 	{
 		public:			
-			~InputManager();
+			static InputManager* getInstance();
+			static void deleteInstance();
 			void update(SDL_Event* event);
 			void removeInput(GameInput* gi);
 			void addInput(GameInput* gi);
 		private:
+			static InputManager* instance;
+			InputManager(){};
+			~InputManager();
 			std::vector<GameInput*> gameInputs;
 			const InputManager& operator=(const InputManager&) = delete;
 	};

@@ -10,8 +10,7 @@ namespace ge {
 	{
 		public:
 			static LevelHandler* getInstance();
-			static void deleteInstance();
-			~LevelHandler();
+			static void deleteInstance();			
 			void addLevel(std::vector<int> enemySet);
 			void NextLevel();
 			bool hasNextLevel();
@@ -20,6 +19,7 @@ namespace ge {
 			void loadLevel(int level);
 		private:
 			static LevelHandler* instance;
+			~LevelHandler();
 			LevelHandler()
 			{
 				nextLevel = GameEngine::getInstance()->getSoundManager()->createSound("nextLevel.wav");

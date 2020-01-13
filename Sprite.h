@@ -7,15 +7,15 @@
 namespace ge {
 	class Sprite : public GraphicObject2D
 	{
-	public:		
-		~Sprite();
+	public:				
 		const char* getImgDest();
 		SDL_Rect* getScreen();
 		SDL_Rect* getSpriteRect();
 		virtual void update(float delta);
 		void updatePos();
 		void render();
-	protected:				
+	protected:			
+		~Sprite();
 		Sprite(int posX, int posY, int width, int height, const char* imgDestination) :
 			GraphicObject2D(posX, posY, width, height),
 			imgDestination(imgDestination)

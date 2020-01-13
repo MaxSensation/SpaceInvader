@@ -1,5 +1,21 @@
 #include "Game.h"
 namespace ge{
+	Game* Game::instance = 0;
+
+	Game* Game::getInstance()
+	{
+		if (instance == 0)
+		{
+			instance = new Game();
+		}
+		return instance;
+	}
+
+	void Game::deleteInstance()
+	{
+		delete instance;
+		instance = NULL;
+	}
 
 	void Game::createHandlers()
 	{		
@@ -13,17 +29,8 @@ namespace ge{
 		player = Player::getInstance(GameEngine::getInstance()->getScreenWidth(), GameEngine::getInstance()->getScreenHeight(), &bGameOver);
 		textScore = Text::getInstance(10, 10, 100, 100, "arial.ttf", 30, "Score: ");
 		score = Text::getInstance(110, 10, 100, 100, "arial.ttf", 30, "0");
-		Scene::getInstance()->addText(textScore);
-		Scene::getInstance()->addText(score);
-
-
 		textLevel = Text::getInstance(SCREENWITDH - 150, 10, 100, 100, "arial.ttf", 30, "Level: ");
 		level = Text::getInstance(SCREENWITDH - 50, 10, 100, 100, "arial.ttf", 30, "0");
-		Scene::getInstance()->addText(textLevel);
-		Scene::getInstance()->addText(level);
-
-		winningText = Text::getInstance(SCREENWITDH / 2 - 100, SCREENHEIGHT / 2 - 100, 100, 100, "arial.ttf", 50, "You Won!");
-		gameOverText = Text::getInstance(SCREENWITDH / 2 - 125, SCREENHEIGHT / 2 - 100, 100, 100, "arial.ttf", 50, "GameOver!");
 	}
 
 	void Game::createSound()
@@ -53,7 +60,7 @@ namespace ge{
 		SCREENHEIGHT(600),
 		fpsCap(60)
 	{	
-		GameEngine::getInstance()->init("SpaceInvader", SCREENWITDH, SCREENHEIGHT, fpsCap);
+		GameEngine::getInstance("SpaceInvader", SCREENWITDH, SCREENHEIGHT, fpsCap);
 		createHandlers();
 		createGrahpics();
 		createSound();
@@ -64,7 +71,7 @@ namespace ge{
 
 	void Game::playerWon() {		
 		std::cout << "--------------- Player Won!!! ---------------" << std::endl;
-		Scene::getInstance()->addText(winningText);
+		winningText = Text::getInstance(SCREENWITDH / 2 - 100, SCREENHEIGHT / 2 - 100, 100, 100, "arial.ttf", 50, "You Won!");		
 		winSound->play();
 	}
 
@@ -76,7 +83,7 @@ namespace ge{
 
 	void Game::gameOver() {
 		std::cout << "--------------- GameOver!!! ---------------" << std::endl;
-		Scene::getInstance()->addText(gameOverText);
+		gameOverText = Text::getInstance(SCREENWITDH / 2 - 125, SCREENHEIGHT / 2 - 100, 100, 100, "arial.ttf", 50, "GameOver!");
 		gameoverSound->play();
 	}
 
@@ -97,7 +104,7 @@ namespace ge{
 		}
 		if (player->isDead() && !bGameOver)
 		{
-			delete(player);
+			Player::deleteInstance();
 			gameOver();
 			bGameOver = true;
 		}
@@ -121,32 +128,23 @@ namespace ge{
 	}
 
 	Game::~Game()
-	{	
-		if (!player)
-		{		
-			delete(player);
-		}
-		
+	{			
 		delete(textScore);
 		delete(score);
 		delete(winningText);
 		delete(gameOverText);
 		delete(textLevel);
 		delete(level);
+		Player::deleteInstance();
 		LevelHandler::deleteInstance();
 		LaserHandler::deleteInstance();
 		EnemyHandler::deleteInstance();
 		GameEngine::deleteInstance();
 	}
-
-	Game* Game::getInstance()
-	{
-		return new Game();
-	}
 }
 int main(int argc, char** argv)
 {	
 	ge::Game* game = ge::Game::getInstance();
-	delete(game);
+	ge::Game::deleteInstance();
 	return 0;
 }

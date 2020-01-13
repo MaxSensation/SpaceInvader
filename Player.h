@@ -13,13 +13,15 @@ namespace ge {
 	{
 		public:			
 			static Player* getInstance(int* sWidth, int* sHeight, bool* bGameOver);
-			~Player();
+			static void deleteInstance();			
 			void updateKeyInput(SDL_Event* event);			
 			void update(float delta);
 			bool isDead();
 			void die();
 			void checkCollision();
 		private:
+			static Player* instance;
+			~Player();
 			Player(int* sWidth, int* sHeight, bool* bGameOver);			
 			void limitPlayerMovement();
 			void moveRight();

@@ -4,6 +4,7 @@
 
 
 namespace ge{
+	Player* Player::instance = 0;
 	Player::Player(int* sWidth, int* sHeight, bool* bGameOver) :
 		MovingSprite((*sWidth / 2) - (50 / 2), *sHeight - (50 + 10), 50, 50, "Player.png"),
 		playerSpeed(0.5f),
@@ -139,7 +140,17 @@ namespace ge{
 
 	Player* Player::getInstance(int* sWidth, int* sHeight, bool* bGameOver)
 	{
-		return new Player(sWidth, sHeight, bGameOver);
+		if (instance == 0)
+		{
+			instance = new Player(sWidth, sHeight, bGameOver);
+		}
+		return instance;		
+	}
+
+	void Player::deleteInstance()
+	{
+		delete instance;
+		instance = NULL;
 	}
 
 	Player::~Player()

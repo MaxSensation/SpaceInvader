@@ -11,9 +11,8 @@ namespace ge {
 	class EnemyHandler : public UpdateEachFrame
 	{
 	public:
-		static EnemyHandler* getInstance();		
-		static void deleteInstance();
-		~EnemyHandler();
+		static EnemyHandler* getInstance();
+		static void deleteInstance();		
 		void addEnemySet(std::vector<int> enemySet);
 		bool allDead();	
 		bool enemyWon();	
@@ -21,6 +20,7 @@ namespace ge {
 		int getTotalCreatedEnemies();		
 	private:		
 		static EnemyHandler* instance;
+		~EnemyHandler();
 		EnemyHandler();
 		void generateFirePoints();
 		void fire();

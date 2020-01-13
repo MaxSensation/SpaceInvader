@@ -1,10 +1,30 @@
 #include "SoundManager.h"
 
 namespace ge{
+	SoundManager* SoundManager::instance = 0;
+
+	SoundManager* SoundManager::getInstance()
+	{
+		if (instance == 0)
+		{
+			instance = new SoundManager();
+		}
+		return instance;
+	}
+
+	void SoundManager::deleteInstance()
+	{
+		delete(instance);
+		instance = NULL;
+	}
+
+	SoundManager::SoundManager()
+	{
+	}
 	SoundManager::~SoundManager()
-	{		
+	{
 		auto it = sounds.begin();
-		while (it != sounds.end()){
+		while (it != sounds.end()) {
 			delete(*it);
 			it++;
 		}

@@ -16,10 +16,10 @@ namespace ge{
 		void removeSprite(Sprite* sprite);
 		void addText(Text* text);
 		void addUpdatableObject(UpdateEachFrame* object);
-		void update(float delta);
-		~Scene();		
-	private:		
+		void update(float delta);				
+	private:	
 		static Scene* instance;
+		~Scene();		
 		Scene();
 		std::vector<Sprite*> sprites;	
 		std::vector<Text*> texts;

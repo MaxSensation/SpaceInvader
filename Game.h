@@ -15,15 +15,17 @@
 namespace ge{
 	class Game : public UpdateEachFrame
 	{
-		public:			
-			~Game();			
+		public:						
 			static Game* getInstance();
+			static void deleteInstance();
 		private:
+			Game();
+			~Game();
+			static Game* instance;
 			void createHandlers();
 			void createGrahpics();
 			void createSound();
-			void createLevels();
-			Game();
+			void createLevels();			
 			void playerWon();
 			void nextLevel();
 			void gameOver();
@@ -39,7 +41,6 @@ namespace ge{
 			Text* gameOverText = nullptr;
 			Text* textLevel = nullptr;
 			Text* level = nullptr;
-			LevelHandler* levelHandler = nullptr;
 			int SCREENWITDH = 0;
 			int SCREENHEIGHT = 0;
 			int fpsCap = 0;
