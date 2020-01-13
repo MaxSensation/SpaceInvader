@@ -137,6 +137,11 @@ namespace ge{
 		}
 	}
 
+	Player* Player::getInstance(int* sWidth, int* sHeight, bool* bGameOver)
+	{
+		return new Player(sWidth, sHeight, bGameOver);
+	}
+
 	Player::~Player()
 	{		
 		bGameOver = nullptr;

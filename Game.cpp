@@ -10,7 +10,7 @@ namespace ge{
 
 	void Game::createGrahpics()
 	{
-		player = new Player(GameEngine::getInstance()->getScreenWidth(), GameEngine::getInstance()->getScreenHeight(), &bGameOver);
+		player = Player::getInstance(GameEngine::getInstance()->getScreenWidth(), GameEngine::getInstance()->getScreenHeight(), &bGameOver);
 		textScore = Text::getInstance(10, 10, 100, 100, "arial.ttf", 30, "Score: ");
 		score = Text::getInstance(110, 10, 100, 100, "arial.ttf", 30, "0");
 		Scene::getInstance()->addText(textScore);

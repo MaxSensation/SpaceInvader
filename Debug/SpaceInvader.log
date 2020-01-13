@@ -1,14 +1,12 @@
-﻿  Enemy.cpp
+﻿  Game.cpp
 D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(15,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(15,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Github\SpaceInvader\SpaceInvader\Enemy.cpp(28,17): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Github\SpaceInvader\SpaceInvader\Enemy.cpp(33,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Github\SpaceInvader\SpaceInvader\Enemy.cpp(38,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Github\SpaceInvader\SpaceInvader\Enemy.cpp(38,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Github\SpaceInvader\SpaceInvader\Enemy.cpp(61,92): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Github\SpaceInvader\SpaceInvader\Enemy.cpp(61,70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Game.cpp
+  Player.cpp
 D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(15,91): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Github\SpaceInvader\SpaceInvader\GraphicObject2D.h(15,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\Player.cpp(45,94): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\Player.cpp(45,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\Player.cpp(98,80): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Github\SpaceInvader\SpaceInvader\Player.cpp(107,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating Code...
   SpaceInvader.vcxproj -> D:\Github\SpaceInvader\Debug\SpaceInvader.exe
