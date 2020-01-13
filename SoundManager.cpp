@@ -3,6 +3,11 @@
 namespace ge{
 	SoundManager::~SoundManager()
 	{		
+		auto it = sounds.begin();
+		while (it != sounds.end()){
+			delete(*it);
+			it++;
+		}
 		Mix_FreeMusic(music);
 	}
 

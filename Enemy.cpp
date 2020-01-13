@@ -2,10 +2,15 @@
 #include "LaserHandler.h"
 
 namespace ge{
-	Enemy::~Enemy()
+	Enemy* Enemy::getInstance(int posX, int posY, double speed)
 	{
-		
+		return new Enemy(posX, posY, speed);
 	}
+
+	Enemy::~Enemy()
+	{		
+	}
+
 	Enemy::Enemy(int posX, int posY, double speed) :
 		MovingSprite(posX, posY, 24, 24, "Enemy.png"),
 		speed(speed)
@@ -63,11 +68,6 @@ namespace ge{
 
 	void Enemy::setFire(bool status) {
 		bCanFire = status;
-	}
-
-	Enemy* Enemy::getInstance(int posX, int posY, double speed)
-	{
-		return new Enemy(posX, posY, speed);
 	}
 
 	bool Enemy::canFire() {

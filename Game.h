@@ -39,7 +39,6 @@ namespace ge{
 			Text* gameOverText = nullptr;
 			Text* textLevel = nullptr;
 			Text* level = nullptr;
-			EnemyHandler* enemyHandler = nullptr;
 			LevelHandler* levelHandler = nullptr;
 			int SCREENWITDH = 0;
 			int SCREENHEIGHT = 0;

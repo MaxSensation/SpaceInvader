@@ -85,6 +85,12 @@ namespace ge {
 		return instance;
 	}
 
+	void GameEngine::deleteInstance()
+	{
+		delete instance;
+		instance = NULL;
+	}
+
 	void GameEngine::init(const char* title, int screenWidth, int screenHeight, const int targetFramerate) {
 		this->title = title;
 		this->screenWidth = screenWidth;
@@ -190,6 +196,7 @@ namespace ge {
 	GameEngine::~GameEngine() {
 		delete(soundManager);
 		delete(inputManager);		
+		Scene::deleteInstance();
 		Mix_Quit();
 		TTF_Quit();
 		IMG_Quit();

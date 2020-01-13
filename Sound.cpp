@@ -2,9 +2,7 @@
 namespace ge{
 	Sound::~Sound()
 	{
-		Mix_FreeChunk(sound);
-		sound = nullptr;
-		delete(sound);
+		//Mix_FreeChunk(sound);
 	}
 	Sound::Sound(std::string filePath)
 	{

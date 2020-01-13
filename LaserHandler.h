@@ -17,7 +17,8 @@ namespace ge {
 			void update(float delta);
 			~LaserHandler();			
 			void removeAllLaserBeams();
-			static LaserHandler* getInstance();			
+			static LaserHandler* getInstance();
+			static void deleteInstance();
 		private:			
 			static LaserHandler* instance;
 			LaserHandler();

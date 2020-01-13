@@ -7,7 +7,7 @@ namespace ge {
 	{
 		generateFirePoints();	
 		totalCreatedEnemies = 0;
-		enemyDestroydSound = GameEngine::getInstance()->getSoundManager()->createSound("explosion.wav");
+		enemyDestroydSound = GameEngine::getInstance()->getSoundManager()->createSound("explosion.wav");		
 	}
 
 	EnemyHandler* EnemyHandler::getInstance()
@@ -17,6 +17,12 @@ namespace ge {
 			instance = new EnemyHandler();
 		}
 		return instance;
+	}
+
+	void EnemyHandler::deleteInstance()
+	{
+		delete instance;
+		instance = NULL;
 	}
 
 	EnemyHandler::~EnemyHandler()

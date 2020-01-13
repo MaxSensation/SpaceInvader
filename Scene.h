@@ -11,6 +11,7 @@ namespace ge{
 	{
 	public:		
 		static Scene* getInstance();
+		static void deleteInstance();
 		void addSprite(Sprite* sprite);
 		void removeSprite(Sprite* sprite);
 		void addText(Text* text);

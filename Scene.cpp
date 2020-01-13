@@ -6,7 +6,23 @@
 
 
 namespace ge{
+	Scene* Scene::instance = 0;
 	
+	Scene* Scene::getInstance()
+	{
+		if (instance == 0)
+		{
+			instance = new Scene();
+		}
+		return instance;
+	}	
+	
+	void Scene::deleteInstance()
+	{
+		delete instance;
+		instance = NULL;
+	}
+
 	void Scene::addSprite(Sprite* sprite)
 	{
 		sprites.push_back(sprite);
@@ -44,7 +60,7 @@ namespace ge{
 		}
 
 		for (Sprite* sprite : sprites) {						
-			if (sprite != 0)
+			if (sprite->getImgDest() != 0)
 			{
 				sprite->update(delta);
 				sprite->updatePos();
@@ -61,20 +77,12 @@ namespace ge{
 
 	Scene::~Scene()
 	{
-		
+
 	}
+
 	Scene::Scene()
 	{
 
 	}
-	Scene* Scene::getInstance()
-	{
-		if (instance == 0)
-		{
-			instance = new Scene();
-		}
-		return instance;
-	}
-	Scene* Scene::instance = 0;
 }
 

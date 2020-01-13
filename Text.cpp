@@ -9,6 +9,11 @@ namespace ge {
 		UpdateTextues();		
 	}
 		
+	Text* Text::getInstance(int posX, int posY, int width, int height, std::string font, int fontSize, std::string text)
+	{
+		return new Text(posX, posY, width, height, font, fontSize, text);
+	}
+
 	Text::~Text() {
 		SDL_DestroyTexture(texture);		
 		TTF_CloseFont(font);

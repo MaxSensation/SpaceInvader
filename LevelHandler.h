@@ -10,6 +10,7 @@ namespace ge {
 	{
 		public:
 			static LevelHandler* getInstance();
+			static void deleteInstance();
 			~LevelHandler();
 			void addLevel(std::vector<int> enemySet);
 			void NextLevel();

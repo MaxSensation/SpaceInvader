@@ -11,6 +11,13 @@ namespace ge {
 		}
 		return instance;
 	}
+
+	void LevelHandler::deleteInstance()
+	{
+		delete instance;
+		instance = NULL;
+	}
+
 	LevelHandler::~LevelHandler()
 	{		
 		auto level = levels.begin();

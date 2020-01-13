@@ -4,9 +4,24 @@
 namespace ge {
 	LaserHandler* LaserHandler::instance = 0;
 
+	LaserHandler* LaserHandler::getInstance()
+	{
+		if (instance == 0)
+		{
+			instance = new LaserHandler();
+		}
+		return instance;
+	}
+
+	void LaserHandler::deleteInstance()
+	{
+		delete instance;
+		instance = NULL;
+	}
+
 	LaserHandler::~LaserHandler()
-	{					 
-		delete(laserSound);		
+	{					
+		removeAllLaserBeams();	
 	}
 
 	LaserHandler::LaserHandler() {
@@ -20,15 +35,6 @@ namespace ge {
 			delete(*laser);
 			laser = laserBeams.erase(laser);
 		}
-	}
-
-	LaserHandler* LaserHandler::getInstance()
-	{
-		if (instance == 0)
-		{
-			instance = new LaserHandler();
-		}
-		return instance;
 	}
 
 	void LaserHandler::addLaser(int posX, int posY, bool bUp)

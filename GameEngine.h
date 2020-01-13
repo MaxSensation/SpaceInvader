@@ -13,6 +13,7 @@ namespace ge {
 	class GameEngine {	
 	public:		
 		static GameEngine* getInstance();
+		static void deleteInstance();
 		void init(const char* title, int width, int height, const int targetFramerate);
 		void launch();				
 		void clearRender();		

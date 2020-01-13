@@ -11,19 +11,19 @@ namespace ge{
 	void Game::createGrahpics()
 	{
 		player = new Player(GameEngine::getInstance()->getScreenWidth(), GameEngine::getInstance()->getScreenHeight(), &bGameOver);
-		textScore = new Text(10, 10, 100, 100, "arial.ttf", 30, "Score: ");
-		score = new Text(110, 10, 100, 100, "arial.ttf", 30, "0");
+		textScore = Text::getInstance(10, 10, 100, 100, "arial.ttf", 30, "Score: ");
+		score = Text::getInstance(110, 10, 100, 100, "arial.ttf", 30, "0");
 		Scene::getInstance()->addText(textScore);
 		Scene::getInstance()->addText(score);
 
 
-		textLevel = new Text(SCREENWITDH - 150, 10, 100, 100, "arial.ttf", 30, "Level: ");
-		level = new Text(SCREENWITDH - 50, 10, 100, 100, "arial.ttf", 30, "0");
+		textLevel = Text::getInstance(SCREENWITDH - 150, 10, 100, 100, "arial.ttf", 30, "Level: ");
+		level = Text::getInstance(SCREENWITDH - 50, 10, 100, 100, "arial.ttf", 30, "0");
 		Scene::getInstance()->addText(textLevel);
 		Scene::getInstance()->addText(level);
 
-		winningText = new Text(SCREENWITDH / 2 - 100, SCREENHEIGHT / 2 - 100, 100, 100, "arial.ttf", 50, "You Won!");
-		gameOverText = new Text(SCREENWITDH / 2 - 125, SCREENHEIGHT / 2 - 100, 100, 100, "arial.ttf", 50, "GameOver!");
+		winningText = Text::getInstance(SCREENWITDH / 2 - 100, SCREENHEIGHT / 2 - 100, 100, 100, "arial.ttf", 50, "You Won!");
+		gameOverText = Text::getInstance(SCREENWITDH / 2 - 125, SCREENHEIGHT / 2 - 100, 100, 100, "arial.ttf", 50, "GameOver!");
 	}
 
 	void Game::createSound()
@@ -126,16 +126,17 @@ namespace ge{
 		{		
 			delete(player);
 		}
-		delete(winSound);
-		delete(gameoverSound);
-		delete(textScore);	
+		
+		delete(textScore);
 		delete(score);
-		delete(winningText);	
-		delete(gameOverText);	
-		delete(textLevel);		
+		delete(winningText);
+		delete(gameOverText);
+		delete(textLevel);
 		delete(level);
-		delete(enemyHandler);
-		delete(levelHandler);
+		LevelHandler::deleteInstance();
+		LaserHandler::deleteInstance();
+		EnemyHandler::deleteInstance();
+		GameEngine::deleteInstance();
 	}
 
 	Game* Game::getInstance()
@@ -146,5 +147,6 @@ namespace ge{
 int main(int argc, char** argv)
 {	
 	ge::Game* game = ge::Game::getInstance();
+	delete(game);
 	return 0;
 }

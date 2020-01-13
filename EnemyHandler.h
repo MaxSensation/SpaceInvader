@@ -12,12 +12,13 @@ namespace ge {
 	{
 	public:
 		static EnemyHandler* getInstance();		
+		static void deleteInstance();
 		~EnemyHandler();
 		void addEnemySet(std::vector<int> enemySet);
 		bool allDead();	
 		bool enemyWon();	
 		int getTotalAliveEnemies();
-		int getTotalCreatedEnemies();
+		int getTotalCreatedEnemies();		
 	private:		
 		static EnemyHandler* instance;
 		EnemyHandler();
