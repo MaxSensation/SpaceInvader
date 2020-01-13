@@ -6,7 +6,7 @@ namespace ge {
 		font(TTF_OpenFont(fontFile.c_str(), fontSize)),
 		text(text)
 	{
-		UpdateTextues();
+		UpdateTextues();		
 	}
 		
 	Text::~Text() {
@@ -26,7 +26,7 @@ namespace ge {
 
 	void Text::UpdateTextues() {
 		surface = TTF_RenderText_Solid(font, text.c_str(), color);
-		texture = SDL_CreateTextureFromSurface(gameengine.getRenderer(), surface);
+		texture = SDL_CreateTextureFromSurface(GameEngine::getInstance()->getRenderer(), surface);
 		SDL_FreeSurface(surface);
 	}
 
@@ -34,6 +34,6 @@ namespace ge {
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &width, &height);
 		SDL_Rect dstrect = { position.getX(), position.getY(), width, height };
-		SDL_RenderCopy(gameengine.getRenderer(), texture, NULL, &dstrect);
+		SDL_RenderCopy(GameEngine::getInstance()->getRenderer(), texture, NULL, &dstrect);
 	}
 }

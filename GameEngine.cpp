@@ -10,6 +10,7 @@
 using namespace std;
 
 namespace ge {	
+	GameEngine* GameEngine::instance = 0;
 
 	bool GameEngine::initVideo()
 	{
@@ -75,15 +76,23 @@ namespace ge {
 		return false;
 	}
 
+	GameEngine* GameEngine::getInstance()
+	{
+		if (instance == 0)
+		{
+			instance = new GameEngine();
+		}
+		return instance;
+	}
+
 	void GameEngine::init(const char* title, int screenWidth, int screenHeight, const int targetFramerate) {
 		this->title = title;
 		this->screenWidth = screenWidth;
 		this->screenHeight = screenHeight;
-		this->targetFramerate = targetFramerate;
+		this->targetFramerate = targetFramerate;		
 		frameDelay = 1000.0f / targetFramerate;
 		inputManager = new InputManager();
-		soundManager = new SoundManager();
-		currentScene = new Scene();		
+		soundManager = new SoundManager();			
 		if (initVideo())
 			if (initAudio())	
 				if (initMixer())
@@ -124,10 +133,6 @@ namespace ge {
 		return soundManager;
 	}
 
-	Scene* GameEngine::getScene() {
-		return currentScene;
-	}
-
 	void GameEngine::clearRender() {
 		SDL_RenderClear(ren);
 		SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);		
@@ -135,46 +140,39 @@ namespace ge {
 
 	void GameEngine::launch()
 	{		
-		if (hasInitialised) {
-			if (currentScene != nullptr)
-			{
-				bool running = true;
-				Uint32 frameStart = 0.0f;;
-				Uint32 frameTime = 0.0f;;
-				float delta = 0.0f;
-				short currentFPS = 0;
-				SDL_Event event;
-				while (running) {
-					frameStart = SDL_GetTicks();
+		if (hasInitialised) {					
+			bool running = true;
+			Uint32 frameStart = 0.0f;;
+			Uint32 frameTime = 0.0f;;
+			float delta = 0.0f;
+			short currentFPS = 0;
+			SDL_Event event;
+			while (running) {
+				frameStart = SDL_GetTicks();
 					
-					clearRender();
-					while (SDL_PollEvent(&event)) {
-						inputManager->update(&event);
-						switch (event.type) {
-						case SDL_QUIT:
-							running = false;
-							break;
-						}
-					}										
-					frameTime = SDL_GetTicks() - frameStart;
-					delta = frameDelay - frameTime;
-					currentScene->update(delta);
-					if (bFPSCounter && delta != 0)
-					{
-						currentFPS = 1000 / delta;
-						cout << "FPS: " << currentFPS << endl;
+				clearRender();
+				while (SDL_PollEvent(&event)) {
+					inputManager->update(&event);
+					switch (event.type) {
+					case SDL_QUIT:
+						running = false;
+						break;
 					}
-					if (frameDelay > frameTime)
-					{
-						SDL_Delay(delta);
-					}
+				}										
+				frameTime = SDL_GetTicks() - frameStart;
+				delta = frameDelay - frameTime;
+				Scene::getInstance()->update(delta);
+				if (bFPSCounter && delta != 0)
+				{
+					currentFPS = 1000 / delta;
+					cout << "FPS: " << currentFPS << endl;
+				}
+				if (frameDelay > frameTime)
+				{
+					SDL_Delay(delta);
 				}
 			}
-			else
-			{
-				cout << "Error: No scene is selected! please use SetScene()" << endl;
 			}
-		}
 		else
 		{
 			cout << "Error: Need to use init(title, screenWidth, screenHeight, targetFramerate)" << endl;
@@ -191,8 +189,7 @@ namespace ge {
 
 	GameEngine::~GameEngine() {
 		delete(soundManager);
-		delete(inputManager);
-		delete(currentScene);		
+		delete(inputManager);		
 		Mix_Quit();
 		TTF_Quit();
 		IMG_Quit();
@@ -200,5 +197,4 @@ namespace ge {
 		SDL_DestroyWindow(win);
 		SDL_Quit();								
 	}
-	GameEngine gameengine;
 }

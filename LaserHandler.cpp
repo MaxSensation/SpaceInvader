@@ -2,32 +2,39 @@
 #include "GameEngine.h"
 
 namespace ge {
-	void LaserHandler::init(Scene* scene)
-	{		
-		handlerScene = scene;	
-		laserSound = gameengine.getSoundManager()->createSound("laser.wav");
-	}
+	LaserHandler* LaserHandler::instance = 0;
+
 	LaserHandler::~LaserHandler()
 	{					 
-		delete(laserSound);
-		handlerScene = nullptr;
-		delete(handlerScene);	
+		delete(laserSound);		
+	}
+
+	LaserHandler::LaserHandler() {
+		laserSound = GameEngine::getInstance()->getSoundManager()->createSound("laser.wav");
 	}
 
 	void LaserHandler::removeAllLaserBeams() {
 		auto laser = laserBeams.begin();
 		while (laser != laserBeams.end())
 		{
-			(*laser)->removeSprite();
+			delete(*laser);
 			laser = laserBeams.erase(laser);
 		}
+	}
+
+	LaserHandler* LaserHandler::getInstance()
+	{
+		if (instance == 0)
+		{
+			instance = new LaserHandler();
+		}
+		return instance;
 	}
 
 	void LaserHandler::addLaser(int posX, int posY, bool bUp)
 	{		
 		LaserBeam* l = LaserBeam::getInstance(posX, posY, bUp);
-		laserBeams.push_back(l);
-		handlerScene->addSprite(laserBeams.back());		
+		laserBeams.push_back(l);	
 		laserSound->play();
 	}
 
@@ -44,35 +51,31 @@ namespace ge {
 		auto it = laserBeams.begin();		
 		while (it != laserBeams.end())
 		{
-			if ((*it)->isDestroyd()) {					
-				it = laserBeams.erase(it);			
+			if ((*it)== laser) {
+				delete(*it);
+				it = laserBeams.erase(it);
 			}
 			else {
 				++it;
 			}
-		}		
-		laser->removeSprite();
+		}			
 		std::cout << "LaserBeam Removed" << std::endl;
 	}
 
 	bool LaserHandler::checkCollision(SDL_Rect* object) {
 		for (LaserBeam* laser : laserBeams)
 		{
-			if (!(laser->isDestroyd()))
+			if (checkRectCollision(object, laser->getSpriteRect()))
 			{
-				if (checkRectCollision(object, laser->getSpriteRect()))
-				{
-					removeLaserBeam(laser);
-					return true;
-				}
-			}			
+				removeLaserBeam(laser);
+				return true;
+			}		
 		}
 		return false;
 	}
 
 	void LaserHandler::update(float delta)
 	{				
-		checkLaserBeams();
+		checkLaserBeams();	
 	}
-	LaserHandler laserHandler;
 }

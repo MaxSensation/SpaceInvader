@@ -1,32 +1,38 @@
 #include "EnemyHandler.h"
 
 namespace ge {
-	EnemyHandler::EnemyHandler(Scene* scene) :
-	scene(scene)
+	EnemyHandler* EnemyHandler::instance = 0;
+
+	EnemyHandler::EnemyHandler()
 	{
 		generateFirePoints();	
 		totalCreatedEnemies = 0;
-		enemyDestroydSound = gameengine.getSoundManager()->createSound("explosion.wav");
+		enemyDestroydSound = GameEngine::getInstance()->getSoundManager()->createSound("explosion.wav");
+	}
+
+	EnemyHandler* EnemyHandler::getInstance()
+	{
+		if (instance == 0)
+		{
+			instance = new EnemyHandler();
+		}
+		return instance;
 	}
 
 	EnemyHandler::~EnemyHandler()
 	{		
 		auto enemy = enemies.begin();
 		while (enemy != enemies.end())
-		{			
-			(*enemy)->removeSprite();			
+		{						
 			delete(*enemy);
 			enemy = enemies.erase(enemy);
 		}		
-		scene = nullptr;
-		delete(scene);
 	}
 
 	void EnemyHandler::add(int posX, int posY, double enemySpeed)
 	{		
 		Enemy* e = Enemy::getInstance(posX, posY, enemySpeed);
 		enemies.push_back(e);
-		scene->addSprite(enemies.back());
 	}
 
 	void EnemyHandler::addEnemySet(std::vector<int> enemySet)
@@ -45,7 +51,7 @@ namespace ge {
 			enemyPerRow > maxEnemiesPerRow ? maxEnemiesPerRow = enemyPerRow : NULL;
 		}
 		
-		enemySpacing = (*gameengine.getScreenWidth() / maxEnemiesPerRow) - (enemyWidth / 2);
+		enemySpacing = (*GameEngine::getInstance()->getScreenWidth() / maxEnemiesPerRow) - (enemyWidth / 2);
 		offset = (enemySpacing * -1);
 
 		int maxMiddleOfRow = (int)(maxEnemiesPerRow + 0.5) / 2.0;
@@ -88,18 +94,8 @@ namespace ge {
 	}
 
 
-	void EnemyHandler::removeEnemy(Enemy* enemy) {				
-		auto it = enemies.begin();		
-		while (it != enemies.end())
-		{
-			if ((*it)->isDestroyd()) {								
-				it = enemies.erase(it);
-			}
-			else {
-				++it;
-			}
-		}				
-		enemy->removeSprite();
+	void EnemyHandler::removeEnemy(Enemy* enemy) {							
+		delete(enemy);
 		enemyDestroydSound->play();
 		std::cout << "Enemy Removed" << std::endl;
 		updateSpeed();
@@ -121,16 +117,23 @@ namespace ge {
 
 	void EnemyHandler::removeDeadEnemies()
 	{
-		for (Enemy* enemy : enemies) {
-			if (enemy->isDead())
-			{
-				removeEnemy(enemy);
+		auto enemy = enemies.begin();
+		while (enemy != enemies.end())
+		{
+			if ((*enemy)->isDead())
+			{				
+				removeEnemy(*enemy);
+				enemy = enemies.erase(enemy);				
 			}
+			else
+			{
+				enemy++;
+			}			
 		}
 	}
 
 	void EnemyHandler::checkEnemyWalls(){
-		if (getEnemyMaxPosX() >= *gameengine.getScreenWidth() - enemyWidth && bMovingRight)
+		if (getEnemyMaxPosX() >= *GameEngine::getInstance()->getScreenWidth() - enemyWidth && bMovingRight)
 		{
 			moveDown();
 			bMovingRight = false;
@@ -167,7 +170,7 @@ namespace ge {
 	int EnemyHandler::getEnemyMinPosX() {
 		if (enemies.size() > 0)
 		{
-			int minPosX = *gameengine.getScreenHeight();
+			int minPosX = *GameEngine::getInstance()->getScreenHeight();
 			for (Enemy* enemy : enemies) {
 				enemy->getPosition()->getX() < minPosX ? minPosX = enemy->getPosition()->getX() : NULL;
 			}
@@ -191,7 +194,7 @@ namespace ge {
 	bool EnemyHandler::enemyWon() {
 		for (Enemy *enemy : enemies)
 		{
-			if (getEnemyMaxPosY() >= *gameengine.getScreenHeight() - enemyWidth)
+			if (getEnemyMaxPosY() >= *GameEngine::getInstance()->getScreenHeight() - enemyWidth)
 			{
 				return true;
 			}
@@ -233,7 +236,7 @@ namespace ge {
 
 	void EnemyHandler::generateFirePoints() {
 		firePoints.clear();
-		for (int i = *gameengine.getScreenWidth()/10; i < *gameengine.getScreenWidth(); i += *gameengine.getScreenWidth()/10)
+		for (int i = *GameEngine::getInstance()->getScreenWidth()/10; i < *GameEngine::getInstance()->getScreenWidth(); i += *GameEngine::getInstance()->getScreenWidth()/10)
 		{			
 			firePoints.push_back(i);
 		}		

@@ -12,6 +12,7 @@
 namespace ge {
 	class GameEngine {	
 	public:		
+		static GameEngine* getInstance();
 		void init(const char* title, int width, int height, const int targetFramerate);
 		void launch();				
 		void clearRender();		
@@ -19,11 +20,10 @@ namespace ge {
 		int* getScreenWidth();
 		SDL_Renderer* getRenderer();
 		InputManager* getInputManager();
-		SoundManager* getSoundManager();
-		Scene* getScene();
-		
+		SoundManager* getSoundManager();		
 		~GameEngine();
 	private:
+		static GameEngine* instance;
 		bool initVideo();
 		bool initAudio();
 		bool initMixer();
@@ -43,10 +43,8 @@ namespace ge {
 		SoundManager* soundManager = nullptr;
 		SDL_Window* win = nullptr;
 		SDL_Renderer* ren = nullptr;
-		Scene* currentScene = nullptr;
 		InputManager* inputManager = nullptr;		
 	};
-	extern GameEngine gameengine;
 }
 
 #endif

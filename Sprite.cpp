@@ -7,8 +7,12 @@ using namespace std;
 
 namespace ge {
 	Sprite::~Sprite()
-	{
- 		SDL_DestroyTexture(texture);
+	{				
+		Scene::getInstance()->removeSprite(this);
+		if (texture == 0)
+		{
+			SDL_DestroyTexture(texture);
+		}		
 	}
 
 	const char* Sprite::getImgDest()
@@ -32,16 +36,7 @@ namespace ge {
 
 	void Sprite::render()
 	{
-		SDL_RenderCopy(gameengine.getRenderer(), texture, getScreen(), getSpriteRect());	
-	}
-
-	bool Sprite::isDestroyd()
-	{
-		return bDestroyd;
-	}
-
-	void Sprite::removeSprite() {
-		bDestroyd = true;
+		SDL_RenderCopy(GameEngine::getInstance()->getRenderer(), texture, getScreen(), getSpriteRect());
 	}
 
 	void Sprite::updatePos() {		
@@ -64,12 +59,13 @@ namespace ge {
 			{
 				printf("Unable to optimize image %s! SDL Error: %s\n", imgDestination, SDL_GetError());
 			}			
-			texture = SDL_CreateTextureFromSurface(gameengine.getRenderer(), optimizedSurface);									
+			texture = SDL_CreateTextureFromSurface(GameEngine::getInstance()->getRenderer(), optimizedSurface);
 			SDL_FreeSurface(loadedSurface);
 			SDL_FreeSurface(optimizedSurface);
 		}
 				
-		screen = { 0,0,*gameengine.getScreenWidth() ,* gameengine.getScreenHeight() };
+		screen = { 0,0,*GameEngine::getInstance()->getScreenWidth() ,*GameEngine::getInstance()->getScreenHeight() };
 		spriteRect = { static_cast<int>(position.getX()), static_cast<int>(position.getY()), width, height };
+		Scene::getInstance()->addSprite(this);
 	}
 }

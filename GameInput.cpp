@@ -5,6 +5,6 @@
 namespace ge{
 	GameInput::GameInput()		
 	{	
-		gameengine.getInputManager()->addInput(this);
+		GameEngine::getInstance()->getInputManager()->addInput(this);
 	}
 }

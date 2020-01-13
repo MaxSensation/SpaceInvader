@@ -12,7 +12,7 @@ namespace ge {
 	class Player : public MovingSprite, public GameInput
 	{
 		public:			
-			Player(int* sWidth, int* sHeight, Scene* scene, bool* bGameOver);
+			Player(int* sWidth, int* sHeight, bool* bGameOver);
 			~Player();
 			void updateKeyInput(SDL_Event* event);			
 			void update(float delta);
@@ -35,7 +35,6 @@ namespace ge {
 			bool bCanMoveLeft = true;
 			bool* bGameOver;
 
-			Scene* scene;
 	};
 }
 #endif

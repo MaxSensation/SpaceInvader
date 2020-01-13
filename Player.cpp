@@ -4,10 +4,9 @@
 
 
 namespace ge{
-	Player::Player(int* sWidth, int* sHeight, Scene* scene, bool* bGameOver) :
+	Player::Player(int* sWidth, int* sHeight, bool* bGameOver) :
 		MovingSprite((*sWidth / 2) - (50 / 2), *sHeight - (50 + 10), 50, 50, "Player.png"),
 		playerSpeed(0.5f),
-		scene(scene),
 		bGameOver(bGameOver)
 	{	
 		std::cout << "Player Spawned" << std::endl;
@@ -43,7 +42,7 @@ namespace ge{
 		{
 			std::cout << "Player Fired LaserBeam" << std::endl;
 			bReadyToFire = false;			
-			laserHandler.addLaser((position.getX() + width / 2) - 10, position.getY() - 20, true);
+			LaserHandler::getInstance()->addLaser((position.getX() + width / 2) - 10, position.getY() - 20, true);
 		}		
 	}
 
@@ -93,13 +92,13 @@ namespace ge{
 	}	
 
 	void Player::limitPlayerMovement() {				
-		if (position.getX() > *gameengine.getScreenWidth() -width)
+		if (position.getX() > * GameEngine::getInstance()->getScreenWidth() -width)
 		{							
 			stopRight();
-			translate(*gameengine.getScreenWidth() - width,position.getY());
+			translate(*GameEngine::getInstance()->getScreenWidth() - width,position.getY());
 			bCanMoveRight = false;
 		}
-		if(position.getX() < *gameengine.getScreenWidth() -width) {
+		if(position.getX() < *GameEngine::getInstance()->getScreenWidth() -width) {
 			bCanMoveRight = true;
 		}
 		if(position.getX() < 0)
@@ -127,11 +126,11 @@ namespace ge{
 	void Player::die()
 	{
 		bIsDead = true;
-		gameengine.getInputManager()->removeInput(this);
+		GameEngine::getInstance()->getInputManager()->removeInput(this);
 	}
 
 	void Player::checkCollision() {
-		if (laserHandler.checkCollision(getSpriteRect()))
+		if (LaserHandler::getInstance()->checkCollision(getSpriteRect()))
 		{
 			std::cout << "Player hit!" << std::endl;
 			die();
@@ -142,7 +141,5 @@ namespace ge{
 	{		
 		bGameOver = nullptr;
 		delete(bGameOver);
-		scene = nullptr;
-		delete(scene);		
 	}
 }

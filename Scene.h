@@ -5,20 +5,25 @@
 #include <vector>
 #include "Text.h"
 
+
 namespace ge{
 	class Scene
 	{
 	public:		
+		static Scene* getInstance();
 		void addSprite(Sprite* sprite);
+		void removeSprite(Sprite* sprite);
 		void addText(Text* text);
 		void addUpdatableObject(UpdateEachFrame* object);
 		void update(float delta);
-		~Scene();
-	private:
+		~Scene();		
+	private:		
+		static Scene* instance;
+		Scene();
 		std::vector<Sprite*> sprites;	
 		std::vector<Text*> texts;
 		std::vector<UpdateEachFrame*> UpdateEachFrames;
-	};
+	};	
 }
 
 #endif

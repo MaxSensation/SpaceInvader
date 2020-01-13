@@ -15,10 +15,15 @@
 namespace ge{
 	class Game : public UpdateEachFrame
 	{
-		public:
-			Game();
-			~Game();		
+		public:			
+			~Game();			
+			static Game* getInstance();
 		private:
+			void createHandlers();
+			void createGrahpics();
+			void createSound();
+			void createLevels();
+			Game();
 			void playerWon();
 			void nextLevel();
 			void gameOver();
@@ -33,8 +38,7 @@ namespace ge{
 			Text* winningText = nullptr;
 			Text* gameOverText = nullptr;
 			Text* textLevel = nullptr;
-			Text* level = nullptr;	
-			Scene* scene = nullptr;
+			Text* level = nullptr;
 			EnemyHandler* enemyHandler = nullptr;
 			LevelHandler* levelHandler = nullptr;
 			int SCREENWITDH = 0;
@@ -46,5 +50,4 @@ namespace ge{
 			Sound* gameoverSound = nullptr;
 	};
 }
-
 #endif

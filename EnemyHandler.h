@@ -11,7 +11,7 @@ namespace ge {
 	class EnemyHandler : public UpdateEachFrame
 	{
 	public:
-		EnemyHandler(Scene* scene);		
+		static EnemyHandler* getInstance();		
 		~EnemyHandler();
 		void addEnemySet(std::vector<int> enemySet);
 		bool allDead();	
@@ -19,6 +19,8 @@ namespace ge {
 		int getTotalAliveEnemies();
 		int getTotalCreatedEnemies();
 	private:		
+		static EnemyHandler* instance;
+		EnemyHandler();
 		void generateFirePoints();
 		void fire();
 		void add(int posX, int posY, double enemySpeed);
@@ -38,7 +40,6 @@ namespace ge {
 		int totalCreatedEnemies;
 		float enemySpeed;
 		std::vector<int> firePoints;
-		Scene* scene = nullptr;
 		std::vector<Enemy*> enemies;
 		Sound* enemyDestroydSound = nullptr;
 	};

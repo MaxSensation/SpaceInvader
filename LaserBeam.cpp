@@ -3,7 +3,7 @@
 
 namespace ge{
 	LaserBeam::~LaserBeam()
-	{
+	{		
 	}
 	LaserBeam::LaserBeam(int posX, int posY, bool bUp) :
 		MovingSprite(posX, posY, 20, 20, "LaserBeam.png"),
@@ -21,7 +21,7 @@ namespace ge{
 	}
 
 	bool LaserBeam::outsideBounce() {
-		if (position.getY() < 0 || position.getY() > *gameengine.getScreenHeight())
+		if (position.getY() < 0 || position.getY() > * GameEngine::getInstance()->getScreenHeight())
 		{
 			std::cout << "LaserBeam Outside Bounce and will be removed" << std::endl;
 			return true;			

@@ -15,8 +15,9 @@ namespace ge {
 		void fire();
 		bool canFire();
 		void setFire(bool status);		
-		static Enemy* getInstance(int posX, int posY, double speed);			
-	private:
+		static Enemy* getInstance(int posX, int posY, double speed);
+		~Enemy();
+	private:		
 		Enemy(int posX, int posY, double speed);
 		void die();
 		void checkCollision();		

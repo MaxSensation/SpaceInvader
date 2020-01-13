@@ -1,6 +1,16 @@
 #include "LevelHandler.h"
 
 namespace ge {
+	LevelHandler* LevelHandler::instance = 0;
+
+	LevelHandler* LevelHandler::getInstance()
+	{
+		if (instance == 0)
+		{
+			instance = new LevelHandler();
+		}
+		return instance;
+	}
 	LevelHandler::~LevelHandler()
 	{		
 		auto level = levels.begin();
@@ -10,9 +20,7 @@ namespace ge {
 			level = levels.erase(level);
 		}
 		nextLevel = nullptr;
-		delete(nextLevel);
-		enemyHandler = nullptr;
-		delete(enemyHandler);
+		delete(nextLevel);	
 	}
 
 	void LevelHandler::addLevel(std::vector<int> enemySet)
@@ -42,14 +50,14 @@ namespace ge {
 	}
 
 	void LevelHandler::loadLevel(Level* level) {
-		enemyHandler -> addEnemySet(level->getEnemySet());
+		EnemyHandler::getInstance()-> addEnemySet(level->getEnemySet());
 	}
 
 	void LevelHandler::loadLevel(int level) {		
 		
 		if (level <= levels.size() && level > 0)
 		{			
-			enemyHandler -> addEnemySet(levels[level - 1]->getEnemySet());
+			EnemyHandler::getInstance()-> addEnemySet(levels[level - 1]->getEnemySet());
 		}		
 	}
 }

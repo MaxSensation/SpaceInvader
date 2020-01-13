@@ -8,15 +8,13 @@ namespace ge {
 	class Sprite : public GraphicObject2D
 	{
 	public:		
-		virtual ~Sprite() = 0;
+		~Sprite();
 		const char* getImgDest();
 		SDL_Rect* getScreen();
 		SDL_Rect* getSpriteRect();
 		virtual void update(float delta);
 		void updatePos();
 		void render();
-		bool isDestroyd();
-		void removeSprite();
 	protected:				
 		Sprite(int posX, int posY, int width, int height, const char* imgDestination) :
 			GraphicObject2D(posX, posY, width, height),
@@ -26,7 +24,6 @@ namespace ge {
 		};
 	private:
 		void init();	
-		bool bDestroyd = false;
 		SDL_Texture* texture = nullptr;
 		SDL_Rect screen;
 		SDL_Rect spriteRect;		

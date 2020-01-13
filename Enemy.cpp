@@ -2,6 +2,10 @@
 #include "LaserHandler.h"
 
 namespace ge{
+	Enemy::~Enemy()
+	{
+		
+	}
 	Enemy::Enemy(int posX, int posY, double speed) :
 		MovingSprite(posX, posY, 24, 24, "Enemy.png"),
 		speed(speed)
@@ -40,7 +44,7 @@ namespace ge{
 	}
 
 	void Enemy::checkCollision() {
-		if (laserHandler.checkCollision(getSpriteRect()))
+		if (LaserHandler::getInstance()->checkCollision(getSpriteRect()))
 		{
 			std::cout << "Enemy hit!" << std::endl;
 			die();
@@ -49,7 +53,7 @@ namespace ge{
 
 	void Enemy::fire() {
 		std::cout << "Enemy fired" << std::endl;		
-		laserHandler.addLaser((position.getX() + width / 2 - 5), position.getY() + height, false);
+		LaserHandler::getInstance()->addLaser((position.getX() + width / 2 - 5), position.getY() + height, false);
 	}
 
 	void Enemy::update(float delta) {		

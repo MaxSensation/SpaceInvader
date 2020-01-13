@@ -4,10 +4,26 @@
 #include <SDL.h>
 #include "GameEngine.h"
 
+
 namespace ge{
+	
 	void Scene::addSprite(Sprite* sprite)
 	{
 		sprites.push_back(sprite);
+	}
+
+	void Scene::removeSprite(Sprite* sprite)
+	{
+		auto it = sprites.begin();
+		while (it != sprites.end())
+		{
+			if ((*it)==sprite) {						
+				it = sprites.erase(it);			
+			}
+			else {
+				++it;
+			}
+		}
 	}
 
 	void Scene::addText(Text* text)
@@ -28,33 +44,37 @@ namespace ge{
 		}
 
 		for (Sprite* sprite : sprites) {						
-			sprite->update(delta);
-			sprite->updatePos();			
-			sprite->render();			
-		}
-
-		auto sprite = sprites.begin();
-		while (sprite != sprites.end())
-		{
-			if ((*sprite)->isDestroyd()) {
-				delete(*sprite);
-				sprite = sprites.erase(sprite);
-			}
-			else {
-				++sprite;
-			}
-		}
+			if (sprite != 0)
+			{
+				sprite->update(delta);
+				sprite->updatePos();
+				sprite->render();
+			}			
+		}		
 
 		for (Text* text : texts) {
 			text->render();
 		}
 
-		SDL_RenderPresent(gameengine.getRenderer());
+		SDL_RenderPresent(GameEngine::getInstance()->getRenderer());
 	}
 
 	Scene::~Scene()
 	{
 		
-	}	
+	}
+	Scene::Scene()
+	{
+
+	}
+	Scene* Scene::getInstance()
+	{
+		if (instance == 0)
+		{
+			instance = new Scene();
+		}
+		return instance;
+	}
+	Scene* Scene::instance = 0;
 }
 
